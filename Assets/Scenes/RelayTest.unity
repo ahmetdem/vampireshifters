@@ -1512,10 +1512,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyPanel: {fileID: 1730306713}
-  container: {fileID: 0}
-  lobbyItemPrefab: {fileID: 0}
-  createLobbyButton: {fileID: 0}
-  refreshButton: {fileID: 0}
+  container: {fileID: 1730306714}
+  lobbyItemPrefab: {fileID: 3314724525547355510, guid: e3785ad46bfc7dba6ada525a61d3314f, type: 3}
+  createLobbyButton: {fileID: 167322695}
+  refreshButton: {fileID: 440128423}
 --- !u!4 &1367959791
 Transform:
   m_ObjectHideFlags: 0
@@ -1687,8 +1687,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 115.71246, y: 0}
+  m_SizeDelta: {x: -231.4249, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730306715
 MonoBehaviour:
