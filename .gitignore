@@ -1,11 +1,26 @@
-[Library/ ]
-[Temp/ ]
-[Obj/ ]
-[Logs/ ]
-[MemoryCaptures/ ]
-[Build/ ]
-[Builds/ ]
-[.vs/ ]
-[*.csproj]
-[*.sln]
-[*.unitypackage]
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# Visual Studio / VS Code
+.vscode/
+.vs/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
