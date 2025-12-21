@@ -15,16 +15,28 @@ public class GameBootstrap : MonoBehaviour
     {
         connectButton.interactable = false;
 
-        // Initialize Unity Services
-        await UnityServices.InitializeAsync();
+        // 1. Setup Initialization Options for ParrelSync
+        InitializationOptions options = new InitializationOptions();
 
-        // Sign in anonymously
+#if UNITY_EDITOR
+        // If we are a ParrelSync clone, use a unique profile name
+        if (ParrelSync.ClonesManager.IsClone())
+        {
+            string cloneName = ParrelSync.ClonesManager.GetArgument();
+            options.SetProfile(cloneName);
+        }
+#endif
+
+        // 2. Initialize with those options
+        await UnityServices.InitializeAsync(options);
+
+        // 3. Sign in (This will now result in a unique PlayerID for the clone)
         if (!AuthenticationService.Instance.IsSignedIn)
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
 
-        // Load saved name if exists
+        // Load saved name
         string savedName = PlayerPrefs.GetString("PlayerName", "");
         nameInput.text = savedName;
 
@@ -33,7 +45,6 @@ public class GameBootstrap : MonoBehaviour
 
         ValidateName(savedName);
     }
-
     private void ValidateName(string name)
     {
         // Simple validation: 2-12 characters

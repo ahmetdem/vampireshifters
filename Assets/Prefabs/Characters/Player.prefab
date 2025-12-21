@@ -151,6 +151,8 @@ GameObject:
   - component: {fileID: 2943996455624648008}
   - component: {fileID: 4516828263033888125}
   - component: {fileID: -3073520012640474232}
+  - component: {fileID: -7554878226443166949}
+  - component: {fileID: 3113784856879174944}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -238,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3378483131
+  GlobalObjectIdHash: 3255075157
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -415,6 +417,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8155164133519da74895197838799e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7554878226443166949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767376123689669050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec04e66ee45260569ac43208fa55ae44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalCoins:
+    m_InternalValue: 0
+--- !u!114 &3113784856879174944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767376123689669050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1707a9c3d00822472a58622d04a46f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth:
+    m_InternalValue: 100
 --- !u!1 &8185655984755733289
 GameObject:
   m_ObjectHideFlags: 0
