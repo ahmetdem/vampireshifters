@@ -3,44 +3,36 @@ using UnityEngine;
 
 public class CoinPickup : NetworkBehaviour
 {
-    [Header("Settings")]
-    public NetworkVariable<int> coinValue = new NetworkVariable<int>(1);
+    public NetworkVariable<int> coinValue = new NetworkVariable<int>(10);
 
-    [Header("Visuals")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite smallCoinSprite;
-    [SerializeField] private Sprite bigSackSprite;
+    // Safety flag to prevent double-collection
+    private bool isCollected = false;
 
-    public override void OnNetworkSpawn()
+    public void SetValue(int newValue)
     {
-        UpdateVisuals(coinValue.Value);
-        coinValue.OnValueChanged += (oldVal, newVal) => UpdateVisuals(newVal);
-    }
-
-    private void UpdateVisuals(int value)
-    {
-        // Logic: If value > 10, show a "Sack", otherwise show a "Coin"
-        if (smallCoinSprite != null && bigSackSprite != null)
+        if (IsServer)
         {
-            spriteRenderer.sprite = value >= 10 ? bigSackSprite : smallCoinSprite;
+            coinValue.Value = newValue;
         }
-
-        // Optimization 2: Visual scaling based on value
-        // Scale range: 1.0 (1 coin) to 2.0 (100 coins)
-        float scale = 1f + Mathf.Clamp01(value / 100f);
-        transform.localScale = Vector3.one * scale;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // 1. Standard Server Check
         if (!IsServer) return;
+
+        // 2. CRITICAL FIX: If already collected or already despawned, stop here.
+        if (isCollected || !IsSpawned) return;
 
         if (other.TryGetComponent(out PlayerEconomy economy))
         {
+            // Mark as collected immediately so the next collider ignores this code
+            isCollected = true;
+
             economy.CollectCoin(coinValue.Value);
 
-            // Despawn object across the network
-            GetComponent<NetworkObject>().Despawn();
+            // Safe to despawn now
+            NetworkObject.Despawn();
         }
     }
 }

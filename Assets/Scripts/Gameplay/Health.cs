@@ -19,19 +19,21 @@ public class Health : NetworkBehaviour
 
     private void Die()
     {
-        // Only try to respawn if it's a player
         if (TryGetComponent(out PlayerNetworkState playerState))
         {
-            // Tell the Manager to handle the respawn logic
+            // Player Death Logic (Respawn)...
             ConnectionHandler.Instance.HandlePlayerDeath(OwnerClientId);
-
-            // Destroy this object immediately
-            // Since the Coroutine runs in ConnectionHandler, it won't be cancelled!
             GetComponent<NetworkObject>().Despawn(true);
         }
         else
         {
-            // Just destroy enemies
+            // Enemy Death Logic
+            if (TryGetComponent(out LootDropper loot))
+            {
+                loot.DropLoot();
+            }
+
+            Debug.Log($"[Health] Enemy {NetworkObjectId} Died.");
             GetComponent<NetworkObject>().Despawn(true);
         }
     }

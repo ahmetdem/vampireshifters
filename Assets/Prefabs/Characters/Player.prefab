@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: -3073520012640474232}
   - component: {fileID: -7554878226443166949}
   - component: {fileID: 3113784856879174944}
+  - component: {fileID: -4208716419324339616}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -240,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3255075157
+  GlobalObjectIdHash: 3378483131
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -431,6 +432,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalCoins:
     m_InternalValue: 0
+  currentXP:
+    m_InternalValue: 0
+  currentLevel:
+    m_InternalValue: 1
 --- !u!114 &3113784856879174944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,6 +450,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth:
     m_InternalValue: 100
+--- !u!114 &-4208716419324339616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767376123689669050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec54c9d00de502c73895f3d98c649ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allWeaponsPool:
+  - {fileID: 11400000, guid: f014cbad5aa8cfe1cac4c79396326941, type: 2}
+  - {fileID: 11400000, guid: 34fdc6170b556c9a497a9cf05b5c4573, type: 2}
+  startingWeapon: {fileID: 11400000, guid: f014cbad5aa8cfe1cac4c79396326941, type: 2}
 --- !u!1 &8185655984755733289
 GameObject:
   m_ObjectHideFlags: 0
