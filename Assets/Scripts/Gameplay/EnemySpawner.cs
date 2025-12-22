@@ -56,4 +56,12 @@ public class EnemySpawner : NetworkBehaviour
         GameObject enemy = Instantiate(swarmPrefab, spawnPos, Quaternion.identity);
         enemy.GetComponent<NetworkObject>().Spawn();
     }
+
+    // Add this inside EnemySpawner.cs
+    public void StopSpawning()
+    {
+        CancelInvoke(); // Stops all InvokeRepeating timers
+        enabled = false; // Stops the Update loop
+        Debug.Log("Enemy Spawning Stopped.");
+    }
 }

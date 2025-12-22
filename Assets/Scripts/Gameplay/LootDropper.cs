@@ -7,6 +7,10 @@ public class LootDropper : NetworkBehaviour
     [SerializeField] private int coinValue = 10;
     [SerializeField] private float dropChance = 1.0f;
 
+    [Header("Rare Drops")]
+    [SerializeField] private GameObject rareItemPrefab; // Drag Summon Scroll here
+    [SerializeField] private float rareDropChance = 0.01f; // 1% chance
+
     public override void OnNetworkSpawn()
     {
         if (!IsServer) enabled = false;
@@ -14,6 +18,12 @@ public class LootDropper : NetworkBehaviour
 
     public void DropLoot()
     {
+        if (Random.value <= rareDropChance && rareItemPrefab != null)
+        {
+            SpawnItem(rareItemPrefab);
+            return;
+        }
+
         // Simple RNG check
         if (Random.value > dropChance) return;
 
@@ -27,5 +37,11 @@ public class LootDropper : NetworkBehaviour
         {
             coinScript.SetValue(coinValue);
         }
+    }
+
+    private void SpawnItem(GameObject prefab)
+    {
+        GameObject item = Instantiate(prefab, transform.position, Quaternion.identity);
+        item.GetComponent<NetworkObject>().Spawn();
     }
 }

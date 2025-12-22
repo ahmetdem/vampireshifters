@@ -33,7 +33,9 @@ public class ProjectileWeapon : BaseWeapon
         if (projObj.TryGetComponent(out ProjectileMover mover))
         {
             Vector2 dir = (target.position - transform.position).normalized;
-            mover.Initialize(dir, data.projectileSpeed, data.baseDamage);
+
+            // FIX: Use GetCurrentDamage() instead of data.baseDamage
+            mover.Initialize(dir, data.projectileSpeed, GetCurrentDamage());
         }
     }
 }

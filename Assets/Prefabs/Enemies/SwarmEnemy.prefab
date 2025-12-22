@@ -231,3 +231,5 @@ MonoBehaviour:
   coinPrefab: {fileID: 2166651954924859026, guid: b74e0c259daa362d88dd1dac093e21d6, type: 3}
   coinValue: 10
   dropChance: 1
+  rareItemPrefab: {fileID: 5318105536326779877, guid: 472da1df08e313ae694a307bba6c6e97, type: 3}
+  rareDropChance: 0.2

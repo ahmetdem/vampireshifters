@@ -1,8 +1,11 @@
 using UnityEngine;
+using Unity.Netcode;
 
 // Abstract means you can't put this directly on an object; you must inherit from it
 public abstract class BaseWeapon : MonoBehaviour
 {
+    protected WeaponController controller;
+
     protected WeaponData data;
     protected ulong ownerId;
     protected float currentCooldown;
@@ -12,9 +15,15 @@ public abstract class BaseWeapon : MonoBehaviour
     public virtual void Initialize(WeaponData weaponData, ulong id)
     {
         data = weaponData;
-        currentCooldown = data.baseCooldown;
         ownerId = id;
+        currentCooldown = data.baseCooldown;
         timer = 0f;
+
+        // 2. Find the controller on the player
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject playerObj))
+        {
+            controller = playerObj.GetComponent<WeaponController>();
+        }
     }
 
     public virtual void WeaponUpdate()
@@ -28,6 +37,15 @@ public abstract class BaseWeapon : MonoBehaviour
                 timer = currentCooldown;
             }
         }
+    }
+
+    protected int GetCurrentDamage()
+    {
+        float multiplier = 1.0f;
+        if (controller != null) multiplier = controller.globalDamageMultiplier;
+
+        // Return Base Damage * Multiplier
+        return Mathf.RoundToInt(data.baseDamage * multiplier);
     }
 
     // Returns true if attack successfully fired
