@@ -70,19 +70,26 @@ public class LobbyManager : MonoBehaviour
         try
         {
             // 1. Create Relay
-            Allocation allocation = await Relay.Instance.CreateAllocationAsync(4); // 4 players total
+            Allocation allocation = await Relay.Instance.CreateAllocationAsync(4);
             string joinCode = await Relay.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             // 2. Create Lobby with Join Code
             CreateLobbyOptions options = new CreateLobbyOptions();
             options.Data = new Dictionary<string, DataObject>
-            {
-                { "joinCode", new DataObject(DataObject.VisibilityOptions.Member, joinCode) }
-            };
+        {
+            { "joinCode", new DataObject(DataObject.VisibilityOptions.Member, joinCode) }
+        };
 
-            // Quest 3: Host Beacon (Lobby Name includes Player Name)
             string playerName = PlayerPrefs.GetString("PlayerName", "Host");
             currentLobby = await LobbyService.Instance.CreateLobbyAsync($"{playerName}'s Lobby", 4, options);
+
+            // NEW: Attach heartbeat to the NetworkManager so it survives scene loads
+            if (NetworkManager.Singleton.TryGetComponent(out LobbyBeat oldBeat))
+            {
+                Destroy(oldBeat); // Clean up if one already exists
+            }
+            LobbyBeat heartbeat = NetworkManager.Singleton.gameObject.AddComponent<LobbyBeat>();
+            heartbeat.Initialize(currentLobby.Id);
 
             // 3. Setup Transport
             var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
@@ -93,7 +100,6 @@ public class LobbyManager : MonoBehaviour
 
             if (NetworkManager.Singleton.StartHost())
             {
-                // Host loads the Game Arena. Clients will follow automatically.
                 NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
             }
         }
@@ -102,7 +108,6 @@ public class LobbyManager : MonoBehaviour
             Debug.LogError($"Create Lobby Failed: {e.Message}");
         }
     }
-
     private async void JoinLobby(string lobbyId)
     {
         try

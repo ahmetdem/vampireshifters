@@ -389,9 +389,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swarmPrefab: {fileID: 5081695803496586333, guid: f76e7cf1ac524370b8982f4a9a9d01d7, type: 3}
   spawnInterval: 5
-  maxEnemies: 20
-  minSpawnDistance: 10
-  maxSpawnDistance: 20
+  baseMaxEnemies: 50
+  difficultyMultiplier: 6
+  extraCapPerMinute: 6
+  baseBurstCount: 1
+  minSpawnDistance: 20
+  maxSpawnDistance: 30
 --- !u!1 &661755696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,10 +1185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arenaSpawnPoint: {fileID: 1717762043}
-  bossPrefab: {fileID: 5081695803496586333, guid: f76e7cf1ac524370b8982f4a9a9d01d7, type: 3}
+  bossPrefab: {fileID: 5081695803496586333, guid: ed82031ca4ad89a428899e265435ddfd, type: 3}
   mainEnemySpawner: {fileID: 638645817}
   bossArenaCamera: {fileID: 742526559}
-  bossTimerDuration: 3
+  bossTimerDuration: 300
 --- !u!4 &1116681002
 Transform:
   m_ObjectHideFlags: 0

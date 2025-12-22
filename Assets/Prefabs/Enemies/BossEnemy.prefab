@@ -15,11 +15,11 @@ GameObject:
   - component: {fileID: 3782026180421123215}
   - component: {fileID: -3242095549862174872}
   - component: {fileID: 8216826031370973542}
-  - component: {fileID: -4876949735105719303}
   - component: {fileID: -7855572886094739564}
   - component: {fileID: 227886966536145675}
+  - component: {fileID: -1997917228949462298}
   m_Layer: 0
-  m_Name: SwarmEnemy
+  m_Name: BossEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2757285402
+  GlobalObjectIdHash: 184791840
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPrefab: {fileID: 4464664025128372768, guid: 1c985f55d1c76ddab8c5baf26bd6004b, type: 3}
-  swarmCount: 1
-  swarmSpread: 5
+  swarmCount: 5
+  swarmSpread: 4
 --- !u!58 &3782026180421123215
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -176,21 +176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 10
   damageInterval: 1
---- !u!114 &-4876949735105719303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081695803496586333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1707a9c3d00822472a58622d04a46f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth:
-    m_InternalValue: 100
 --- !u!50 &-7855572886094739564
 Rigidbody2D:
   serializedVersion: 4
@@ -235,3 +220,18 @@ MonoBehaviour:
   dropChance: 1
   rareItemPrefab: {fileID: 5318105536326779877, guid: 472da1df08e313ae694a307bba6c6e97, type: 3}
   rareDropChance: 0.2
+--- !u!114 &-1997917228949462298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081695803496586333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a28ec11bca17156bc7cb46d04929f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth:
+    m_InternalValue: 100

@@ -18,7 +18,7 @@ public class Health : NetworkBehaviour
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         if (TryGetComponent(out PlayerNetworkState playerState))
         {

@@ -11,9 +11,17 @@ public class PlayerMovement : NetworkBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    // FIX: This stops the player from sliding when the script is disabled (e.g., on Level Up)
+    private void OnDisable()
+    {
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+        }
+    }
+
     private void FixedUpdate()
     {
-        // Only the owner can control their player
         if (!IsOwner) return;
 
         float moveX = Input.GetAxisRaw("Horizontal");
@@ -23,13 +31,8 @@ public class PlayerMovement : NetworkBehaviour
         rb.velocity = movement * speed;
     }
 
-    // Add this method
     public void ModifySpeed(float amount)
     {
-        // Example: If amount is 0.1, we increase speed by 10%
-        // Or strictly additive: moveSpeed += amount; 
-
-        // Let's go with Additive for simplicity (e.g. +1 speed)
         speed += amount;
     }
 }

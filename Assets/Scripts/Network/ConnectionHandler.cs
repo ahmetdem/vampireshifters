@@ -41,6 +41,11 @@ public class ConnectionHandler : MonoBehaviour
         Debug.Log($"[ConnectionHandler] Client {clientId} died. Total deaths: {deathCounts[clientId]}. Respawning in {delay}s");
 
         StartCoroutine(RespawnRoutine(clientId, delay));
+
+        if (BossEventDirector.Instance != null)
+        {
+            BossEventDirector.Instance.ResetCameraClientRpc();
+        }
     }
 
     private IEnumerator RespawnRoutine(ulong clientId, float delay)
@@ -62,7 +67,10 @@ public class ConnectionHandler : MonoBehaviour
 
     public Vector3 GetRandomSpawnPosition()
     {
+        // Simply pick a random point within the radius
         Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
+
+        // Return that position
         return new Vector3(randomPoint.x, randomPoint.y, 0f);
     }
 

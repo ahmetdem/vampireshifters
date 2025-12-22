@@ -4,26 +4,64 @@ using UnityEngine;
 public class SwarmController : NetworkBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float wanderRadius = 5f;
-    [SerializeField] private float speed = 2f;
+    [SerializeField] private float baseSpeed = 2f;
+    [SerializeField] private float trackingRefreshRate = 0.5f;
+    private float currentSpeed;
 
     [Header("Collision Tuning")]
     [SerializeField] private CircleCollider2D swarmCollider;
-    [SerializeField] private float padding = 1.2f; // Extra buffer so it feels fair
+    [SerializeField] private float padding = 1.2f;
 
-    private Vector2 wanderTarget;
+    public NetworkVariable<float> difficultyMultiplier = new NetworkVariable<float>(1.0f);
 
+    private Transform targetPlayer;
+    private float trackingTimer;
+
+    public void InitializeDifficulty(float difficulty)
+    {
+        // Update the Network Variable so clients know
+        difficultyMultiplier.Value = difficulty;
+
+        // SCALING LOGIC
+        // 1. Slow Down: Speed decreases as difficulty goes up
+        currentSpeed = baseSpeed / (1.0f + (difficulty * 0.1f));
+
+        // 2. Tank Up: Health increases (e.g. 10 HP per difficulty level)
+        if (TryGetComponent(out Health healthScript))
+        {
+            healthScript.IncreaseMaxHealth(Mathf.RoundToInt(difficulty * 10));
+        }
+
+        // 3. Get Rich: Loot value increases
+        if (TryGetComponent(out LootDropper loot))
+        {
+            loot.SetLootMultiplier(difficulty);
+        }
+
+        // --- THE FIX ---
+        // 4. Update Visuals Immediately (Host side)
+        if (TryGetComponent(out SwarmVisuals visuals))
+        {
+            // This ensures the Host sees the change instantly
+            visuals.SetSwarmDensity(difficulty);
+
+            // Update the physical collider to match the new visual size
+            if (IsServer && swarmCollider != null)
+            {
+                swarmCollider.radius = visuals.GetSwarmSpread() * padding;
+            }
+        }
+    }
     public override void OnNetworkSpawn()
     {
-        if (IsServer)
-        {
-            PickNewTarget();
+        if (currentSpeed == 0) currentSpeed = baseSpeed;
 
-            // Adjust collider size to match the visual swarm spread
-            if (TryGetComponent(out SwarmVisuals visuals))
+        if (TryGetComponent(out SwarmVisuals visuals))
+        {
+            visuals.SetSwarmDensity(difficultyMultiplier.Value);
+
+            if (IsServer && swarmCollider != null)
             {
-                // We use the spread value from visuals to set the radius
-                // Source 50: 1 Network Transform updates movement of the entire group
                 swarmCollider.radius = visuals.GetSwarmSpread() * padding;
             }
         }
@@ -33,19 +71,42 @@ public class SwarmController : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        Vector2 currentPos = transform.position;
-        Vector2 direction = (wanderTarget - currentPos).normalized;
-        transform.position += (Vector3)direction * speed * Time.fixedDeltaTime;
-
-        if (Vector2.Distance(currentPos, wanderTarget) < 0.5f)
+        trackingTimer -= Time.fixedDeltaTime;
+        if (trackingTimer <= 0)
         {
-            PickNewTarget();
+            trackingTimer = trackingRefreshRate;
+            targetPlayer = GetClosestPlayer();
+        }
+
+        if (targetPlayer != null)
+        {
+            Vector2 currentPos = transform.position;
+            Vector2 targetPos = targetPlayer.position;
+
+            Vector2 direction = (targetPos - currentPos).normalized;
+
+            transform.position += (Vector3)direction * currentSpeed * Time.fixedDeltaTime;
         }
     }
 
-    private void PickNewTarget()
+    private Transform GetClosestPlayer()
     {
-        wanderTarget = (Vector2)transform.position + Random.insideUnitCircle * wanderRadius;
+        Transform closest = null;
+        float minDst = float.MaxValue;
+
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            if (client.PlayerObject != null)
+            {
+                float dst = Vector2.Distance(transform.position, client.PlayerObject.transform.position);
+                if (dst < minDst)
+                {
+                    minDst = dst;
+                    closest = client.PlayerObject.transform;
+                }
+            }
+        }
+        return closest;
     }
 
     private void OnDrawGizmosSelected()

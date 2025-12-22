@@ -97,4 +97,67 @@ public class BossEventDirector : NetworkBehaviour
         GameObject boss = Instantiate(bossPrefab, bossPos, Quaternion.identity);
         boss.GetComponent<NetworkObject>().Spawn();
     }
+
+    [ClientRpc]
+    public void ResetCameraClientRpc()
+    {
+        // Turn off the boss camera so the default follow camera takes priority again
+        if (bossArenaCamera != null)
+        {
+            bossArenaCamera.gameObject.SetActive(false);
+        }
+    }
+
+    public void OnBossDefeated()
+    {
+        // 1. Logic runs only on Server
+        if (!IsServer) return;
+
+        Debug.Log(">>> BOSS DEFEATED! RETURNING TO FOREST <<<");
+
+        if (mainEnemySpawner != null)
+        {
+            mainEnemySpawner.StartSpawning();
+        }
+
+        // 2. Loop through players on the Server
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            // Server calculates a random spot for this specific player
+            Vector3 targetPos = ConnectionHandler.Instance.GetRandomSpawnPosition();
+
+            // Server whispers to this client: "Go to this specific spot"
+            ClientRpcParams clientRpcParams = new ClientRpcParams
+            {
+                Send = new ClientRpcSendParams
+                {
+                    TargetClientIds = new ulong[] { client.ClientId }
+                }
+            };
+
+            ReturnToForestClientRpc(targetPos, clientRpcParams);
+        }
+    }
+
+    [ClientRpc]
+    private void ReturnToForestClientRpc(Vector3 targetPos, ClientRpcParams clientRpcParams = default)
+    {
+        // Client just follows orders. No math, no checking lists.
+
+        if (bossArenaCamera != null)
+        {
+            bossArenaCamera.gameObject.SetActive(false);
+        }
+
+        if (NetworkManager.Singleton.LocalClient != null &&
+            NetworkManager.Singleton.LocalClient.PlayerObject != null)
+        {
+            var player = NetworkManager.Singleton.LocalClient.PlayerObject;
+
+            if (player.TryGetComponent(out Rigidbody2D rb)) rb.velocity = Vector2.zero;
+
+            // Move to the spot the server picked
+            player.transform.position = targetPos;
+        }
+    }
 }
