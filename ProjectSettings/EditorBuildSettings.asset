@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/02_GameArena.unity
     guid: cd4a1517c7ed01d4baf3f0568ee4d367
+  - enabled: 1
+    path: Assets/Scenes/RelayTest.unity
+    guid: 897870f6216813d7baae2cc9be9cfc17
   m_configObjects: {}

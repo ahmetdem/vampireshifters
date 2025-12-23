@@ -1,0 +1,1105 @@
+fileFormatVersion: 2
+guid: 1ad90fe6b2e8d4d4b838fae8778ddd4c
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 291
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_0"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1235
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6d1806538d1f45d18c6a15a3f9b906f
+      internalID: 2122955870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_1"
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 1235
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bfb05ea84915457c90c223a0c0ca606
+      internalID: -86746587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_2"
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1235
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4ff4661df6464443bc0d35c9067a538
+      internalID: -737155006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_3"
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 1235
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a85bc4b89d8946a68074661e06a8811
+      internalID: 908853320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_4"
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 1235
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72496554213744a3482da57f53e94a68
+      internalID: -952143192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_5"
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 1235
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cf6819b4ecb94a7ba900c1d8ab97d90
+      internalID: 1659536170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_6"
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 1235
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f92b71ae370e2471cad4bfa4a9861ccf
+      internalID: -496577850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_7"
+      rect:
+        serializedVersion: 2
+        x: 2196
+        y: 1235
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2210d664fdb5c4a9a9c6fddfaeb06dc7
+      internalID: 921403029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_8"
+      rect:
+        serializedVersion: 2
+        x: 2512
+        y: 1234
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3544e4f389de44c2c8412f94817f67a5
+      internalID: 1543341627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_9"
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc0775084aed741b99b289cdeb82af16
+      internalID: -1213856205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_10"
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e21884d04170545cab1727388bf60e1a
+      internalID: -1568098088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_11"
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 605a5c51f628e46358b5758443eab70a
+      internalID: -1475802436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_12"
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d2ceeb1798784eb89deedd193de8c7d
+      internalID: 2021195873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_13"
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 807ed9650c2044dce8ca32c62da44a71
+      internalID: 476730524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_14"
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc5c1670182d5414cadd23dfd07995bd
+      internalID: -2092255591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_15"
+      rect:
+        serializedVersion: 2
+        x: 1880
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96adb309997c94d5087a2424892bd5a2
+      internalID: -2014064844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_16"
+      rect:
+        serializedVersion: 2
+        x: 2196
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56f5f24ec8bed4d13a88094914ea10ba
+      internalID: 1309069091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_17"
+      rect:
+        serializedVersion: 2
+        x: 2513
+        y: 923
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11e3b05292a4746838ea4e63b70ca682
+      internalID: 601243328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_18"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13c8d64b76b7f46a2b8689808b508778
+      internalID: -1045488808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_19"
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0de30a966993e4e518edb81debec8c63
+      internalID: 1342347197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_20"
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36e44d040e6db4a9c9631a7b58062733
+      internalID: -1241135362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_21"
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a7a9907fa62046e6b5f5a872dcbfea9
+      internalID: 1121231271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_22"
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2164922eba2ac4a5a8fc108953c8121d
+      internalID: -1815906770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_23"
+      rect:
+        serializedVersion: 2
+        x: 1570
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbd63cb0db9d04554bd8adc997e2de0d
+      internalID: -1449869236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_24"
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 802b07082255c415b9b45bdf4aa675a3
+      internalID: -664133983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_25"
+      rect:
+        serializedVersion: 2
+        x: 2196
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d416fa7d09017440089f398c817aafe4
+      internalID: -322849287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_26"
+      rect:
+        serializedVersion: 2
+        x: 2513
+        y: 620
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a5cce91374d646309b4508c76c0ae6d
+      internalID: -2121736637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_27"
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 314
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a9c06b252c504eedbc23a406951222e
+      internalID: -1294724366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_28"
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 314
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27a99d4e1a65542589a4412031a30766
+      internalID: -1223637608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_29"
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 314
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 647ba9f3c07874739a05492ead250233
+      internalID: -195823923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_30"
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 314
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d326b443fa2c4cb99982eaf2b78abfd
+      internalID: 1264889019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_31"
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 315
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac911015ad9c04d8daeffef409f592dc
+      internalID: -433187071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_32"
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 315
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cd63c2280f204eedbfe39d59c22afdd
+      internalID: -480958769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_33"
+      rect:
+        serializedVersion: 2
+        x: 1882
+        y: 314
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bc189453a2f440cbb6dc3453e25b3d9
+      internalID: -135140551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_34"
+      rect:
+        serializedVersion: 2
+        x: 2196
+        y: 314
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 407472f2449cb416d8f4562956d177fc
+      internalID: -1417523716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_35"
+      rect:
+        serializedVersion: 2
+        x: 2513
+        y: 314
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c3af5341092944c2b30b89a7269ef26
+      internalID: 1938712007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_36"
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 4
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88d261e7c7c74453ba147e322439071b
+      internalID: -813291871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_37"
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 3
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d5afbde665b74a1382e08edeb7bd20d
+      internalID: -1644356889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_38"
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 4
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2741970f8b3f6406e9bcb23811a7c477
+      internalID: 1057749077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_39"
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 4
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ca820834c2144ec7949bfc5497d46d9
+      internalID: -1810260426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_40"
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 3
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8397bbae0e5e6406dbef5b0f3f036a61
+      internalID: -903977390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_41"
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 3
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1233282213c1940a6b1bee53e202346a
+      internalID: 1357122108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_42"
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 4
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 233462986fb3d41da953f582cf02a147
+      internalID: -557373150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_43"
+      rect:
+        serializedVersion: 2
+        x: 2196
+        y: 4
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ede218bd73a044bb7a3d50d66312ab0a
+      internalID: 233988068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Map_Map - D\xFCzenlendi_44"
+      rect:
+        serializedVersion: 2
+        x: 2512
+        y: 3
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e24baf27e301148f7a2fc9b8cf20cd27
+      internalID: 1556012639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      "Map_Map - D\xFCzenlendi_0": 2122955870
+      "Map_Map - D\xFCzenlendi_1": -86746587
+      "Map_Map - D\xFCzenlendi_10": -1568098088
+      "Map_Map - D\xFCzenlendi_11": -1475802436
+      "Map_Map - D\xFCzenlendi_12": 2021195873
+      "Map_Map - D\xFCzenlendi_13": 476730524
+      "Map_Map - D\xFCzenlendi_14": -2092255591
+      "Map_Map - D\xFCzenlendi_15": -2014064844
+      "Map_Map - D\xFCzenlendi_16": 1309069091
+      "Map_Map - D\xFCzenlendi_17": 601243328
+      "Map_Map - D\xFCzenlendi_18": -1045488808
+      "Map_Map - D\xFCzenlendi_19": 1342347197
+      "Map_Map - D\xFCzenlendi_2": -737155006
+      "Map_Map - D\xFCzenlendi_20": -1241135362
+      "Map_Map - D\xFCzenlendi_21": 1121231271
+      "Map_Map - D\xFCzenlendi_22": -1815906770
+      "Map_Map - D\xFCzenlendi_23": -1449869236
+      "Map_Map - D\xFCzenlendi_24": -664133983
+      "Map_Map - D\xFCzenlendi_25": -322849287
+      "Map_Map - D\xFCzenlendi_26": -2121736637
+      "Map_Map - D\xFCzenlendi_27": -1294724366
+      "Map_Map - D\xFCzenlendi_28": -1223637608
+      "Map_Map - D\xFCzenlendi_29": -195823923
+      "Map_Map - D\xFCzenlendi_3": 908853320
+      "Map_Map - D\xFCzenlendi_30": 1264889019
+      "Map_Map - D\xFCzenlendi_31": -433187071
+      "Map_Map - D\xFCzenlendi_32": -480958769
+      "Map_Map - D\xFCzenlendi_33": -135140551
+      "Map_Map - D\xFCzenlendi_34": -1417523716
+      "Map_Map - D\xFCzenlendi_35": 1938712007
+      "Map_Map - D\xFCzenlendi_36": -813291871
+      "Map_Map - D\xFCzenlendi_37": -1644356889
+      "Map_Map - D\xFCzenlendi_38": 1057749077
+      "Map_Map - D\xFCzenlendi_39": -1810260426
+      "Map_Map - D\xFCzenlendi_4": -952143192
+      "Map_Map - D\xFCzenlendi_40": -903977390
+      "Map_Map - D\xFCzenlendi_41": 1357122108
+      "Map_Map - D\xFCzenlendi_42": -557373150
+      "Map_Map - D\xFCzenlendi_43": 233988068
+      "Map_Map - D\xFCzenlendi_44": 1556012639
+      "Map_Map - D\xFCzenlendi_45": -2001192294
+      "Map_Map - D\xFCzenlendi_5": 1659536170
+      "Map_Map - D\xFCzenlendi_6": -496577850
+      "Map_Map - D\xFCzenlendi_7": 921403029
+      "Map_Map - D\xFCzenlendi_8": 1543341627
+      "Map_Map - D\xFCzenlendi_9": -1213856205
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

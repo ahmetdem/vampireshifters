@@ -1,0 +1,818 @@
+fileFormatVersion: 2
+guid: a67cc66d2abf4499589e97bb5f969aa8
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 291
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_0"
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1200
+        width: 202
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa6fd82b2b2eb4b3ba159901617b191d
+      internalID: -1613402328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_1"
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 1200
+        width: 163
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af5e1ef08e7b34b5dba07dedb16b0fa2
+      internalID: 53413624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_2"
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 1200
+        width: 203
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7895388cbfa040bb8959bb0599faebd
+      internalID: -676826697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_3"
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 1200
+        width: 273
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb2ca6a1d13194e8ab22f3cc35d1bf4e
+      internalID: -1190517073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_4"
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 1200
+        width: 215
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c11f50830e3e74fcf9c52f52b563db1b
+      internalID: 1964956028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_5"
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 1199
+        width: 176
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3b12228da44d43e49eccd5b81ae13ae
+      internalID: -1345863299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_6"
+      rect:
+        serializedVersion: 2
+        x: 1745
+        y: 1199
+        width: 232
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f667d21bef9f483082cd797d22b958e
+      internalID: -848008988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_7"
+      rect:
+        serializedVersion: 2
+        x: 2003
+        y: 1199
+        width: 198
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdef07d82b74946c5b3a723caf84820d
+      internalID: 998727862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_8"
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 1199
+        width: 212
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb95114c376048e38ed4bc12983ed60
+      internalID: -762636450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_9"
+      rect:
+        serializedVersion: 2
+        x: 2537
+        y: 1199
+        width: 206
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d4f6b81262dc448cb80700c7fac2cb9
+      internalID: 420905982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_10"
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 840
+        width: 202
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c21a6b6273ec2459e981b82f552fcb65
+      internalID: 350748296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_11"
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 842
+        width: 161
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75030312c9a0249a29b1789e39d93098
+      internalID: -1867701162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_12"
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 840
+        width: 296
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a2ea5600961e436ca4602008e8d741d
+      internalID: 1655172496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_13"
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 842
+        width: 282
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca52acc9fe142491e8c3496951a8b351
+      internalID: 1056429168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_14"
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 840
+        width: 213
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b09dfe6915bd483f9d971f314cfa373
+      internalID: -1782913521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_15"
+      rect:
+        serializedVersion: 2
+        x: 1478
+        y: 840
+        width: 178
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0ba4c6f221804f16ace1646e863bf34
+      internalID: -1497250495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_16"
+      rect:
+        serializedVersion: 2
+        x: 1745
+        y: 840
+        width: 232
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16a916523fe2b4f3ebb2dfd31bfadb89
+      internalID: 1721436905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_17"
+      rect:
+        serializedVersion: 2
+        x: 2003
+        y: 840
+        width: 198
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1c4c212fd5004db68072e1fdba3f4d4
+      internalID: -888938854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_18"
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 840
+        width: 212
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69b240e7a1eab4487bd88557f21e222d
+      internalID: -1113689720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_19"
+      rect:
+        serializedVersion: 2
+        x: 2538
+        y: 840
+        width: 205
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bf77f396be2b4dd29e9307f5b7c963b
+      internalID: -700588153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_20"
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 81
+        width: 468
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fec8e53a250904fd89cbe720e500c210
+      internalID: 604460095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_21"
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 92
+        width: 507
+        height: 612
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1aaa320b9f9645af853836a17f1e0b5
+      internalID: -1764692605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_22"
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 92
+        width: 478
+        height: 565
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f23ea1ccf80f457093be922fc7c840c
+      internalID: -1527306809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_23"
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 461
+        width: 233
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48c0eb63bcb4c433aa635cb8f261937c
+      internalID: 751908138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_24"
+      rect:
+        serializedVersion: 2
+        x: 1735
+        y: 461
+        width: 234
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 653d9f19bb89c45bf9e1c00ec96a8310
+      internalID: 1168710970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_25"
+      rect:
+        serializedVersion: 2
+        x: 1994
+        y: 461
+        width: 235
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a36ddf010f4244f8dadb0dfe8bb9e869
+      internalID: -2117522061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_26"
+      rect:
+        serializedVersion: 2
+        x: 2254
+        y: 461
+        width: 235
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6706ed0a0986d44bc883a0850094563f
+      internalID: 1222375762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_27"
+      rect:
+        serializedVersion: 2
+        x: 2514
+        y: 461
+        width: 233
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9929b4f6cf68476bad168316bafd630
+      internalID: 1034594261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_28"
+      rect:
+        serializedVersion: 2
+        x: 1486
+        y: 74
+        width: 263
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c051b0edf411a41ef963b9e1958325f5
+      internalID: -1740929071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_29"
+      rect:
+        serializedVersion: 2
+        x: 1796
+        y: 69
+        width: 276
+        height: 278
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbea34e7847f2437587dcc3417319c8a
+      internalID: 2044602956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_30"
+      rect:
+        serializedVersion: 2
+        x: 2145
+        y: 81
+        width: 269
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cde146c53073f404ba9ae5bedc23c11f
+      internalID: 1185925733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Characters - Du\u0308zenlendi_31"
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 81
+        width: 271
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1f91237feea646c7b42bf95357e4d4d
+      internalID: -864230456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      "Characters - Du\u0308zenlendi_0": -1613402328
+      "Characters - Du\u0308zenlendi_1": 53413624
+      "Characters - Du\u0308zenlendi_10": 350748296
+      "Characters - Du\u0308zenlendi_11": -1867701162
+      "Characters - Du\u0308zenlendi_12": 1655172496
+      "Characters - Du\u0308zenlendi_13": 1056429168
+      "Characters - Du\u0308zenlendi_14": -1782913521
+      "Characters - Du\u0308zenlendi_15": -1497250495
+      "Characters - Du\u0308zenlendi_16": 1721436905
+      "Characters - Du\u0308zenlendi_17": -888938854
+      "Characters - Du\u0308zenlendi_18": -1113689720
+      "Characters - Du\u0308zenlendi_19": -700588153
+      "Characters - Du\u0308zenlendi_2": -676826697
+      "Characters - Du\u0308zenlendi_20": 604460095
+      "Characters - Du\u0308zenlendi_21": -1764692605
+      "Characters - Du\u0308zenlendi_22": -1527306809
+      "Characters - Du\u0308zenlendi_23": 751908138
+      "Characters - Du\u0308zenlendi_24": 1168710970
+      "Characters - Du\u0308zenlendi_25": -2117522061
+      "Characters - Du\u0308zenlendi_26": 1222375762
+      "Characters - Du\u0308zenlendi_27": 1034594261
+      "Characters - Du\u0308zenlendi_28": -1740929071
+      "Characters - Du\u0308zenlendi_29": 2044602956
+      "Characters - Du\u0308zenlendi_3": -1190517073
+      "Characters - Du\u0308zenlendi_30": 1185925733
+      "Characters - Du\u0308zenlendi_31": -864230456
+      "Characters - Du\u0308zenlendi_4": 1964956028
+      "Characters - Du\u0308zenlendi_5": -1345863299
+      "Characters - Du\u0308zenlendi_6": -848008988
+      "Characters - Du\u0308zenlendi_7": 998727862
+      "Characters - Du\u0308zenlendi_8": -762636450
+      "Characters - Du\u0308zenlendi_9": 420905982
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
