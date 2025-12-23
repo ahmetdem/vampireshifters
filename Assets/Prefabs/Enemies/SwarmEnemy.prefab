@@ -188,9 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1707a9c3d00822472a58622d04a46f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1
   currentHealth:
-    m_InternalValue: 100
+    m_InternalValue: 1
 --- !u!50 &-7855572886094739564
 Rigidbody2D:
   serializedVersion: 4
@@ -233,5 +233,7 @@ MonoBehaviour:
   coinPrefab: {fileID: 2166651954924859026, guid: b74e0c259daa362d88dd1dac093e21d6, type: 3}
   coinValue: 10
   dropChance: 1
-  rareItemPrefab: {fileID: 5318105536326779877, guid: 472da1df08e313ae694a307bba6c6e97, type: 3}
-  rareDropChance: 0.2
+  rareDropTable:
+  - {fileID: 5318105536326779877, guid: 472da1df08e313ae694a307bba6c6e97, type: 3}
+  - {fileID: 5318105536326779877, guid: ca0653b3ec7dc84bcbec53c15c7604a1, type: 3}
+  rareDropChance: 1

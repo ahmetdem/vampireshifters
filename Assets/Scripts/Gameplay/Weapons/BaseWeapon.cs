@@ -54,17 +54,40 @@ public abstract class BaseWeapon : MonoBehaviour
     // Helper to find nearest enemy for Auto-Aim weapons
     protected Transform FindNearestEnemy()
     {
-        // Optimization: In a real swarm, use a dedicated EnemyManager list.
-        // For now, OverlapCircle is acceptable for testing.
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, data.range);
         Transform bestTarget = null;
         float closestDistSqr = Mathf.Infinity;
 
+        // Check Global PvP State
+        bool isPvP = false;
+        if (PvPDirector.Instance != null && PvPDirector.Instance.IsPvPActive.Value)
+        {
+            isPvP = true;
+        }
+
         foreach (var hit in hits)
         {
-            // Check if it has a Health component and is NOT the player
-            // Note: We need a Tag or Layer check to distinguish Enemy from Player
+            bool isValidTarget = false;
+
+            // 1. Standard Enemy
             if (hit.CompareTag("Enemy"))
+            {
+                isValidTarget = true;
+            }
+            // 2. PvP Target (Player)
+            else if (isPvP && hit.CompareTag("Player"))
+            {
+                if (hit.TryGetComponent(out NetworkObject netObj))
+                {
+                    // FIX IS HERE: Compare NetworkObjectId, not OwnerClientId
+                    if (netObj.NetworkObjectId != ownerId)
+                    {
+                        isValidTarget = true;
+                    }
+                }
+            }
+
+            if (isValidTarget)
             {
                 float dSqr = (hit.transform.position - transform.position).sqrMagnitude;
                 if (dSqr < closestDistSqr)

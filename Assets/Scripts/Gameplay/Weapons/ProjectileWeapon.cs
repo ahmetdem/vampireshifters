@@ -35,7 +35,7 @@ public class ProjectileWeapon : BaseWeapon
             Vector2 dir = (target.position - transform.position).normalized;
 
             // FIX: Use GetCurrentDamage() instead of data.baseDamage
-            mover.Initialize(dir, data.projectileSpeed, GetCurrentDamage());
+            mover.Initialize(dir, data.projectileSpeed, GetCurrentDamage(), ownerId);
         }
     }
 }
