@@ -1,0 +1,13 @@
+ Assets/Prefabs/Characters/Player.prefab            |   19 +-
+ Assets/Prefabs/Enemies/BossEnemy.prefab            |    8 +-
+ Assets/Prefabs/Network/BossSummonScroll.prefab     |    8 +-
+ Assets/Prefabs/Network/Coin.prefab                 |    1 +
+ Assets/Prefabs/Network/PvpSummonScroll.prefab      |    8 +-
+ Assets/Scenes/02_GameArena.unity                   | 1266 ++++++++++++++++++--
+ Assets/Scripts/Gameplay/CoinPickup.cs              |   24 +
+ .../Scripts/Gameplay/Managers/BossEventDirector.cs |   27 +-
+ Assets/Scripts/Gameplay/Managers/PvPDirector.cs    |  106 +-
+ Assets/Scripts/Gameplay/PlayerEconomy.cs           |   47 +-
+ .../Scripts/Gameplay/Weapons/WeaponController.cs   |   15 +
+ Assets/Scripts/Network/ConnectionHandler.cs        |    7 +
+ 12 files changed, 1383 insertions(+), 153 deletions(-)

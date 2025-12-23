@@ -42,9 +42,16 @@ public class ConnectionHandler : MonoBehaviour
 
         StartCoroutine(RespawnRoutine(clientId, delay));
 
+        // Reset any active event cameras
         if (BossEventDirector.Instance != null)
         {
             BossEventDirector.Instance.ResetCameraClientRpc();
+        }
+
+        // Also reset PvP camera if player died in PvP arena
+        if (PvPDirector.Instance != null)
+        {
+            PvPDirector.Instance.ResetPvPCameraForClientRpc(clientId);
         }
     }
 

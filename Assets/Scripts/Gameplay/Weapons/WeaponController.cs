@@ -48,6 +48,21 @@ public class WeaponController : NetworkBehaviour
         ResumeGameplayClientRpc();
     }
 
+    /// <summary>
+    /// Directly applies an upgrade at the given index (server-side, no UI).
+    /// Used for random upgrade selection on level up.
+    /// </summary>
+    public void ApplyUpgradeAtIndex(int index)
+    {
+        if (!IsServer) return;
+        if (index < 0 || index >= allUpgradesPool.Count) return;
+
+        UpgradeData selectedUpgrade = allUpgradesPool[index];
+        selectedUpgrade.Apply(gameObject);
+
+        Debug.Log($"[Upgrade] Player {OwnerClientId} auto-selected: {selectedUpgrade.upgradeName}");
+    }
+
     [ClientRpc]
     private void ResumeGameplayClientRpc()
     {

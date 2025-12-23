@@ -233,9 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a28ec11bca17156bc7cb46d04929f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   currentHealth:
-    m_InternalValue: 100
+    m_InternalValue: 1000
 --- !u!212 &3175959295347169575
 SpriteRenderer:
   m_ObjectHideFlags: 0

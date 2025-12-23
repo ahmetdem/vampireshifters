@@ -5,6 +5,9 @@ public class CoinPickup : NetworkBehaviour
 {
     public NetworkVariable<int> coinValue = new NetworkVariable<int>(10);
 
+    [Header("Auto-Despawn")]
+    [SerializeField] private float lifetime = 30f; // Time before auto-despawn (editable in Inspector)
+
     // Safety flag to prevent double-collection
     private bool isCollected = false;
 
@@ -13,6 +16,24 @@ public class CoinPickup : NetworkBehaviour
         if (IsServer)
         {
             coinValue.Value = newValue;
+        }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer && lifetime > 0)
+        {
+            // Schedule auto-despawn
+            Invoke(nameof(AutoDespawn), lifetime);
+        }
+    }
+
+    private void AutoDespawn()
+    {
+        if (!isCollected && IsSpawned)
+        {
+            Debug.Log($"[CoinPickup] Auto-despawning coin after {lifetime}s");
+            NetworkObject.Despawn();
         }
     }
 
@@ -28,6 +49,9 @@ public class CoinPickup : NetworkBehaviour
         {
             // Mark as collected immediately so the next collider ignores this code
             isCollected = true;
+
+            // Cancel auto-despawn since we're collecting it
+            CancelInvoke(nameof(AutoDespawn));
 
             economy.CollectCoin(coinValue.Value);
 

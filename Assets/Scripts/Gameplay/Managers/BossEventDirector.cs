@@ -20,7 +20,8 @@ public class BossEventDirector : NetworkBehaviour
     [Header("Settings")]
     public float bossTimerDuration = 300f;
     private float currentTimer;
-    private bool eventStarted = false;
+    public NetworkVariable<bool> isEventActive = new NetworkVariable<bool>(false);
+    public bool IsEventActive => isEventActive.Value;
 
     private void Awake()
     {
@@ -31,12 +32,16 @@ public class BossEventDirector : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        if (IsServer) currentTimer = 0f;
+        if (IsServer)
+        {
+            currentTimer = 0f;
+            isEventActive.Value = false;
+        }
     }
 
     private void Update()
     {
-        if (!IsServer || eventStarted) return;
+        if (!IsServer || isEventActive.Value) return;
 
         currentTimer += Time.deltaTime;
         if (currentTimer >= bossTimerDuration)
@@ -47,12 +52,12 @@ public class BossEventDirector : NetworkBehaviour
 
     public void ForceStartEvent()
     {
-        if (IsServer && !eventStarted) StartBossEvent();
+        if (IsServer && !isEventActive.Value) StartBossEvent();
     }
 
     private void StartBossEvent()
     {
-        eventStarted = true;
+        isEventActive.Value = true;
         Debug.Log(">>> BOSS EVENT STARTED <<<");
 
         // 1. STOP NORMAL ENEMY SPAWNS
@@ -60,6 +65,12 @@ public class BossEventDirector : NetworkBehaviour
         {
             // You need to add this public method to your EnemySpawner script!
             mainEnemySpawner.StopSpawning();
+        }
+
+        if (PvPDirector.Instance != null)
+        {
+            PvPDirector.Instance.IsPvPActive.Value = false; // Force PvP flag off
+            PvPDirector.Instance.DisablePvPCamera();        // Force Camera off
         }
 
         // 2. TELEPORT & FIX CAMERA (Client Side)
@@ -112,6 +123,7 @@ public class BossEventDirector : NetworkBehaviour
     {
         // 1. Logic runs only on Server
         if (!IsServer) return;
+        isEventActive.Value = false;
 
         Debug.Log(">>> BOSS DEFEATED! RETURNING TO FOREST <<<");
 
@@ -147,6 +159,11 @@ public class BossEventDirector : NetworkBehaviour
         if (bossArenaCamera != null)
         {
             bossArenaCamera.gameObject.SetActive(false);
+        }
+
+        if (PvPDirector.Instance != null)
+        {
+            PvPDirector.Instance.DisablePvPCamera();
         }
 
         if (NetworkManager.Singleton.LocalClient != null &&

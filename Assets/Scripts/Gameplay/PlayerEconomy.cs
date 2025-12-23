@@ -45,22 +45,51 @@ public class PlayerEconomy : NetworkBehaviour
 
         Debug.Log($"[Economy] Player {OwnerClientId} Leveled Up! New Level: {currentLevel.Value}");
 
-        // 3. Trigger Client Event (Show UI)
-        // We use a ClientRpc to tell the specific client "Show your menu!"
-        ShowLevelUpUIClientRpc();
+        // 3. Check Win Condition
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.CheckWinCondition(OwnerClientId, currentLevel.Value);
+        }
+
+        // 4. Auto-select a random upgrade (no UI)
+        ApplyRandomUpgrade();
     }
 
-    [ClientRpc]
-    private void ShowLevelUpUIClientRpc()
+    /// <summary>
+    /// Add multiple levels at once (e.g., PvP winner bonus).
+    /// </summary>
+    public void AddLevels(int count)
     {
-        if (!IsOwner) return;
+        if (!IsServer) return;
 
-        // Find our local weapon controller
+        for (int i = 0; i < count; i++)
+        {
+            currentLevel.Value++;
+
+            Debug.Log($"[Economy] Player {OwnerClientId} gained bonus level! New Level: {currentLevel.Value}");
+
+            // Check Win Condition after each level
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.CheckWinCondition(OwnerClientId, currentLevel.Value);
+            }
+
+            // Apply a random upgrade for each level gained
+            ApplyRandomUpgrade();
+        }
+    }
+
+    /// <summary>
+    /// Automatically applies a random upgrade from the player's upgrade pool.
+    /// </summary>
+    private void ApplyRandomUpgrade()
+    {
         if (TryGetComponent(out WeaponController controller))
         {
-            if (LevelUpUI.Instance != null)
+            if (controller.allUpgradesPool != null && controller.allUpgradesPool.Count > 0)
             {
-                LevelUpUI.Instance.ShowOptions(controller);
+                int randomIndex = UnityEngine.Random.Range(0, controller.allUpgradesPool.Count);
+                controller.ApplyUpgradeAtIndex(randomIndex);
             }
         }
     }

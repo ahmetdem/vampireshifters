@@ -1,0 +1,39 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Assets/Prefabs/Characters/Player.prefab
+	modified:   Assets/Prefabs/Enemies/BossEnemy.prefab
+	modified:   Assets/Prefabs/Network/BossSummonScroll.prefab
+	modified:   Assets/Prefabs/Network/Coin.prefab
+	modified:   Assets/Prefabs/Network/PvpSummonScroll.prefab
+	modified:   Assets/Scenes/02_GameArena.unity
+	modified:   Assets/Scripts/Gameplay/CoinPickup.cs
+	modified:   Assets/Scripts/Gameplay/Managers/BossEventDirector.cs
+	modified:   Assets/Scripts/Gameplay/Managers/PvPDirector.cs
+	modified:   Assets/Scripts/Gameplay/PlayerEconomy.cs
+	modified:   Assets/Scripts/Gameplay/Weapons/WeaponController.cs
+	modified:   Assets/Scripts/Network/ConnectionHandler.cs
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Assets/ScriptableObjects/Items.meta
+	Assets/ScriptableObjects/Items/
+	Assets/Scripts/Gameplay/Items/InventoryPickup.cs
+	Assets/Scripts/Gameplay/Items/InventoryPickup.cs.meta
+	Assets/Scripts/Gameplay/Managers/GameManager.cs
+	Assets/Scripts/Gameplay/Managers/GameManager.cs.meta
+	Assets/Scripts/Gameplay/PlayerInventory.cs
+	Assets/Scripts/Gameplay/PlayerInventory.cs.meta
+	Assets/Scripts/SESSION_CHANGES.md
+	Assets/Scripts/ScriptableObjects/InventoryItemData.cs
+	Assets/Scripts/ScriptableObjects/InventoryItemData.cs.meta
+	Assets/Scripts/UI/GameOverUI.cs
+	Assets/Scripts/UI/GameOverUI.cs.meta
+	Assets/Scripts/UI/InventoryUI.cs
+	Assets/Scripts/UI/InventoryUI.cs.meta
+	git_status.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")

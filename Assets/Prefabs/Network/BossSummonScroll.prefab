@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 964226400047439983}
   - component: {fileID: 3098929960963847182}
   - component: {fileID: 8252524534552391600}
-  - component: {fileID: 105163354279246183}
+  - component: {fileID: 286038070592074002}
   m_Layer: 0
   m_Name: BossSummonScroll
   m_TagString: Untagged
@@ -155,7 +155,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &105163354279246183
+--- !u!114 &286038070592074002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,6 +164,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5318105536326779877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9dc199ca6c1de119b21bab3c0590749, type: 3}
+  m_Script: {fileID: 11500000, guid: a02bcb1d12b5e690a85ae3f505e1ce3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 93cbc8b090f85b5ee92078c7dac898b1, type: 2}
+  lifetime: 4

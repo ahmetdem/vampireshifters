@@ -93,6 +93,7 @@ public class PvPDirector : NetworkBehaviour
     {
         int aliveCount = 0;
         ulong lastSurvivorId = 0;
+        NetworkObject winnerObject = null;
 
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
@@ -101,15 +102,89 @@ public class PvPDirector : NetworkBehaviour
             {
                 aliveCount++;
                 lastSurvivorId = client.ClientId;
+                winnerObject = client.PlayerObject;
             }
         }
 
-        if (aliveCount <= 1)
+        if (aliveCount <= 1 && winnerObject != null)
         {
-            // Trigger Game Over Logic here later
-            Debug.Log($"Winner Found: {lastSurvivorId}");
+            Debug.Log($"[PvP] Winner Found: {lastSurvivorId}");
             IsPvPActive.Value = false;
+
+            // Grant +5 level boost to winner
+            if (winnerObject.TryGetComponent(out PlayerEconomy economy))
+            {
+                Debug.Log($"[PvP] Granting {GameManager.PVP_WIN_LEVEL_BOOST} bonus levels to winner!");
+                economy.AddLevels(GameManager.PVP_WIN_LEVEL_BOOST);
+            }
+
+            // Return all players to forest and resume gameplay
+            EndPvPAndReturnToForest();
         }
+    }
+
+    /// <summary>
+    /// Ends PvP mode, teleports all players back to forest, and resumes normal gameplay.
+    /// </summary>
+    private void EndPvPAndReturnToForest()
+    {
+        Debug.Log("[PvP] Returning all players to Forest Arena...");
+
+        // 1. Teleport all surviving players back to forest
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            if (client.PlayerObject == null) continue;
+
+            // Get a random spawn position in the forest
+            Vector3 forestPos = Vector3.zero;
+            if (ConnectionHandler.Instance != null)
+            {
+                forestPos = ConnectionHandler.Instance.GetRandomSpawnPosition();
+            }
+            else
+            {
+                // Fallback: random position near origin
+                forestPos = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f);
+            }
+
+            ClientRpcParams clientParams = new ClientRpcParams
+            {
+                Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { client.ClientId } }
+            };
+
+            ReturnToForestClientRpc(forestPos, clientParams);
+        }
+
+        // 2. Resume enemy spawning
+        if (mainEnemySpawner != null)
+        {
+            mainEnemySpawner.StartSpawning();
+        }
+
+        // 3. Reset timer for next potential PvP event
+        timerActive = true;
+        matchTimer = 0f;
+
+        Debug.Log("[PvP] Forest gameplay resumed!");
+    }
+
+    [ClientRpc]
+    private void ReturnToForestClientRpc(Vector3 pos, ClientRpcParams clientRpcParams = default)
+    {
+        // 1. Disable the PvP Arena Camera
+        if (pvpArenaCamera != null)
+        {
+            pvpArenaCamera.gameObject.SetActive(false);
+        }
+
+        // 2. Teleport the local player
+        if (NetworkManager.Singleton.LocalClient.PlayerObject.TryGetComponent(out Rigidbody2D rb))
+        {
+            rb.velocity = Vector2.zero;
+            rb.transform.position = pos;
+        }
+
+        Debug.Log($"[PvP] Returned to Forest at {pos}");
     }
 
     // Add this inside PvPDirector class
@@ -144,5 +219,30 @@ public class PvPDirector : NetworkBehaviour
         DespawnAllEnemies();
 
         TeleportPlayersToArena();
+    }
+
+    // Add this helper method
+    public void DisablePvPCamera()
+    {
+        if (pvpArenaCamera != null)
+        {
+            pvpArenaCamera.gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Resets the PvP camera for a specific client (e.g., when they die during PvP).
+    /// </summary>
+    [ClientRpc]
+    public void ResetPvPCameraForClientRpc(ulong clientId)
+    {
+        // Only the dead player should reset their camera
+        if (NetworkManager.Singleton.LocalClientId != clientId) return;
+
+        if (pvpArenaCamera != null)
+        {
+            pvpArenaCamera.gameObject.SetActive(false);
+            Debug.Log($"[PvP] Camera reset for dead player {clientId}");
+        }
     }
 }
