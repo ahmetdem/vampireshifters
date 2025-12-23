@@ -6,14 +6,27 @@ public class Health : NetworkBehaviour
     [SerializeField] private int maxHealth = 100;
     public NetworkVariable<int> currentHealth = new NetworkVariable<int>(100);
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            // FORCE the network variable to match the Inspector setting
+            currentHealth.Value = maxHealth;
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         if (!IsServer) return;
+
+        Debug.Log($"[Health] Took {damage} damage! Current HP: {currentHealth.Value - damage}"); // <--- ADD THIS
 
         currentHealth.Value -= damage;
 
         if (currentHealth.Value <= 0)
         {
+            // Trace the stack to see what called Die()
+            Debug.LogError($"[Health] DIED! Death triggered by: {System.Environment.StackTrace}"); // <--- ADD THIS
             Die();
         }
     }

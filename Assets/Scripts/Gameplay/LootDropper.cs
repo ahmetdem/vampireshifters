@@ -5,10 +5,10 @@ public class LootDropper : NetworkBehaviour
 {
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private int coinValue = 10;
-    [SerializeField] private float dropChance = 1.0f;
+    [SerializeField] private float dropChance = 0.5f;
 
     [Header("Rare Drops")]
-    [SerializeField] private GameObject rareItemPrefab;
+    [SerializeField] private GameObject[] rareDropTable;
     [SerializeField] private float rareDropChance = 0.01f;
 
     // 1. New variable to store the multiplier
@@ -27,13 +27,25 @@ public class LootDropper : NetworkBehaviour
 
     public void DropLoot()
     {
-        if (Random.value <= rareDropChance && rareItemPrefab != null)
+        // 1. Roll for RARE drop first
+        if (rareDropTable.Length > 0 && Random.value <= rareDropChance)
         {
-            SpawnItem(rareItemPrefab);
-            return;
+            // Pick a random rare item from the list
+            GameObject itemToDrop = rareDropTable[Random.Range(0, rareDropTable.Length)];
+            SpawnItem(itemToDrop);
+            return; // Don't drop a coin if we dropped a rare item
         }
 
-        if (Random.value > dropChance) return;
+        // 2. Roll for COMMON drop (Coin)
+        if (Random.value <= dropChance)
+        {
+            SpawnCoin();
+        }
+    }
+
+    private void SpawnCoin()
+    {
+        if (coinPrefab == null) return;
 
         GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
         NetworkObject netObj = coin.GetComponent<NetworkObject>();
@@ -41,8 +53,7 @@ public class LootDropper : NetworkBehaviour
 
         if (coin.TryGetComponent(out CoinPickup coinScript))
         {
-            // 3. Apply the multiplier to the coin value
-            // If base is 10 and difficulty is 3, this drops 30 gold.
+            // Use the coinValue variable here to clear the warning
             int finalValue = Mathf.RoundToInt(coinValue * lootMultiplier);
             coinScript.SetValue(finalValue);
         }
@@ -50,6 +61,7 @@ public class LootDropper : NetworkBehaviour
 
     private void SpawnItem(GameObject prefab)
     {
+        if (prefab == null) return;
         GameObject item = Instantiate(prefab, transform.position, Quaternion.identity);
         item.GetComponent<NetworkObject>().Spawn();
     }
