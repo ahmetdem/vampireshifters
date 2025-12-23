@@ -1,0 +1,1280 @@
+fileFormatVersion: 2
+guid: 58207cee0bffb4d2cba6fd5478214f4d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 291
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PVP Decor2_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1298
+        width: 220
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c62d3532d79d44697afdfea1b54b900a
+      internalID: 1539459961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_1
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 1298
+        width: 220
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 486faa99f9a9a4244af85d067f29d8bc
+      internalID: 390125816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_2
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 1298
+        width: 220
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5db13a950a904712b0180ab68f8c1e6
+      internalID: -2074472489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_3
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 1298
+        width: 220
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d9c4ba2d3d4f408d89f2d5431fad4c4
+      internalID: -1757695314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_4
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 1298
+        width: 218
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e16e49b768f2745b0874a111c40f1449
+      internalID: 2104288972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_5
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 1298
+        width: 220
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 041c5a68db1304a67aa8d34c42f73f67
+      internalID: -1810177086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_6
+      rect:
+        serializedVersion: 2
+        x: 1415
+        y: 1298
+        width: 220
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed568773dd9d34fc5ac2bfe2e58acbc5
+      internalID: 248031212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_7
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 1298
+        width: 220
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eebc4c256e8b427aa02fef79e0bd168
+      internalID: 1079379605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_8
+      rect:
+        serializedVersion: 2
+        x: 1882
+        y: 1299
+        width: 219
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96d6c71ca3a7049419a4a81773ed7f89
+      internalID: 361369789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_9
+      rect:
+        serializedVersion: 2
+        x: 2116
+        y: 1298
+        width: 219
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7526972c9c71b4168808d15b622e0df6
+      internalID: 1738261164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_10
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 1299
+        width: 219
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2abee46bd14014c6c917b8bc12a6b18f
+      internalID: 96093978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_11
+      rect:
+        serializedVersion: 2
+        x: 2585
+        y: 1299
+        width: 220
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30cb56d6bf52946b2a9b6c43e6ecfed3
+      internalID: -1477693992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1052
+        width: 221
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55cf79ebe70964c8cb7fbf348c2966b9
+      internalID: 759461915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_13
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 1052
+        width: 220
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 416cdc420058e44d1ac9871f1d98cd18
+      internalID: -425305920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_14
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 1052
+        width: 220
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d21789653b434289a34d1944346ad82
+      internalID: -264276061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_15
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 1052
+        width: 220
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4106584a3b51844b68abbb1a6c4f1dde
+      internalID: 1192257199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_16
+      rect:
+        serializedVersion: 2
+        x: 949
+        y: 1052
+        width: 218
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdd0ea99e183f4d06b26e2f02c43c4b5
+      internalID: 1668904654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_17
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 1052
+        width: 220
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a94f5dd19fb3a459d91895545e4564f0
+      internalID: -910770321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_18
+      rect:
+        serializedVersion: 2
+        x: 1415
+        y: 1053
+        width: 220
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a76b42e3bf38e4f88ae48a312e15b21b
+      internalID: -1317804005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_19
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 1053
+        width: 221
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b90422547b5141738b674329bc08d7d
+      internalID: -507437430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_20
+      rect:
+        serializedVersion: 2
+        x: 1882
+        y: 1053
+        width: 219
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3328faf7372041d0adbad55d41d309c
+      internalID: 402775454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_21
+      rect:
+        serializedVersion: 2
+        x: 2116
+        y: 1052
+        width: 219
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75a4b5b5cdb9a4ce59cab8768bf62155
+      internalID: 2000984062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_22
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 1053
+        width: 220
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71a42a82c608b450c8e86725b32973ba
+      internalID: 391434384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_23
+      rect:
+        serializedVersion: 2
+        x: 2584
+        y: 1052
+        width: 221
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff650b0f3aad34317992c3aafe0314a8
+      internalID: -1987605964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_24
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 714
+        width: 190
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7325f28bc39314741977f3a6078fb312
+      internalID: 752934178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_25
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 714
+        width: 191
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb948f1df0534448281da49733030a8e
+      internalID: -1982992379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_26
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 714
+        width: 195
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd53e570afdff4695bbaa7ee5d8b962b
+      internalID: -110630342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_27
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 715
+        width: 206
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7277f7a92927f4f7586ad576b592e06c
+      internalID: 620095435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_28
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 712
+        width: 321
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4705168df65a4af1aefec994e0bbfae
+      internalID: 63926542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_29
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 714
+        width: 323
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c6a7b53156f94ccf8b4dc4d204ee7a5
+      internalID: -991570433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_30
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 712
+        width: 323
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9e69a67b3a324e6080e7114f41083f4
+      internalID: 402930464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_31
+      rect:
+        serializedVersion: 2
+        x: 2019
+        y: 736
+        width: 273
+        height: 275
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7c7ef039821741ebb70eea290dfa9c5
+      internalID: -143222404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_32
+      rect:
+        serializedVersion: 2
+        x: 2355
+        y: 721
+        width: 444
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1657913d15846e892b0452c7ba8584
+      internalID: 979091098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_33
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 397
+        width: 254
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a3eaf2d825924e3ebf9285d11dbe1b7
+      internalID: -1124266902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_34
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 397
+        width: 254
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bbcb14dce4df41dda91053f4c159f90
+      internalID: -1829899233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_35
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 349
+        width: 145
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27e6f2c07304044daa55c3074219253a
+      internalID: -1559621901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_36
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 403
+        width: 86
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eadcb92af89e45fd83d97f2edbebc22
+      internalID: 1854282184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_37
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 358
+        width: 259
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b017872b5e9494f17afb67d5e494c536
+      internalID: 594826319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_38
+      rect:
+        serializedVersion: 2
+        x: 1209
+        y: 358
+        width: 392
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d56b6d06d92814cd2bad2da9f3e820f8
+      internalID: -1435178351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_39
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 358
+        width: 215
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcdde319e09a04a599bc08ff55656c19
+      internalID: -1923149679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_40
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 403
+        width: 84
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ed1503e2233f42559d0ea981e57f8d6
+      internalID: 518518478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_41
+      rect:
+        serializedVersion: 2
+        x: 1994
+        y: 397
+        width: 132
+        height: 266
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8126866ba45654033a07da898764a1a9
+      internalID: 1423985325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_42
+      rect:
+        serializedVersion: 2
+        x: 2185
+        y: 397
+        width: 129
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d590f37da37c4c82a316f8719bb8b21
+      internalID: 554112557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_43
+      rect:
+        serializedVersion: 2
+        x: 2406
+        y: 363
+        width: 120
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2af00727a70a249c3a88b56384c19348
+      internalID: 1243828559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_44
+      rect:
+        serializedVersion: 2
+        x: 2623
+        y: 363
+        width: 122
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f63adcbf80544f2683906e0c1e92bbf
+      internalID: -1045628459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_45
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 0
+        width: 149
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d70b49047fa6b48bdb692a1c8d72af81
+      internalID: 2060729271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_46
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 0
+        width: 148
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c09d8bb715d47c5aabb2f04aee4e5d
+      internalID: -1272669556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_47
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 22
+        width: 476
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 754e647abb13842d4acabf45ac8c58cf
+      internalID: -935871762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_48
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 0
+        width: 747
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba2244890bce648b5aed5ee5c3d6e30c
+      internalID: -1556200574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_49
+      rect:
+        serializedVersion: 2
+        x: 1965
+        y: 34
+        width: 33
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5445de0ab6322451cbaa20c8482f4473
+      internalID: -251311934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_50
+      rect:
+        serializedVersion: 2
+        x: 1965
+        y: 45
+        width: 223
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66dd184caf0b04521a060d8f7c76c628
+      internalID: -526138266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_51
+      rect:
+        serializedVersion: 2
+        x: 2130
+        y: 29
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cb49b8ded07c4d5fb7af6a83dcaccb2
+      internalID: -2143736529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor2_52
+      rect:
+        serializedVersion: 2
+        x: 2247
+        y: 23
+        width: 268
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f74803d707de84967931b09223658697
+      internalID: 1183925698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PVP Decor2_0: 1539459961
+      PVP Decor2_1: 390125816
+      PVP Decor2_10: 96093978
+      PVP Decor2_11: -1477693992
+      PVP Decor2_12: 759461915
+      PVP Decor2_13: -425305920
+      PVP Decor2_14: -264276061
+      PVP Decor2_15: 1192257199
+      PVP Decor2_16: 1668904654
+      PVP Decor2_17: -910770321
+      PVP Decor2_18: -1317804005
+      PVP Decor2_19: -507437430
+      PVP Decor2_2: -2074472489
+      PVP Decor2_20: 402775454
+      PVP Decor2_21: 2000984062
+      PVP Decor2_22: 391434384
+      PVP Decor2_23: -1987605964
+      PVP Decor2_24: 752934178
+      PVP Decor2_25: -1982992379
+      PVP Decor2_26: -110630342
+      PVP Decor2_27: 620095435
+      PVP Decor2_28: 63926542
+      PVP Decor2_29: -991570433
+      PVP Decor2_3: -1757695314
+      PVP Decor2_30: 402930464
+      PVP Decor2_31: -143222404
+      PVP Decor2_32: 979091098
+      PVP Decor2_33: -1124266902
+      PVP Decor2_34: -1829899233
+      PVP Decor2_35: -1559621901
+      PVP Decor2_36: 1854282184
+      PVP Decor2_37: 594826319
+      PVP Decor2_38: -1435178351
+      PVP Decor2_39: -1923149679
+      PVP Decor2_4: 2104288972
+      PVP Decor2_40: 518518478
+      PVP Decor2_41: 1423985325
+      PVP Decor2_42: 554112557
+      PVP Decor2_43: 1243828559
+      PVP Decor2_44: -1045628459
+      PVP Decor2_45: 2060729271
+      PVP Decor2_46: -1272669556
+      PVP Decor2_47: -935871762
+      PVP Decor2_48: -1556200574
+      PVP Decor2_49: -251311934
+      PVP Decor2_5: -1810177086
+      PVP Decor2_50: -526138266
+      PVP Decor2_51: -2143736529
+      PVP Decor2_52: 1183925698
+      PVP Decor2_6: 248031212
+      PVP Decor2_7: 1079379605
+      PVP Decor2_8: 361369789
+      PVP Decor2_9: 1738261164
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,347 @@
+fileFormatVersion: 2
+guid: d266b287db3a945ab8bed9bf2da0f7b1
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 291
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PVP Ground_10
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 1140
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7291feabdea3e4ec189a25afd5592396
+      internalID: -1851051186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Ground_11
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 1143
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43adaf09d8ffd4e35b113586908dfe44
+      internalID: 1881841321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Ground_13
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 57
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 925b9ac54f5b442b0b49811b67c8e000
+      internalID: -1787596337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Ground_14
+      rect:
+        serializedVersion: 2
+        x: 1492
+        y: 1140
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05557aa7c1fde45119843a580e558e82
+      internalID: -1116410423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Ground_16
+      rect:
+        serializedVersion: 2
+        x: 1952
+        y: 1140
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b75c85b1349b04db4be2b598facf569b
+      internalID: 551555255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Ground_17
+      rect:
+        serializedVersion: 2
+        x: 2411
+        y: 1141
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b4b81da596a9406e84963f5fb52bf59
+      internalID: -1693471128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Ground_19
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 648
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb7ac912b970d4a4eb82c4a3e5de3eca
+      internalID: -551494404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Ground_20
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 58
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d45715c551c374148a4a0826691b05e5
+      internalID: 194359298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Ground_41
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 174
+        width: 291
+        height: 291
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8a3cd8fdc2d04049b49db166fb2b24a
+      internalID: 1823299313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PVP Ground_0: -94606243
+      PVP Ground_1: -982534177
+      PVP Ground_10: -1851051186
+      PVP Ground_11: 1881841321
+      PVP Ground_12: -1635664039
+      PVP Ground_13: -1787596337
+      PVP Ground_14: -1116410423
+      PVP Ground_15: 1277366549
+      PVP Ground_16: 551555255
+      PVP Ground_17: -1693471128
+      PVP Ground_18: -648079616
+      PVP Ground_19: -551494404
+      PVP Ground_2: -1460168647
+      PVP Ground_20: 194359298
+      PVP Ground_21: -2061072341
+      PVP Ground_22: -1800325827
+      PVP Ground_23: -1029512906
+      PVP Ground_24: 1053351227
+      PVP Ground_25: 409979414
+      PVP Ground_26: 973090342
+      PVP Ground_27: 1283835490
+      PVP Ground_28: 764358970
+      PVP Ground_29: 865779726
+      PVP Ground_3: -1253447317
+      PVP Ground_30: -841890697
+      PVP Ground_31: 1526888935
+      PVP Ground_32: 1022605736
+      PVP Ground_33: -1657899968
+      PVP Ground_34: 458244871
+      PVP Ground_35: -560638043
+      PVP Ground_36: 738776995
+      PVP Ground_37: 788764449
+      PVP Ground_38: -1113188855
+      PVP Ground_39: 934694995
+      PVP Ground_4: 1954070052
+      PVP Ground_40: 1076348691
+      PVP Ground_41: 1823299313
+      PVP Ground_42: 795836068
+      PVP Ground_43: -1516631445
+      PVP Ground_5: 2084502096
+      PVP Ground_6: 1599017961
+      PVP Ground_7: -1513205099
+      PVP Ground_8: -1894372459
+      PVP Ground_9: 1898083319
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
