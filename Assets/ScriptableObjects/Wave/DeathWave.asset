@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 232c0508545acde88bf6fc90d2f34594, type: 3}
-  m_Name: BatWave
+  m_Name: DeathWave
   m_EditorClassIdentifier: 
   startTimeMinutes: 0.2
   endTimeMinutes: -1
   enemyPrefabs:
-  - {fileID: 5081695803496586333, guid: dcd49cbba6a69633eb6639b7c9ca0fdc, type: 3}
-  spawnWeight: 2
-  healthMultiplier: 0.7
-  damageMultiplier: 0.8
+  - {fileID: 5081695803496586333, guid: c68ebe7319c059a74929b418f74fa79f, type: 3}
+  spawnWeight: 0.5
+  healthMultiplier: 0.8
+  damageMultiplier: 1.5

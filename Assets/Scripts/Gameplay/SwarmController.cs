@@ -16,6 +16,14 @@ public class SwarmController : NetworkBehaviour
 
     public NetworkVariable<float> difficultyMultiplier = new NetworkVariable<float>(1.0f);
 
+    [Header("Despawn Settings")]
+    [Tooltip("Despawn if further than this from ALL players")]
+    [SerializeField] private float despawnDistance = 50f;
+    
+    [Tooltip("How often to check distance (seconds)")]
+    [SerializeField] private float despawnCheckInterval = 2f;
+    private float despawnCheckTimer;
+
     private Transform targetPlayer;
     private float trackingTimer;
     
@@ -97,6 +105,19 @@ public class SwarmController : NetworkBehaviour
     private void FixedUpdate()
     {
         if (!IsServer) return;
+
+        // Check if too far from all players
+        despawnCheckTimer -= Time.fixedDeltaTime;
+        if (despawnCheckTimer <= 0)
+        {
+            despawnCheckTimer = despawnCheckInterval;
+            if (IsTooFarFromAllPlayers())
+            {
+                DespawnSelf();
+                return;
+            }
+        }
+
         if (isMovementPaused) return; // Don't move while attacking
 
         trackingTimer -= Time.fixedDeltaTime;
@@ -114,6 +135,40 @@ public class SwarmController : NetworkBehaviour
             Vector2 direction = (targetPos - currentPos).normalized;
 
             transform.position += (Vector3)direction * currentSpeed * Time.fixedDeltaTime;
+        }
+    }
+
+    /// <summary>
+    /// Check if this enemy is too far from all players.
+    /// </summary>
+    private bool IsTooFarFromAllPlayers()
+    {
+        if (NetworkManager.Singleton == null) return false;
+
+        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            if (client.PlayerObject != null)
+            {
+                float dist = Vector2.Distance(transform.position, client.PlayerObject.transform.position);
+                if (dist <= despawnDistance)
+                {
+                    return false; // At least one player is close enough
+                }
+            }
+        }
+        return true; // All players are too far
+    }
+
+    /// <summary>
+    /// Despawn this enemy to free up the cap for new spawns.
+    /// </summary>
+    private void DespawnSelf()
+    {
+        Debug.Log($"[SwarmController] Despawning enemy too far from all players.");
+        
+        if (NetworkObject != null && NetworkObject.IsSpawned)
+        {
+            NetworkObject.Despawn(true);
         }
     }
 

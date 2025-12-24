@@ -30,13 +30,25 @@ public class EnemyRangedAttack : NetworkBehaviour
     [Tooltip("Minimum range - won't attack if player is closer (switch to melee)")]
     [SerializeField] private float minAttackRange = 2f;
 
+    [Header("Visual Feedback")]
+    [Tooltip("Scale projectile based on swarm size")]
+    [SerializeField] private bool scaleBySwarmSize = true;
+    
+    [Tooltip("Base projectile scale")]
+    [SerializeField] private float baseProjectileScale = 1f;
+    
+    [Tooltip("Extra scale per minion in swarm")]
+    [SerializeField] private float scalePerMinion = 0.15f;
+
     private SwarmController swarmController;
+    private SwarmVisuals swarmVisuals;
     private float fireTimer;
     private bool isAttacking;
 
     private void Awake()
     {
         swarmController = GetComponent<SwarmController>();
+        swarmVisuals = GetComponent<SwarmVisuals>();
     }
 
     private void Update()
@@ -87,15 +99,26 @@ public class EnemyRangedAttack : NetworkBehaviour
     {
         if (projectilePrefab == null) return;
 
-        // Calculate direction to player
-        Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
+        // Get spawn position from a random minion (or fallback to swarm center)
+        Vector3 spawnPos = GetRandomMinionPosition();
         
-        // Spawn projectile
-        GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        // Calculate direction to player
+        Vector2 direction = ((Vector2)target.position - (Vector2)spawnPos).normalized;
+        
+        // Spawn projectile at minion position
+        GameObject proj = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
         
         // Rotate to face direction
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         proj.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // Scale projectile based on swarm size
+        if (scaleBySwarmSize && swarmVisuals != null)
+        {
+            int minionCount = swarmVisuals.GetMinions()?.Length ?? 1;
+            float scale = baseProjectileScale + (minionCount * scalePerMinion);
+            proj.transform.localScale = Vector3.one * scale;
+        }
 
         // Spawn on network FIRST (so IsServer is properly set)
         if (proj.TryGetComponent(out NetworkObject netObj))
@@ -108,6 +131,27 @@ public class EnemyRangedAttack : NetworkBehaviour
         {
             enemyProj.Initialize(direction, projectileSpeed, projectileDamage);
         }
+    }
+
+    /// <summary>
+    /// Get position of a random minion from the swarm.
+    /// Falls back to swarm center if no minions found.
+    /// </summary>
+    private Vector3 GetRandomMinionPosition()
+    {
+        if (swarmVisuals == null) return transform.position;
+
+        GameObject[] minions = swarmVisuals.GetMinions();
+        if (minions == null || minions.Length == 0) return transform.position;
+
+        // Pick a random active minion
+        int randomIndex = Random.Range(0, minions.Length);
+        if (minions[randomIndex] != null)
+        {
+            return minions[randomIndex].transform.position;
+        }
+
+        return transform.position;
     }
 
     private Transform GetClosestPlayer()

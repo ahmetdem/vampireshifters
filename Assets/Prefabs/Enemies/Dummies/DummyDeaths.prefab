@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2616710747261595784}
   - component: {fileID: 1024035286103656450}
   m_Layer: 0
-  m_Name: DummyBats
+  m_Name: DummyDeaths
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

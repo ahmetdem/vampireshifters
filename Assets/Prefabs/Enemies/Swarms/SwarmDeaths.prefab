@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: -4876949735105719303}
   - component: {fileID: -7855572886094739564}
   - component: {fileID: 227886966536145675}
-  - component: {fileID: 6442960217844549814}
-  m_Layer: 8
-  m_Name: SwarmBats
+  - component: {fileID: 7308972442982815606}
+  m_Layer: 0
+  m_Name: SwarmDeaths
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3163704138
+  GlobalObjectIdHash: 1358421478
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -92,9 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2cb7db380fb5a3bb911e4749a056e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualPrefab: {fileID: 4464664025128372768, guid: fce634c2778c445a1bbbf60a55ed5e09, type: 3}
+  visualPrefab: {fileID: 4464664025128372768, guid: 1c7c32d6c5811adb7908265422a15eb8, type: 3}
   swarmCount: 1
-  swarmSpread: 5
+  swarmSpread: 6
 --- !u!114 &-3242095549862174872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,9 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1707a9c3d00822472a58622d04a46f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 2000
   currentHealth:
-    m_InternalValue: 1
+    m_InternalValue: 2000
 --- !u!50 &-7855572886094739564
 Rigidbody2D:
   serializedVersion: 4
@@ -187,7 +187,7 @@ MonoBehaviour:
   - {fileID: 5318105536326779877, guid: 472da1df08e313ae694a307bba6c6e97, type: 3}
   - {fileID: 5318105536326779877, guid: ca0653b3ec7dc84bcbec53c15c7604a1, type: 3}
   rareDropChance: 0.2
---- !u!114 &6442960217844549814
+--- !u!114 &7308972442982815606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f348622e48dd4a7281e4b5ce59054d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 2345379668496736793, guid: cffff78193449d3fe9a0e6d0fa39fbc6, type: 3}
-  attackRange: 40
+  projectilePrefab: {fileID: 2345379668496736793, guid: 2cee029514f0af283ac794f5dab399f9, type: 3}
+  attackRange: 20
   fireInterval: 2
   projectileSpeed: 5
   projectileDamage: 10

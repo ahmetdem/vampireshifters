@@ -24,9 +24,12 @@ public class EnemySpawner : NetworkBehaviour
     [SerializeField] private int baseMaxEnemies = 20;
     [SerializeField] private float extraCapPerMinute = 10f;
 
-    [Header("Spawn Distance")]
-    [SerializeField] private float minSpawnDistance = 18f;
-    [SerializeField] private float maxSpawnDistance = 28f;
+    [Header("Spawn Distance (Camera-Based)")]
+    [Tooltip("Extra distance beyond camera edge to spawn enemies")]
+    [SerializeField] private float spawnBufferDistance = 3f;
+    
+    [Tooltip("Fallback distance if camera not available")]
+    [SerializeField] private float fallbackSpawnDistance = 20f;
 
     [Header("Object Pooling")]
     [Tooltip("Enable object pooling for better performance (requires EnemyPool in scene)")]
@@ -116,7 +119,9 @@ public class EnemySpawner : NetworkBehaviour
                 float healthMult = selectedWave?.healthMultiplier ?? 1f;
                 float damageMult = selectedWave?.damageMultiplier ?? 1f;
 
-                SpawnEnemyAround(client.PlayerObject.transform.position, prefab, currentDifficulty, healthMult, damageMult);
+                // Spawn just outside camera view
+                Vector3 spawnPos = GetCameraEdgeSpawnPosition(client.PlayerObject.transform.position);
+                SpawnEnemyAt(spawnPos, prefab, currentDifficulty, healthMult, damageMult);
             }
         }
     }
@@ -163,12 +168,53 @@ public class EnemySpawner : NetworkBehaviour
         return activeWaves[0];
     }
 
-    private void SpawnEnemyAround(Vector3 center, GameObject prefab, float difficulty, float healthMult, float damageMult)
+    /// <summary>
+    /// Get a spawn position just outside the camera view.
+    /// </summary>
+    private Vector3 GetCameraEdgeSpawnPosition(Vector3 playerPosition)
     {
-        Vector2 randomDir = Random.insideUnitCircle.normalized;
-        float distance = Random.Range(minSpawnDistance, maxSpawnDistance);
-        Vector3 spawnPos = center + (Vector3)(randomDir * distance);
+        Camera cam = Camera.main;
+        if (cam == null)
+        {
+            // Fallback to fixed distance if no camera
+            Vector2 randomDir = Random.insideUnitCircle.normalized;
+            return playerPosition + (Vector3)(randomDir * fallbackSpawnDistance);
+        }
 
+        // Get camera bounds in world space
+        float camHeight = cam.orthographicSize;
+        float camWidth = camHeight * cam.aspect;
+
+        // Pick a random edge (0=top, 1=right, 2=bottom, 3=left)
+        int edge = Random.Range(0, 4);
+        Vector3 spawnPos = cam.transform.position;
+
+        switch (edge)
+        {
+            case 0: // Top
+                spawnPos.y += camHeight + spawnBufferDistance;
+                spawnPos.x += Random.Range(-camWidth, camWidth);
+                break;
+            case 1: // Right
+                spawnPos.x += camWidth + spawnBufferDistance;
+                spawnPos.y += Random.Range(-camHeight, camHeight);
+                break;
+            case 2: // Bottom
+                spawnPos.y -= camHeight + spawnBufferDistance;
+                spawnPos.x += Random.Range(-camWidth, camWidth);
+                break;
+            case 3: // Left
+                spawnPos.x -= camWidth + spawnBufferDistance;
+                spawnPos.y += Random.Range(-camHeight, camHeight);
+                break;
+        }
+
+        spawnPos.z = 0; // Keep on game plane
+        return spawnPos;
+    }
+
+    private void SpawnEnemyAt(Vector3 spawnPos, GameObject prefab, float difficulty, float healthMult, float damageMult)
+    {
         GameObject enemyObj;
 
         if (useObjectPooling && EnemyPool.Instance != null)

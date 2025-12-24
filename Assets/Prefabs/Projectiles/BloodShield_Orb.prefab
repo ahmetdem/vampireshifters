@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7444826366349589811}
   - component: {fileID: 1390745331874929759}
   - component: {fileID: 3061782358387577228}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BloodShield_Orb
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 878750799
+  GlobalObjectIdHash: 2623408731
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
