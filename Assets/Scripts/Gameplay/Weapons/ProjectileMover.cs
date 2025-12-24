@@ -34,15 +34,25 @@ public class ProjectileMover : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!IsServer) return;
-
         // 1. Hit Enemy (Standard)
         if (other.CompareTag("Enemy"))
         {
-            // Use GetComponentInParent to find Health on parent (for individual minions)
-            Health health = other.GetComponentInParent<Health>();
-            if (health != null) health.TakeDamage(damage);
-            DespawnProjectile();
+            // CLIENT VISUALS
+            if (other.TryGetComponent(out MinionFlashFeedback feedback))
+            {
+                feedback.Flash();
+            }
+
+            // SERVER LOGIC
+            if (IsServer)
+            {
+                // Use GetComponentInParent to find Health on parent (for individual minions)
+                Health health = other.GetComponentInParent<Health>();
+                if (health != null) health.TakeDamage(damage);
+                DespawnProjectile();
+            }
+            // Client creates visual prediction on despawn naturally by network object disappearing or we could hide it locally immediately if needed,
+            // but for now we just want the flash.
         }
         // 2. Hit Player (PvP Logic)
         else if (other.CompareTag("Player"))
@@ -56,15 +66,19 @@ public class ProjectileMover : NetworkBehaviour
                     // Skip if this is our own projectile owner
                     if (netObj.NetworkObjectId == ownerId) return;
 
-                    Debug.Log($"[PvP] Bullet Hit Player {netObj.OwnerClientId}! Dealing {damage} dmg.");
-
-                    // Get Health from the same GameObject as NetworkObject
-                    Health health = netObj.GetComponent<Health>();
-                    if (health != null)
+                    // SERVER LOGIC
+                    if (IsServer)
                     {
-                        health.TakeDamage(damage);
+                        Debug.Log($"[PvP] Bullet Hit Player {netObj.OwnerClientId}! Dealing {damage} dmg.");
+
+                        // Get Health from the same GameObject as NetworkObject
+                        Health health = netObj.GetComponent<Health>();
+                        if (health != null)
+                        {
+                            health.TakeDamage(damage);
+                        }
+                        DespawnProjectile();
                     }
-                    DespawnProjectile();
                 }
             }
         }

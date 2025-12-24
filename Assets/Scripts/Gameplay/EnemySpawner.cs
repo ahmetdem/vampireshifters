@@ -24,12 +24,13 @@ public class EnemySpawner : NetworkBehaviour
     [SerializeField] private int baseMaxEnemies = 20;
     [SerializeField] private float extraCapPerMinute = 10f;
 
-    [Header("Spawn Distance (Camera-Based)")]
-    [Tooltip("Extra distance beyond camera edge to spawn enemies")]
-    [SerializeField] private float spawnBufferDistance = 3f;
-    
-    [Tooltip("Fallback distance if camera not available")]
-    [SerializeField] private float fallbackSpawnDistance = 20f;
+    [Header("Spawn Distance (Camera Simulation)")]
+    [Tooltip("Orthographic Size of the camera (Half Height). Default is 10.")]
+    [SerializeField] private float referenceOrthographicSize = 10f;
+    [Tooltip("Aspect Ratio of the camera (Width / Height). Default 16:9 = ~1.77.")]
+    [SerializeField] private float referenceAspectRatio = 1.777f; 
+    [Tooltip("Extra buffer distance outside the camera view.")]
+    [SerializeField] private float spawnBuffer = 2f;
 
     [Header("Object Pooling")]
     [Tooltip("Enable object pooling for better performance (requires EnemyPool in scene)")]
@@ -85,19 +86,16 @@ public class EnemySpawner : NetworkBehaviour
     {
         float minutes = timeElapsed / 60f;
 
-        // Calculate scaled max, then clamp to absolute cap
+        // Calculate scaled max per player
         int scaledMax = Mathf.RoundToInt(baseMaxEnemies + (extraCapPerMinute * minutes * difficultyMultiplier));
-        int currentMaxEnemies = Mathf.Min(scaledMax, absoluteMaxEnemies);
+        int totalMaxEnemies = Mathf.Min(scaledMax, absoluteMaxEnemies);
+        
+        // Calculate per-player cap
+        int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
+        int maxEnemiesPerPlayer = Mathf.Max(1, totalMaxEnemies / Mathf.Max(1, playerCount));
+        
         int currentBurst = Mathf.RoundToInt(baseBurstCount + (minutes * difficultyMultiplier));
-
         float currentDifficulty = 1.0f + (minutes * difficultyMultiplier);
-
-        // Get current enemy count
-        int currentCount = useObjectPooling && EnemyPool.Instance != null 
-            ? EnemyPool.Instance.GetActiveEnemyCount() 
-            : FindObjectsOfType<SwarmController>().Length;
-
-        if (currentCount >= currentMaxEnemies) return;
 
         // Get active waves for current time
         List<WaveData> activeWaves = GetActiveWaves(minutes);
@@ -106,9 +104,24 @@ public class EnemySpawner : NetworkBehaviour
         {
             if (client.PlayerObject == null) continue;
 
+            // Get enemy count for THIS player
+            int playerEnemyCount = 0;
+            if (useObjectPooling && EnemyPool.Instance != null)
+            {
+                playerEnemyCount = EnemyPool.Instance.GetEnemyCountForPlayer(client.ClientId);
+            }
+            else
+            {
+                // Fallback: use global count / player count
+                playerEnemyCount = FindObjectsOfType<SwarmController>().Length / Mathf.Max(1, playerCount);
+            }
+
+            // Skip if this player's cap is reached
+            if (playerEnemyCount >= maxEnemiesPerPlayer) continue;
+
             for (int i = 0; i < currentBurst; i++)
             {
-                if (currentCount + i >= currentMaxEnemies) break;
+                if (playerEnemyCount + i >= maxEnemiesPerPlayer) break;
 
                 // Pick wave and enemy
                 WaveData selectedWave = PickWeightedWave(activeWaves);
@@ -119,9 +132,9 @@ public class EnemySpawner : NetworkBehaviour
                 float healthMult = selectedWave?.healthMultiplier ?? 1f;
                 float damageMult = selectedWave?.damageMultiplier ?? 1f;
 
-                // Spawn just outside camera view
+                // Spawn just outside player view
                 Vector3 spawnPos = GetCameraEdgeSpawnPosition(client.PlayerObject.transform.position);
-                SpawnEnemyAt(spawnPos, prefab, currentDifficulty, healthMult, damageMult);
+                SpawnEnemyAt(spawnPos, prefab, currentDifficulty, healthMult, damageMult, client.ClientId);
             }
         }
     }
@@ -169,43 +182,38 @@ public class EnemySpawner : NetworkBehaviour
     }
 
     /// <summary>
-    /// Get a spawn position just outside the camera view.
+    /// Get a spawn position just outside the player's calculated camera view.
+    /// Uses reference camera size since server doesn't know client's actual camera state.
     /// </summary>
     private Vector3 GetCameraEdgeSpawnPosition(Vector3 playerPosition)
     {
-        Camera cam = Camera.main;
-        if (cam == null)
-        {
-            // Fallback to fixed distance if no camera
-            Vector2 randomDir = Random.insideUnitCircle.normalized;
-            return playerPosition + (Vector3)(randomDir * fallbackSpawnDistance);
-        }
-
-        // Get camera bounds in world space
-        float camHeight = cam.orthographicSize;
-        float camWidth = camHeight * cam.aspect;
+        float camHeight = referenceOrthographicSize * 2f;
+        float camWidth = camHeight * referenceAspectRatio;
+        
+        float halfHeight = camHeight / 2f;
+        float halfWidth = camWidth / 2f;
 
         // Pick a random edge (0=top, 1=right, 2=bottom, 3=left)
         int edge = Random.Range(0, 4);
-        Vector3 spawnPos = cam.transform.position;
+        Vector3 spawnPos = playerPosition;
 
         switch (edge)
         {
             case 0: // Top
-                spawnPos.y += camHeight + spawnBufferDistance;
-                spawnPos.x += Random.Range(-camWidth, camWidth);
+                spawnPos.y += halfHeight + spawnBuffer;
+                spawnPos.x += Random.Range(-halfWidth - spawnBuffer, halfWidth + spawnBuffer);
                 break;
             case 1: // Right
-                spawnPos.x += camWidth + spawnBufferDistance;
-                spawnPos.y += Random.Range(-camHeight, camHeight);
+                spawnPos.x += halfWidth + spawnBuffer;
+                spawnPos.y += Random.Range(-halfHeight - spawnBuffer, halfHeight + spawnBuffer);
                 break;
             case 2: // Bottom
-                spawnPos.y -= camHeight + spawnBufferDistance;
-                spawnPos.x += Random.Range(-camWidth, camWidth);
+                spawnPos.y -= halfHeight + spawnBuffer;
+                spawnPos.x += Random.Range(-halfWidth - spawnBuffer, halfWidth + spawnBuffer);
                 break;
             case 3: // Left
-                spawnPos.x -= camWidth + spawnBufferDistance;
-                spawnPos.y += Random.Range(-camHeight, camHeight);
+                spawnPos.x -= halfWidth + spawnBuffer;
+                spawnPos.y += Random.Range(-halfHeight - spawnBuffer, halfHeight + spawnBuffer);
                 break;
         }
 
@@ -213,14 +221,14 @@ public class EnemySpawner : NetworkBehaviour
         return spawnPos;
     }
 
-    private void SpawnEnemyAt(Vector3 spawnPos, GameObject prefab, float difficulty, float healthMult, float damageMult)
+    private void SpawnEnemyAt(Vector3 spawnPos, GameObject prefab, float difficulty, float healthMult, float damageMult, ulong targetClientId)
     {
         GameObject enemyObj;
 
         if (useObjectPooling && EnemyPool.Instance != null)
         {
-            // Use object pooling
-            enemyObj = EnemyPool.Instance.GetEnemy(prefab, spawnPos, difficulty, healthMult, damageMult);
+            // Use object pooling with per-player tracking
+            enemyObj = EnemyPool.Instance.GetEnemy(prefab, spawnPos, difficulty, healthMult, damageMult, targetClientId);
         }
         else
         {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6392243223045185892}
   - component: {fileID: 2616710747261595784}
   - component: {fileID: 1024035286103656450}
+  - component: {fileID: 708628249079749313}
   m_Layer: 0
   m_Name: DummyEagles
   m_TagString: Enemy
@@ -133,3 +134,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465dc2a4aa560912aac018d172893f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &708628249079749313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4464664025128372768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f51d860ae5e07048a5325ee5d09bc06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 4bc4d570f39431e09a89d03b391f7f60, type: 2}
+  flashDuration: 0.2
+  flashCount: 1

@@ -19,6 +19,9 @@ public class EnemyPool : NetworkBehaviour
     
     // Track all active enemies for count limiting
     private List<GameObject> activeEnemies = new List<GameObject>();
+    
+    // Track enemies per player for per-player spawn caps
+    private Dictionary<ulong, List<GameObject>> enemiesPerPlayer = new Dictionary<ulong, List<GameObject>>();
 
     private void Awake()
     {
@@ -32,8 +35,17 @@ public class EnemyPool : NetworkBehaviour
 
     /// <summary>
     /// Get an enemy from the pool (or create new if pool empty).
+    /// Legacy overload - uses global tracking only.
     /// </summary>
     public GameObject GetEnemy(GameObject prefab, Vector3 position, float difficulty, float healthMult = 1f, float damageMult = 1f)
+    {
+        return GetEnemy(prefab, position, difficulty, healthMult, damageMult, null);
+    }
+
+    /// <summary>
+    /// Get an enemy from the pool, tracked to a specific player for per-player caps.
+    /// </summary>
+    public GameObject GetEnemy(GameObject prefab, Vector3 position, float difficulty, float healthMult, float damageMult, ulong? targetClientId)
     {
         if (!IsServer) return null;
 
@@ -78,6 +90,17 @@ public class EnemyPool : NetworkBehaviour
         }
 
         activeEnemies.Add(enemy);
+        
+        // Track per-player if client ID provided
+        if (targetClientId.HasValue)
+        {
+            if (!enemiesPerPlayer.ContainsKey(targetClientId.Value))
+            {
+                enemiesPerPlayer[targetClientId.Value] = new List<GameObject>();
+            }
+            enemiesPerPlayer[targetClientId.Value].Add(enemy);
+        }
+        
         return enemy;
     }
 
@@ -119,13 +142,28 @@ public class EnemyPool : NetworkBehaviour
     }
 
     /// <summary>
-    /// Get current count of active enemies.
+    /// Get current count of active enemies (global).
     /// </summary>
     public int GetActiveEnemyCount()
     {
         // Clean up null references
         activeEnemies.RemoveAll(e => e == null);
         return activeEnemies.Count;
+    }
+
+    /// <summary>
+    /// Get count of enemies spawned for a specific player.
+    /// </summary>
+    public int GetEnemyCountForPlayer(ulong clientId)
+    {
+        if (!enemiesPerPlayer.ContainsKey(clientId))
+        {
+            return 0;
+        }
+        
+        // Clean up null/destroyed references
+        enemiesPerPlayer[clientId].RemoveAll(e => e == null || !e.activeInHierarchy);
+        return enemiesPerPlayer[clientId].Count;
     }
 
     /// <summary>

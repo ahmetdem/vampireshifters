@@ -39,6 +39,47 @@ public class SwarmController : NetworkBehaviour
         if (TryGetComponent(out SwarmVisuals visuals))
         {
             visuals.SetSwarmController(this);
+            _cachedVisuals = visuals;
+        }
+    }
+
+    // Cached reference for visual feedback
+    private SwarmVisuals _cachedVisuals;
+
+    public override void OnNetworkSpawn()
+    {
+        if (currentSpeed == 0) currentSpeed = baseSpeed;
+
+        if (TryGetComponent(out SwarmVisuals visuals))
+        {
+            visuals.SetSwarmDensity(difficultyMultiplier.Value);
+        }
+
+        // Subscribe to health changes for visual feedback (client-only effect)
+        if (TryGetComponent(out Health health))
+        {
+            health.currentHealth.OnValueChanged += OnHealthChanged;
+        }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        // Unsubscribe to prevent memory leaks
+        if (TryGetComponent(out Health health))
+        {
+            health.currentHealth.OnValueChanged -= OnHealthChanged;
+        }
+    }
+
+    /// <summary>
+    /// Called when health changes (on all clients). Triggers visual feedback.
+    /// </summary>
+    private void OnHealthChanged(int previousValue, int newValue)
+    {
+        // Only react to damage (not healing)
+        if (newValue < previousValue && _cachedVisuals != null)
+        {
+            _cachedVisuals.OnDamageTaken();
         }
     }
 
@@ -80,16 +121,6 @@ public class SwarmController : NetworkBehaviour
 
         // 5. Hit Harder: Damage scales with difficulty (20% per level) + wave multiplier
         damageAmount = Mathf.RoundToInt(baseDamageAmount * (1.0f + (difficulty * 0.2f)) * waveDamageMult);
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        if (currentSpeed == 0) currentSpeed = baseSpeed;
-
-        if (TryGetComponent(out SwarmVisuals visuals))
-        {
-            visuals.SetSwarmDensity(difficultyMultiplier.Value);
-        }
     }
 
     private bool isMovementPaused = false;

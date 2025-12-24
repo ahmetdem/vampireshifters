@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
@@ -11,8 +12,7 @@ public class OrbitWeapon : BaseWeapon
     private List<GameObject> orbitals = new List<GameObject>();
     private int orbitalCount = 2;
     private float orbitRadius;
-    private float orbitSpeed = 180f; // degrees per second
-    private float currentAngle = 0f;
+
     private bool initialized = false;
 
     public override void Initialize(WeaponData weaponData, ulong id)
@@ -20,8 +20,21 @@ public class OrbitWeapon : BaseWeapon
         base.Initialize(weaponData, id);
         orbitRadius = data.range;
         orbitalCount = Mathf.Max(1, Mathf.RoundToInt(data.duration)); // Use duration as orbital count
-        SpawnOrbitals();
+        
+        // Delay spawning to avoid scene sync race condition
+        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsServer)
+        {
+            StartCoroutine(DelayedSpawnOrbitals());
+        }
+        
         initialized = true;
+    }
+
+    private IEnumerator DelayedSpawnOrbitals()
+    {
+        // Wait for scene synchronization to complete
+        yield return new WaitForSeconds(0.5f);
+        SpawnOrbitals();
     }
 
     private void SpawnOrbitals()
@@ -43,10 +56,10 @@ public class OrbitWeapon : BaseWeapon
                 netObj.Spawn();
             }
 
-            // Setup orbital damage component
+            // Setup orbital damage component with prediction data
             if (orbital.TryGetComponent(out OrbitalDamage orbDmg))
             {
-                orbDmg.Initialize(GetCurrentDamage(), ownerId);
+                orbDmg.Initialize(GetCurrentDamage(), ownerId, i, orbitalCount, orbitRadius);
             }
 
             orbitals.Add(orbital);
@@ -56,7 +69,7 @@ public class OrbitWeapon : BaseWeapon
 
     private Vector3 GetOrbitPosition(float angleOffset)
     {
-        float angle = (currentAngle + angleOffset) * Mathf.Deg2Rad;
+        float angle = angleOffset * Mathf.Deg2Rad;
         float x = Mathf.Cos(angle) * orbitRadius;
         float y = Mathf.Sin(angle) * orbitRadius;
         return transform.position + new Vector3(x, y, 0);
@@ -67,18 +80,8 @@ public class OrbitWeapon : BaseWeapon
         if (!NetworkManager.Singleton.IsServer) return;
         if (!initialized) return;
 
-        // Rotate orbitals around player
-        currentAngle += orbitSpeed * Time.deltaTime;
-        if (currentAngle >= 360f) currentAngle -= 360f;
-
-        for (int i = 0; i < orbitals.Count; i++)
-        {
-            if (orbitals[i] != null)
-            {
-                float angleOffset = (360f / orbitalCount) * i;
-                orbitals[i].transform.position = GetOrbitPosition(angleOffset);
-            }
-        }
+        // Note: Movement is now handled autonomously by OrbitalDamage.cs on each client
+        // This ensures visuals are smooth and attached to the player representation on that client
     }
 
     // Orbital weapon doesn't use TryAttack - damage is handled by OrbitalDamage on collision
@@ -89,8 +92,26 @@ public class OrbitWeapon : BaseWeapon
 
     private void OnDestroy()
     {
-        // Clean up orbitals when weapon is destroyed
-        foreach (var orbital in orbitals)
+        // Safety check for shutdown/scene change where NetworkManager might already be gone
+        if (NetworkManager.Singleton == null)
+        {
+            orbitals.Clear();
+            return;
+        }
+
+        // Only server can despawn network objects
+        if (!NetworkManager.Singleton.IsServer) 
+        {
+            orbitals.Clear();
+            return;
+        }
+
+        // Server: copy list, clear it, then despawn
+        // This prevents issues if despawn triggers other callbacks
+        var orbitalsToDestroy = new List<GameObject>(orbitals);
+        orbitals.Clear();
+
+        foreach (var orbital in orbitalsToDestroy)
         {
             if (orbital != null)
             {
@@ -101,6 +122,5 @@ public class OrbitWeapon : BaseWeapon
                 }
             }
         }
-        orbitals.Clear();
     }
 }

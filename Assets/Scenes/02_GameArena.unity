@@ -945,11 +945,12 @@ MonoBehaviour:
   spawnInterval: 5
   baseBurstCount: 1
   difficultyMultiplier: 6
-  absoluteMaxEnemies: 30
+  absoluteMaxEnemies: 20
   baseMaxEnemies: 30
   extraCapPerMinute: 6
-  spawnBufferDistance: 3
-  fallbackSpawnDistance: 20
+  referenceOrthographicSize: 36
+  referenceAspectRatio: 1
+  spawnBuffer: 2
   useObjectPooling: 1
 --- !u!1 &661755696
 GameObject:
@@ -1013,7 +1014,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15.01
+  orthographic size: 36
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1038,7 +1039,7 @@ Transform:
   m_GameObject: {fileID: 661755696}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1094,7 +1095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &742526559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2781,7 +2782,7 @@ GameObject:
   - component: {fileID: 1567918898}
   - component: {fileID: 1567918900}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: LevelUpUiHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3246,7 +3247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1783957457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3866,6 +3867,7 @@ GameObject:
   - component: {fileID: 1969923234}
   - component: {fileID: 1969923235}
   - component: {fileID: 1969923236}
+  - component: {fileID: 1969923237}
   m_Layer: 0
   m_Name: InventoryHUD
   m_TagString: Untagged
@@ -3892,7 +3894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -303, y: 93}
+  m_AnchoredPosition: {x: -305, y: 85}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1969923235
@@ -3938,6 +3940,14 @@ MonoBehaviour:
   - {fileID: 72680161}
   - {fileID: 1039825718}
   emptySlotSprite: {fileID: 21300000, guid: 929f7314ab3854bdfb221ff0b5529478, type: 3}
+--- !u!222 &1969923237
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969923233}
+  m_CullTransparentMesh: 1
 --- !u!1 &2006177979
 GameObject:
   m_ObjectHideFlags: 0
