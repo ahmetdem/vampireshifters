@@ -80,6 +80,8 @@ MonoBehaviour:
   damageInterval: 1
   difficultyMultiplier:
     m_InternalValue: 1
+  despawnDistance: 50
+  despawnCheckInterval: 2
 --- !u!114 &8630027605579998487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,9 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1707a9c3d00822472a58622d04a46f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2000
+  maxHealth: 1
   currentHealth:
-    m_InternalValue: 2000
+    m_InternalValue: 1
 --- !u!50 &-7855572886094739564
 Rigidbody2D:
   serializedVersion: 4
@@ -206,3 +208,6 @@ MonoBehaviour:
   projectileDamage: 10
   stopWhileAttacking: 1
   minAttackRange: 2
+  scaleBySwarmSize: 1
+  baseProjectileScale: 1
+  scalePerMinion: 0.15

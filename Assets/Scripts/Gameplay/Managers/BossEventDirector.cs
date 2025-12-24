@@ -83,11 +83,12 @@ public class BossEventDirector : NetworkBehaviour
     [ClientRpc]
     private void TeleportAndSwitchCameraClientRpc(Vector3 pos)
     {
-        // A. Enable the Boss Camera
+        // A. Enable the Boss Camera with high priority
         // Because it has higher priority (setup below), Cinemachine will snap to it
         if (bossArenaCamera != null)
         {
             bossArenaCamera.gameObject.SetActive(true);
+            bossArenaCamera.Priority = 20; // Higher than player camera
         }
 
         // B. Teleport Local Player

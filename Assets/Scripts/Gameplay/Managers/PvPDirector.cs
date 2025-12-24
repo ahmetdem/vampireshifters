@@ -57,10 +57,11 @@ public class PvPDirector : NetworkBehaviour
     [ClientRpc]
     private void TeleportClientRpc(Vector3 pos, ClientRpcParams clientRpcParams = default)
     {
-        // 1. Activate the Static Arena Camera
+        // 1. Activate the Static Arena Camera with high priority
         if (pvpArenaCamera != null)
         {
             pvpArenaCamera.gameObject.SetActive(true);
+            pvpArenaCamera.Priority = 20; // Higher than player camera
         }
 
         // 2. Teleport the local player
