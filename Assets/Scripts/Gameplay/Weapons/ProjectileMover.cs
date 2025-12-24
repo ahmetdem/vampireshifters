@@ -39,7 +39,9 @@ public class ProjectileMover : NetworkBehaviour
         // 1. Hit Enemy (Standard)
         if (other.CompareTag("Enemy"))
         {
-            if (other.TryGetComponent(out Health health)) health.TakeDamage(damage);
+            // Use GetComponentInParent to find Health on parent (for individual minions)
+            Health health = other.GetComponentInParent<Health>();
+            if (health != null) health.TakeDamage(damage);
             DespawnProjectile();
         }
         // 2. Hit Player (PvP Logic)

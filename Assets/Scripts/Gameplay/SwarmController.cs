@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -8,16 +9,40 @@ public class SwarmController : NetworkBehaviour
     [SerializeField] private float trackingRefreshRate = 0.5f;
     private float currentSpeed;
 
-    [Header("Collision Tuning")]
-    [SerializeField] private CircleCollider2D swarmCollider;
-    [SerializeField] private float padding = 1.2f;
+    [Header("Damage Settings")]
+    [SerializeField] private int baseDamageAmount = 10;
+    [SerializeField] private float damageInterval = 1.0f;
+    private int damageAmount; // Actual damage after scaling
 
     public NetworkVariable<float> difficultyMultiplier = new NetworkVariable<float>(1.0f);
 
     private Transform targetPlayer;
     private float trackingTimer;
+    
+    // Server-side damage cooldown tracking per player
+    private Dictionary<ulong, float> nextDamageTime = new Dictionary<ulong, float>();
+
+    private void Awake()
+    {
+        // Set default damage
+        damageAmount = baseDamageAmount;
+        
+        // Link SwarmVisuals to this controller before Start() runs
+        if (TryGetComponent(out SwarmVisuals visuals))
+        {
+            visuals.SetSwarmController(this);
+        }
+    }
 
     public void InitializeDifficulty(float difficulty)
+    {
+        InitializeDifficulty(difficulty, 1f, 1f);
+    }
+
+    /// <summary>
+    /// Initialize with wave-specific multipliers.
+    /// </summary>
+    public void InitializeDifficulty(float difficulty, float waveHealthMult, float waveDamageMult)
     {
         // Update the Network Variable so clients know
         difficultyMultiplier.Value = difficulty;
@@ -26,10 +51,11 @@ public class SwarmController : NetworkBehaviour
         // 1. Slow Down: Speed decreases as difficulty goes up
         currentSpeed = baseSpeed / (1.0f + (difficulty * 0.1f));
 
-        // 2. Tank Up: Health increases (e.g. 10 HP per difficulty level)
+        // 2. Tank Up: Health increases (e.g. 10 HP per difficulty level) + wave multiplier
         if (TryGetComponent(out Health healthScript))
         {
-            healthScript.IncreaseMaxHealth(Mathf.RoundToInt(difficulty * 10));
+            int extraHealth = Mathf.RoundToInt(difficulty * 10 * waveHealthMult);
+            healthScript.IncreaseMaxHealth(extraHealth);
         }
 
         // 3. Get Rich: Loot value increases
@@ -38,20 +64,16 @@ public class SwarmController : NetworkBehaviour
             loot.SetLootMultiplier(difficulty);
         }
 
-        // --- THE FIX ---
-        // 4. Update Visuals Immediately (Host side)
+        // 4. Update Visuals
         if (TryGetComponent(out SwarmVisuals visuals))
         {
-            // This ensures the Host sees the change instantly
             visuals.SetSwarmDensity(difficulty);
-
-            // Update the physical collider to match the new visual size
-            if (IsServer && swarmCollider != null)
-            {
-                swarmCollider.radius = visuals.GetSwarmSpread() * padding;
-            }
         }
+
+        // 5. Hit Harder: Damage scales with difficulty (20% per level) + wave multiplier
+        damageAmount = Mathf.RoundToInt(baseDamageAmount * (1.0f + (difficulty * 0.2f)) * waveDamageMult);
     }
+
     public override void OnNetworkSpawn()
     {
         if (currentSpeed == 0) currentSpeed = baseSpeed;
@@ -59,17 +81,23 @@ public class SwarmController : NetworkBehaviour
         if (TryGetComponent(out SwarmVisuals visuals))
         {
             visuals.SetSwarmDensity(difficultyMultiplier.Value);
-
-            if (IsServer && swarmCollider != null)
-            {
-                swarmCollider.radius = visuals.GetSwarmSpread() * padding;
-            }
         }
+    }
+
+    private bool isMovementPaused = false;
+
+    /// <summary>
+    /// Pause/resume movement. Used by EnemyRangedAttack when attacking.
+    /// </summary>
+    public void SetMovementPaused(bool paused)
+    {
+        isMovementPaused = paused;
     }
 
     private void FixedUpdate()
     {
         if (!IsServer) return;
+        if (isMovementPaused) return; // Don't move while attacking
 
         trackingTimer -= Time.fixedDeltaTime;
         if (trackingTimer <= 0)
@@ -86,6 +114,33 @@ public class SwarmController : NetworkBehaviour
             Vector2 direction = (targetPos - currentPos).normalized;
 
             transform.position += (Vector3)direction * currentSpeed * Time.fixedDeltaTime;
+        }
+    }
+
+    /// <summary>
+    /// Called by MinionDamage components when a minion collides with a player.
+    /// Server validates cooldown and applies damage.
+    /// </summary>
+    [ServerRpc(RequireOwnership = false)]
+    public void RequestDamageServerRpc(ulong targetClientId, ServerRpcParams rpcParams = default)
+    {
+        // Server-side cooldown validation to prevent spam/cheating
+        if (nextDamageTime.TryGetValue(targetClientId, out float nextTime) && Time.time < nextTime)
+        {
+            return; // Still on cooldown
+        }
+        
+        // Find the player and apply damage
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(targetClientId, out var client))
+        {
+            if (client.PlayerObject != null && client.PlayerObject.TryGetComponent(out Health health))
+            {
+                Debug.Log($"[SwarmController] Minion dealing {damageAmount} damage to Client {targetClientId}.");
+                health.TakeDamage(damageAmount);
+                
+                // Set server-side cooldown
+                nextDamageTime[targetClientId] = Time.time + damageInterval;
+            }
         }
     }
 
@@ -111,10 +166,12 @@ public class SwarmController : NetworkBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (swarmCollider != null)
+        // Draw gizmos showing approximate swarm area
+        if (TryGetComponent(out SwarmVisuals visuals))
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, swarmCollider.radius);
+            Gizmos.DrawWireSphere(transform.position, visuals.GetSwarmSpread());
         }
     }
 }
+

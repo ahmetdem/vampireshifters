@@ -12,15 +12,12 @@ GameObject:
   - component: {fileID: 8879275261172665792}
   - component: {fileID: 3176691530574659141}
   - component: {fileID: 8630027605579998487}
-  - component: {fileID: 3782026180421123215}
   - component: {fileID: -3242095549862174872}
-  - component: {fileID: 8216826031370973542}
   - component: {fileID: -4876949735105719303}
   - component: {fileID: -7855572886094739564}
   - component: {fileID: 227886966536145675}
-  - component: {fileID: 6721093231561845367}
   m_Layer: 0
-  m_Name: SwarmEnemy
+  m_Name: SwarmZombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2741752431
+  GlobalObjectIdHash: 2757285402
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -78,8 +75,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 2
   trackingRefreshRate: 0.5
-  swarmCollider: {fileID: 3782026180421123215}
-  padding: 1.2
+  damageAmount: 10
+  damageInterval: 1
   difficultyMultiplier:
     m_InternalValue: 1
 --- !u!114 &8630027605579998487
@@ -97,41 +94,8 @@ MonoBehaviour:
   visualPrefab: {fileID: 4464664025128372768, guid: 1c985f55d1c76ddab8c5baf26bd6004b, type: 3}
   swarmCount: 1
   swarmSpread: 5
---- !u!58 &3782026180421123215
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081695803496586333}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  minionColliderRadius: 0.5
+  isTrigger: 1
 --- !u!114 &-3242095549862174872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,20 +127,6 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &8216826031370973542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081695803496586333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f031ced43d582089b6654f5f89c006d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 10
-  damageInterval: 1
 --- !u!114 &-4876949735105719303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,4 +187,4 @@ MonoBehaviour:
   rareDropTable:
   - {fileID: 5318105536326779877, guid: 472da1df08e313ae694a307bba6c6e97, type: 3}
   - {fileID: 5318105536326779877, guid: ca0653b3ec7dc84bcbec53c15c7604a1, type: 3}
-  rareDropChance: 1
+  rareDropChance: 0.2

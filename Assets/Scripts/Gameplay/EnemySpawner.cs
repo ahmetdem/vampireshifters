@@ -1,21 +1,36 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 public class EnemySpawner : NetworkBehaviour
 {
-    [Header("Base Settings")]
-    [SerializeField] private GameObject swarmPrefab;
+    [Header("Wave Configuration")]
+    [Tooltip("Configure enemy waves here. Enemies spawn based on time.")]
+    [SerializeField] private WaveData[] waves;
+    
+    [Tooltip("Fallback prefab if no waves are configured")]
+    [SerializeField] private GameObject fallbackPrefab;
+
+    [Header("Spawn Timing")]
     [SerializeField] private float spawnInterval = 2f;
-
-    [Header("Difficulty Scaling")]
-    [SerializeField] private int baseMaxEnemies = 20;
-    [SerializeField] private float difficultyMultiplier = 1.0f; // Set this higher (e.g., 5 or 10) for fast testing
-    [SerializeField] private float extraCapPerMinute = 10f;
     [SerializeField] private int baseBurstCount = 1;
+    [SerializeField] private float difficultyMultiplier = 1.0f;
 
-    [Header("Viewport Logic")]
+    [Header("Enemy Cap (Performance)")]
+    [Tooltip("Hard limit on total enemies. After this, difficulty scales via damage/health only.")]
+    [SerializeField] private int absoluteMaxEnemies = 50;
+    
+    [Header("Scaling")]
+    [SerializeField] private int baseMaxEnemies = 20;
+    [SerializeField] private float extraCapPerMinute = 10f;
+
+    [Header("Spawn Distance")]
     [SerializeField] private float minSpawnDistance = 18f;
     [SerializeField] private float maxSpawnDistance = 28f;
+
+    [Header("Object Pooling")]
+    [Tooltip("Enable object pooling for better performance (requires EnemyPool in scene)")]
+    [SerializeField] private bool useObjectPooling = true;
 
     private float timer;
     private float timeElapsed;
@@ -28,9 +43,9 @@ public class EnemySpawner : NetworkBehaviour
             Debug.LogError("CRITICAL ERROR: EnemySpawner is missing a 'NetworkObject' component!");
         }
 
-        if (swarmPrefab == null)
+        if ((waves == null || waves.Length == 0) && fallbackPrefab == null)
         {
-            Debug.LogError("CRITICAL ERROR: EnemySpawner has no 'Swarm Prefab' assigned!");
+            Debug.LogError("CRITICAL ERROR: EnemySpawner has no waves or fallback prefab assigned!");
         }
     }
 
@@ -65,21 +80,25 @@ public class EnemySpawner : NetworkBehaviour
 
     private void SpawnWave()
     {
-        if (swarmPrefab == null) return;
-
         float minutes = timeElapsed / 60f;
 
-        int currentMaxEnemies = Mathf.RoundToInt(baseMaxEnemies + (extraCapPerMinute * minutes * difficultyMultiplier));
+        // Calculate scaled max, then clamp to absolute cap
+        int scaledMax = Mathf.RoundToInt(baseMaxEnemies + (extraCapPerMinute * minutes * difficultyMultiplier));
+        int currentMaxEnemies = Mathf.Min(scaledMax, absoluteMaxEnemies);
         int currentBurst = Mathf.RoundToInt(baseBurstCount + (minutes * difficultyMultiplier));
 
         float currentDifficulty = 1.0f + (minutes * difficultyMultiplier);
 
-        int currentCount = FindObjectsOfType<SwarmController>().Length;
-        if (currentCount >= currentMaxEnemies)
-        {
-            return;
-        }
+        // Get current enemy count
+        int currentCount = useObjectPooling && EnemyPool.Instance != null 
+            ? EnemyPool.Instance.GetActiveEnemyCount() 
+            : FindObjectsOfType<SwarmController>().Length;
 
+        if (currentCount >= currentMaxEnemies) return;
+
+        // Get active waves for current time
+        List<WaveData> activeWaves = GetActiveWaves(minutes);
+        
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
             if (client.PlayerObject == null) continue;
@@ -88,22 +107,85 @@ public class EnemySpawner : NetworkBehaviour
             {
                 if (currentCount + i >= currentMaxEnemies) break;
 
-                SpawnEnemyAround(client.PlayerObject.transform.position, currentDifficulty);
+                // Pick wave and enemy
+                WaveData selectedWave = PickWeightedWave(activeWaves);
+                GameObject prefab = selectedWave != null ? selectedWave.GetRandomEnemy() : fallbackPrefab;
+                
+                if (prefab == null) continue;
+
+                float healthMult = selectedWave?.healthMultiplier ?? 1f;
+                float damageMult = selectedWave?.damageMultiplier ?? 1f;
+
+                SpawnEnemyAround(client.PlayerObject.transform.position, prefab, currentDifficulty, healthMult, damageMult);
             }
         }
     }
-    private void SpawnEnemyAround(Vector3 center, float currentDifficulty)
+
+    private List<WaveData> GetActiveWaves(float currentMinutes)
+    {
+        List<WaveData> active = new List<WaveData>();
+        
+        if (waves == null) return active;
+
+        foreach (var wave in waves)
+        {
+            if (wave != null && wave.IsActiveAt(currentMinutes))
+            {
+                active.Add(wave);
+            }
+        }
+
+        return active;
+    }
+
+    private WaveData PickWeightedWave(List<WaveData> activeWaves)
+    {
+        if (activeWaves.Count == 0) return null;
+
+        float totalWeight = 0f;
+        foreach (var wave in activeWaves)
+        {
+            totalWeight += wave.spawnWeight;
+        }
+
+        float random = Random.Range(0f, totalWeight);
+        float cumulative = 0f;
+
+        foreach (var wave in activeWaves)
+        {
+            cumulative += wave.spawnWeight;
+            if (random <= cumulative)
+            {
+                return wave;
+            }
+        }
+
+        return activeWaves[0];
+    }
+
+    private void SpawnEnemyAround(Vector3 center, GameObject prefab, float difficulty, float healthMult, float damageMult)
     {
         Vector2 randomDir = Random.insideUnitCircle.normalized;
         float distance = Random.Range(minSpawnDistance, maxSpawnDistance);
         Vector3 spawnPos = center + (Vector3)(randomDir * distance);
 
-        GameObject enemyObj = Instantiate(swarmPrefab, spawnPos, Quaternion.identity);
-        enemyObj.GetComponent<NetworkObject>().Spawn();
+        GameObject enemyObj;
 
-        if (enemyObj.TryGetComponent(out SwarmController swarmScript))
+        if (useObjectPooling && EnemyPool.Instance != null)
         {
-            swarmScript.InitializeDifficulty(currentDifficulty);
+            // Use object pooling
+            enemyObj = EnemyPool.Instance.GetEnemy(prefab, spawnPos, difficulty, healthMult, damageMult);
+        }
+        else
+        {
+            // Traditional instantiate
+            enemyObj = Instantiate(prefab, spawnPos, Quaternion.identity);
+            enemyObj.GetComponent<NetworkObject>().Spawn();
+
+            if (enemyObj.TryGetComponent(out SwarmController swarmScript))
+            {
+                swarmScript.InitializeDifficulty(difficulty, healthMult, damageMult);
+            }
         }
     }
 
@@ -121,3 +203,4 @@ public class EnemySpawner : NetworkBehaviour
         Debug.Log("Enemy Spawning Stopped.");
     }
 }
+

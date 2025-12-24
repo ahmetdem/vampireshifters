@@ -168,4 +168,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: d548dbb204cbd0fddba238eef4e86641, type: 2}
-  lifetime: 4
+  lifetime: 10

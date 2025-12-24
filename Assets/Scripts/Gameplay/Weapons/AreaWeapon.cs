@@ -12,7 +12,9 @@ public class AreaWeapon : BaseWeapon
         if (target == null) return false;
 
         // 2. Deal Damage Immediately
-        if (target.TryGetComponent(out Health health))
+        // Use GetComponentInParent to find Health on parent (for individual minions)
+        Health health = target.GetComponentInParent<Health>();
+        if (health != null)
         {
             health.TakeDamage(data.baseDamage);
         }

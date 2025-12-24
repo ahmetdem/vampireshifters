@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10
+    OrthographicSize: 36
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -800,6 +800,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379965702}
   m_CullTransparentMesh: 1
+--- !u!1 &413666081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413666083}
+  - component: {fileID: 413666082}
+  - component: {fileID: 413666084}
+  m_Layer: 0
+  m_Name: EnemyPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &413666082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413666081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3806758010
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!4 &413666083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413666081}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &413666084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413666081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a596418885be2b79a70bafd6aabe053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPoolSize: 50
 --- !u!1 &638645813
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,14 +937,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2686a38e74fc23289ba63f38dbc954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swarmPrefab: {fileID: 5081695803496586333, guid: f76e7cf1ac524370b8982f4a9a9d01d7, type: 3}
+  waves:
+  - {fileID: 11400000, guid: 6cde1dacf4624386d85fb90c15f92431, type: 2}
+  - {fileID: 11400000, guid: 8a03f99d48a9598598b5190225f3ae27, type: 2}
+  - {fileID: 11400000, guid: 4b9016930d2c8e20fad9c4427942e3e6, type: 2}
+  fallbackPrefab: {fileID: 4464664025128372768, guid: 1c985f55d1c76ddab8c5baf26bd6004b, type: 3}
   spawnInterval: 5
-  baseMaxEnemies: 50
-  difficultyMultiplier: 6
-  extraCapPerMinute: 6
   baseBurstCount: 1
+  difficultyMultiplier: 6
+  absoluteMaxEnemies: 30
+  baseMaxEnemies: 30
+  extraCapPerMinute: 6
   minSpawnDistance: 20
   maxSpawnDistance: 30
+  useObjectPooling: 1
 --- !u!1 &661755696
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +1013,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15.01
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -963,7 +1038,7 @@ Transform:
   m_GameObject: {fileID: 661755696}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: -10}
+  m_LocalPosition: {x: 2000, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3918,7 +3993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -285.8, y: 76.7}
+  m_AnchoredPosition: {x: -285.7998, y: 76.700195}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1969923235
@@ -4120,6 +4195,7 @@ SceneRoots:
   - {fileID: 52365254}
   - {fileID: 1783957458}
   - {fileID: 742526560}
+  - {fileID: 1245903302}
   - {fileID: 892930549}
   - {fileID: 1303099588}
   - {fileID: 638645816}
@@ -4128,4 +4204,4 @@ SceneRoots:
   - {fileID: 97657708}
   - {fileID: 187723851}
   - {fileID: 1922211591}
-  - {fileID: 1245903302}
+  - {fileID: 413666083}

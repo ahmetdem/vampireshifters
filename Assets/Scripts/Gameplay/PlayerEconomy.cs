@@ -51,12 +51,34 @@ public class PlayerEconomy : NetworkBehaviour
             GameManager.Instance.CheckWinCondition(OwnerClientId, currentLevel.Value);
         }
 
-        // 4. Auto-select a random upgrade (no UI)
-        ApplyRandomUpgrade();
+        // 4. Show upgrade UI to the player (instead of random upgrade)
+        ShowUpgradeUIClientRpc();
+    }
+
+    /// <summary>
+    /// ClientRpc to show the upgrade selection UI on the owning client.
+    /// </summary>
+    [ClientRpc]
+    private void ShowUpgradeUIClientRpc()
+    {
+        if (!IsOwner) return; // Only show to this player
+        
+        if (TryGetComponent(out WeaponController controller))
+        {
+            if (LevelUpUI.Instance != null)
+            {
+                LevelUpUI.Instance.ShowOptions(controller);
+            }
+            else
+            {
+                Debug.LogWarning("[Economy] LevelUpUI.Instance is null! Make sure LevelUpUI is in the scene.");
+            }
+        }
     }
 
     /// <summary>
     /// Add multiple levels at once (e.g., PvP winner bonus).
+    /// Uses random upgrades to avoid UI spam.
     /// </summary>
     public void AddLevels(int count)
     {
@@ -74,13 +96,14 @@ public class PlayerEconomy : NetworkBehaviour
                 GameManager.Instance.CheckWinCondition(OwnerClientId, currentLevel.Value);
             }
 
-            // Apply a random upgrade for each level gained
+            // Apply a random upgrade for each level gained (no UI for bonus levels)
             ApplyRandomUpgrade();
         }
     }
 
     /// <summary>
     /// Automatically applies a random upgrade from the player's upgrade pool.
+    /// Used for PvP bonus levels only.
     /// </summary>
     private void ApplyRandomUpgrade()
     {
@@ -94,3 +117,4 @@ public class PlayerEconomy : NetworkBehaviour
         }
     }
 }
+

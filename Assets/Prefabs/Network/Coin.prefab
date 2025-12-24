@@ -159,4 +159,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinValue:
     m_InternalValue: 1
-  lifetime: 2
+  lifetime: 10

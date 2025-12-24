@@ -7,18 +7,46 @@ public class SwarmVisuals : MonoBehaviour
     [SerializeField] private float swarmSpread = 2f; // The "Radius" of the visual group
 
     private GameObject[] _minions;
+    private SwarmController _swarmController;
 
     public float GetSwarmSpread() => swarmSpread; // Getter for the controller
+    public GameObject[] GetMinions() => _minions; // For visual feedback access
+
+    /// <summary>
+    /// Must be called before Start() to set up damage references.
+    /// </summary>
+    public void SetSwarmController(SwarmController controller)
+    {
+        _swarmController = controller;
+    }
 
     private void Start()
+    {
+        SpawnMinions();
+    }
+    
+    private void SpawnMinions()
     {
         _minions = new GameObject[swarmCount];
         for (int i = 0; i < swarmCount; i++)
         {
-            // Source 49: Spawns visual-only zombie prefabs locally
+            // Spawns visual-only zombie prefabs locally
             Vector2 randomOffset = Random.insideUnitCircle * swarmSpread;
             _minions[i] = Instantiate(visualPrefab, transform.position + (Vector3)randomOffset, Quaternion.identity);
             _minions[i].transform.SetParent(transform);
+            
+            // Ensure minions have Enemy tag for weapon detection
+            _minions[i].tag = "Enemy";
+            
+            // Initialize the MinionDamage component (should already exist on prefab)
+            if (_minions[i].TryGetComponent(out MinionDamage damage))
+            {
+                damage.Initialize(_swarmController);
+            }
+            else
+            {
+                Debug.LogWarning($"[SwarmVisuals] Visual prefab '{visualPrefab.name}' is missing MinionDamage component!");
+            }
         }
     }
 

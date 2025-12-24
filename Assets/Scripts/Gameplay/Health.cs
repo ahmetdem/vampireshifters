@@ -68,4 +68,13 @@ public class Health : NetworkBehaviour
         maxHealth += amount;
         currentHealth.Value += amount;
     }
+
+    /// <summary>
+    /// Reset health to max. Used by object pooling when recycling enemies.
+    /// </summary>
+    public void ResetHealth()
+    {
+        if (!IsServer) return;
+        currentHealth.Value = maxHealth;
+    }
 }
