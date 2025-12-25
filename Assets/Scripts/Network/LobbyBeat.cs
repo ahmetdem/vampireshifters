@@ -10,6 +10,8 @@ public class LobbyBeat : MonoBehaviour
     private float _diagnosticTimer = 5f;
     private bool _hasLoggedDiagnostic = false;
 
+    public string LobbyId => _lobbyId; // Public getter for lobby deletion
+
     public void Initialize(string lobbyId)
     {
         _lobbyId = lobbyId;
