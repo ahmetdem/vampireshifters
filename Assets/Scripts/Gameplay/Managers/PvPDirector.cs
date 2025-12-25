@@ -175,6 +175,7 @@ public class PvPDirector : NetworkBehaviour
         // 1. Disable the PvP Arena Camera
         if (pvpArenaCamera != null)
         {
+            pvpArenaCamera.Priority = 0; // Reset priority
             pvpArenaCamera.gameObject.SetActive(false);
         }
 
@@ -241,6 +242,7 @@ public class PvPDirector : NetworkBehaviour
     {
         if (pvpArenaCamera != null)
         {
+            pvpArenaCamera.Priority = 0; // Reset priority so player camera takes over
             pvpArenaCamera.gameObject.SetActive(false);
         }
     }
@@ -299,6 +301,7 @@ public class PvPDirector : NetworkBehaviour
 
         if (pvpArenaCamera != null)
         {
+            pvpArenaCamera.Priority = 0; // Reset priority
             pvpArenaCamera.gameObject.SetActive(false);
             Debug.Log($"[PvP] Camera reset for dead player {clientId}");
         }

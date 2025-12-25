@@ -34,9 +34,21 @@ public class PlayerInventory : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) RequestUseItemServerRpc(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) RequestUseItemServerRpc(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) RequestUseItemServerRpc(2);
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log($"[PlayerInventory] Key 1 pressed. Slots count: {inventorySlots.Count}, IsOwner: {IsOwner}, IsSpawned: {IsSpawned}");
+            RequestUseItemServerRpc(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log($"[PlayerInventory] Key 2 pressed. Slots count: {inventorySlots.Count}, IsOwner: {IsOwner}, IsSpawned: {IsSpawned}");
+            RequestUseItemServerRpc(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Debug.Log($"[PlayerInventory] Key 3 pressed. Slots count: {inventorySlots.Count}, IsOwner: {IsOwner}, IsSpawned: {IsSpawned}");
+            RequestUseItemServerRpc(2);
+        }
     }
 
     // --- FIX 1: Prevent Duplicate Pickups ---

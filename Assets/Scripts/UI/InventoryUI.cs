@@ -10,11 +10,22 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Sprite emptySlotSprite;
 
     private PlayerInventory localInventory;
+    private NetworkObject trackedPlayerObject; // Track the player object to detect respawn
 
     private void Start()
     {
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         if (NetworkManager.Singleton.IsClient) FindLocalInventory();
+    }
+
+    private void Update()
+    {
+        // Check if our tracked player was destroyed (player died) and we need to find the new one
+        if (localInventory == null || trackedPlayerObject == null || !trackedPlayerObject.IsSpawned)
+        {
+            // Player object was destroyed or changed, try to find the new one
+            FindLocalInventory();
+        }
     }
 
     private void OnClientConnected(ulong clientId)
@@ -24,16 +35,32 @@ public class InventoryUI : MonoBehaviour
 
     private void FindLocalInventory()
     {
-        if (NetworkManager.Singleton.LocalClient != null &&
-            NetworkManager.Singleton.LocalClient.PlayerObject != null)
+        // Unsubscribe from old inventory if it still exists
+        if (localInventory != null)
         {
-            localInventory = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerInventory>();
+            try
+            {
+                localInventory.inventorySlots.OnListChanged -= OnInventoryChanged;
+            }
+            catch { } // Ignore errors if object was destroyed
+        }
+        
+        localInventory = null;
+        trackedPlayerObject = null;
+
+        if (NetworkManager.Singleton == null || NetworkManager.Singleton.LocalClient == null) return;
+        
+        if (NetworkManager.Singleton.LocalClient.PlayerObject != null)
+        {
+            trackedPlayerObject = NetworkManager.Singleton.LocalClient.PlayerObject;
+            localInventory = trackedPlayerObject.GetComponent<PlayerInventory>();
 
             if (localInventory != null)
             {
                 // Subscribe to changes so UI updates automatically
                 localInventory.inventorySlots.OnListChanged += OnInventoryChanged;
                 UpdateIcons(); // Initial Draw
+                Debug.Log("[InventoryUI] Found and subscribed to new player inventory");
             }
         }
     }
@@ -87,7 +114,14 @@ public class InventoryUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (localInventory != null) localInventory.inventorySlots.OnListChanged -= OnInventoryChanged;
+        if (localInventory != null)
+        {
+            try
+            {
+                localInventory.inventorySlots.OnListChanged -= OnInventoryChanged;
+            }
+            catch { } // Ignore errors if object was destroyed
+        }
         if (NetworkManager.Singleton != null) NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
     }
 }

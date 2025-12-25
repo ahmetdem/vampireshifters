@@ -116,6 +116,7 @@ public class BossEventDirector : NetworkBehaviour
         // Turn off the boss camera so the default follow camera takes priority again
         if (bossArenaCamera != null)
         {
+            bossArenaCamera.Priority = 0; // Reset priority
             bossArenaCamera.gameObject.SetActive(false);
         }
     }
@@ -175,6 +176,9 @@ public class BossEventDirector : NetworkBehaviour
             mainEnemySpawner.StartSpawning();
         }
         
+        // Hide boss health bar on all clients BEFORE despawning the boss
+        HideBossHealthBarClientRpc();
+        
         // Destroy any existing boss
         BossHealth[] bosses = FindObjectsOfType<BossHealth>();
         foreach (var boss in bosses)
@@ -196,6 +200,7 @@ public class BossEventDirector : NetworkBehaviour
 
         if (bossArenaCamera != null)
         {
+            bossArenaCamera.Priority = 0; // Reset priority
             bossArenaCamera.gameObject.SetActive(false);
         }
 
@@ -213,6 +218,21 @@ public class BossEventDirector : NetworkBehaviour
 
             // Move to the spot the server picked
             player.transform.position = targetPos;
+        }
+    }
+    
+    /// <summary>
+    /// Tell all clients to hide the boss health bar.
+    /// Called when player dies to boss and event is reset.
+    /// </summary>
+    [ClientRpc]
+    private void HideBossHealthBarClientRpc()
+    {
+        BossHealthBar healthBar = FindObjectOfType<BossHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.HideBossHealth();
+            Debug.Log("[BossEventDirector] Hiding boss health bar on player death");
         }
     }
 }

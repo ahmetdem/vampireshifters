@@ -26,17 +26,19 @@ public class CameraFollow : NetworkBehaviour
 
     private void AssignCamera()
     {
-        var vcam = FindObjectOfType<CinemachineVirtualCamera>();
+        // Find the player follow camera by tag to avoid picking up arena cameras (Boss/PvP)
+        GameObject camObj = GameObject.FindWithTag("PlayerFollowCamera");
+        CinemachineVirtualCamera vcam = camObj?.GetComponent<CinemachineVirtualCamera>();
 
         if (vcam != null)
         {
             _virtualCamera = vcam;
             _virtualCamera.Follow = transform;
-
-            // Optional: Set LookAt if you were 3D, but for 2D top-down Follow is usually enough
-            // _virtualCamera.LookAt = transform;
-
             Debug.Log($"Camera found and assigned to {gameObject.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"[CameraFollow] PlayerFollowCamera not found! Make sure a CinemachineVirtualCamera is tagged 'PlayerFollowCamera'.");
         }
     }
 }
