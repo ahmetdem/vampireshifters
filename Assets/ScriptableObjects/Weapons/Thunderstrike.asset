@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   baseDamage: 50
   baseCooldown: 1.5
-  range: 10
+  range: 25
   projectileSpeed: 10
   duration: 2
   projectilePrefab: {fileID: 6712719369691516610, guid: 16da2a4610746ed6e8b758f25493f9f3, type: 3}

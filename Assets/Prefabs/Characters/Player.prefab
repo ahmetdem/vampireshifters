@@ -438,7 +438,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bda01d07ba6e79055bc129f174b25af3, type: 2}
   - {fileID: 11400000, guid: c94b515f3c6484336907b04863478963, type: 2}
   globalDamageMultiplier: 1
-  startingWeapon: {fileID: 11400000, guid: d69f96f9c9feb73058706670812544fe, type: 2}
+  startingWeapon: {fileID: 11400000, guid: 34fdc6170b556c9a497a9cf05b5c4573, type: 2}
 --- !u!114 &8502611914960405661
 MonoBehaviour:
   m_ObjectHideFlags: 0

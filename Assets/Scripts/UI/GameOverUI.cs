@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
-using TMPro;
 using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
@@ -10,14 +9,16 @@ public class GameOverUI : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject panel;
-    [SerializeField] private TextMeshProUGUI titleText;
-    [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private Button returnToLobbyButton;
     [SerializeField] private Image resultImage;
 
     [Header("Result Images")]
     [SerializeField] private Sprite winnerSprite;
     [SerializeField] private Sprite loserSprite;
+
+    [Header("Canvases to Hide")]
+    [Tooltip("Other canvases/UI elements to hide when game over is shown")]
+    [SerializeField] private GameObject[] canvasesToHide;
 
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class GameOverUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows the game over screen.
+    /// Shows the game over screen and hides other UI.
     /// </summary>
     /// <param name="winnerId">The client ID of the winner</param>
     /// <param name="isLocalPlayerWinner">True if the local player won</param>
@@ -40,18 +41,25 @@ public class GameOverUI : MonoBehaviour
     {
         if (panel == null) return;
 
+        // Hide other canvases/UI elements
+        foreach (var canvas in canvasesToHide)
+        {
+            if (canvas != null)
+            {
+                canvas.SetActive(false);
+            }
+        }
+
+        // Show game over panel
         panel.SetActive(true);
 
+        // Set the appropriate image
         if (isLocalPlayerWinner)
         {
-            if (titleText != null) titleText.text = "VICTORY!";
-            if (messageText != null) messageText.text = "You reached Level 100 and won the game!";
             if (resultImage != null && winnerSprite != null) resultImage.sprite = winnerSprite;
         }
         else
         {
-            if (titleText != null) titleText.text = "GAME OVER";
-            if (messageText != null) messageText.text = $"Player {winnerId} reached Level 100 and won!";
             if (resultImage != null && loserSprite != null) resultImage.sprite = loserSprite;
         }
 
@@ -71,7 +79,6 @@ public class GameOverUI : MonoBehaviour
         // Disconnect from network session
         if (NetworkManager.Singleton != null)
         {
-            // Shutdown gracefully whether we're host, server, or client
             NetworkManager.Singleton.Shutdown();
             Debug.Log("[GameOverUI] Network shutdown complete.");
         }

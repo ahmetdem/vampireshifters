@@ -25,11 +25,17 @@ public class AreaWeapon : BaseWeapon
         return true;
     }
 
-    private void SpawnLightningEffect(Vector3 position)
+    private void SpawnLightningEffect(Vector3 targetPosition)
     {
         // Spawn a visual-only object that deletes itself quickly
-        // We use the Prefab from WeaponData as the "Explosion/Lightning" effect
-        GameObject vfx = Instantiate(data.projectilePrefab, position, Quaternion.identity);
+        GameObject vfx = Instantiate(data.projectilePrefab, Vector3.zero, Quaternion.identity);
+
+        // Set up the bolt to stretch from player to target
+        LightningVisual lightningVisual = vfx.GetComponent<LightningVisual>();
+        if (lightningVisual != null)
+        {
+            lightningVisual.SetupBolt(transform.position, targetPosition);
+        }
 
         NetworkObject netObj = vfx.GetComponent<NetworkObject>();
         netObj.Spawn();
