@@ -68,63 +68,32 @@ public class LeaderboardUI : MonoBehaviour
     private void UpdateLeaderboard()
     {
         if (NetworkManager.Singleton == null) return;
+        if (LeaderboardManager.Instance == null) return;
 
-        // 1. Collect Data
-        // NOTE: ConnectedClientsList is SERVER-ONLY in Netcode for GameObjects!
-        // Instead, find all player objects in scene using their PlayerNetworkState component
-        List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
+        // Quest 14: Use NetworkList from LeaderboardManager instead of FindObjectsOfType
+        List<LeaderboardEntry> networkEntries = LeaderboardManager.Instance.GetSortedEntries();
+        List<UILeaderboardEntry> entries = new List<UILeaderboardEntry>();
 
-        // Find all players by their PlayerNetworkState component
-        PlayerNetworkState[] allPlayers = FindObjectsOfType<PlayerNetworkState>();
-        
-        foreach (var networkState in allPlayers)
+        ulong localClientId = NetworkManager.Singleton.LocalClientId;
+
+        for (int i = 0; i < networkEntries.Count; i++)
         {
-            if (networkState == null) continue;
-            
-            // Get the NetworkObject to determine ownership
-            NetworkObject netObj = networkState.GetComponent<NetworkObject>();
-            if (netObj == null || !netObj.IsSpawned) continue;
-            
-            var economy = networkState.GetComponent<PlayerEconomy>();
-
-            string pName = networkState.playerName.Value.ToString();
-            if (string.IsNullOrEmpty(pName)) pName = $"Player {netObj.OwnerClientId}";
-            
-            int pLevel = economy != null ? economy.currentLevel.Value : 1;
-            
-            // Death count is server-only data, use 0 on clients
-            int pDeaths = 0;
-            if (ConnectionHandler.Instance != null && NetworkManager.Singleton.IsServer)
+            var entry = networkEntries[i];
+            entries.Add(new UILeaderboardEntry
             {
-                pDeaths = ConnectionHandler.Instance.GetDeathCount(netObj.OwnerClientId);
-            }
-            
-            bool isMe = (netObj.OwnerClientId == NetworkManager.Singleton.LocalClientId);
-
-            entries.Add(new LeaderboardEntry
-            {
-                Rank = 0, // Assigned after sort
-                Name = pName,
-                Level = pLevel,
-                Deaths = pDeaths,
-                IsLocalPlayer = isMe
+                Rank = i + 1,
+                Name = entry.PlayerName.ToString(),
+                Level = entry.Level,
+                Deaths = entry.Deaths,
+                IsLocalPlayer = (entry.ClientId == localClientId)
             });
         }
 
-        // 2. Sort by Level descending, then by Deaths ascending (fewer deaths break ties)
-        entries = entries.OrderByDescending(x => x.Level).ThenBy(x => x.Deaths).ToList();
-
-        // 3. Assign Ranks
-        for (int i = 0; i < entries.Count; i++)
-        {
-            entries[i].Rank = i + 1;
-        }
-
-        // 4. Update UI
+        // Update UI
         RenderEntries(entries);
     }
 
-    private void RenderEntries(List<LeaderboardEntry> entries)
+    private void RenderEntries(List<UILeaderboardEntry> entries)
     {
         // Ensure we have enough rows
         while (spawnedRows.Count < entries.Count)
@@ -148,7 +117,7 @@ public class LeaderboardUI : MonoBehaviour
         }
     }
 
-    private void UpdateRow(GameObject row, LeaderboardEntry data)
+    private void UpdateRow(GameObject row, UILeaderboardEntry data)
     {
         // Assumption: Row prefab has 4 TextMeshProUGUI components in order: Rank, Name, Level, Deaths
         // Or we can verify by name using transform.Find if needed. 
@@ -175,7 +144,8 @@ public class LeaderboardUI : MonoBehaviour
         }
     }
 
-    private class LeaderboardEntry
+    // UI-only data class (renamed to avoid conflict with network LeaderboardEntry struct)
+    private class UILeaderboardEntry
     {
         public int Rank;
         public string Name;
