@@ -70,40 +70,45 @@ public class LeaderboardUI : MonoBehaviour
         if (NetworkManager.Singleton == null) return;
 
         // 1. Collect Data
-        // NOTE: Use ConnectedClientsList directly - it works on both host AND client
-        // ConnectionHandler.GetAllConnectedClientIds() was server-only and returned empty on clients
+        // NOTE: ConnectedClientsList is SERVER-ONLY in Netcode for GameObjects!
+        // Instead, find all player objects in scene using their PlayerNetworkState component
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
 
-        foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
+        // Find all players by their PlayerNetworkState component
+        PlayerNetworkState[] allPlayers = FindObjectsOfType<PlayerNetworkState>();
+        
+        foreach (var networkState in allPlayers)
         {
-            if (client.PlayerObject != null)
+            if (networkState == null) continue;
+            
+            // Get the NetworkObject to determine ownership
+            NetworkObject netObj = networkState.GetComponent<NetworkObject>();
+            if (netObj == null || !netObj.IsSpawned) continue;
+            
+            var economy = networkState.GetComponent<PlayerEconomy>();
+
+            string pName = networkState.playerName.Value.ToString();
+            if (string.IsNullOrEmpty(pName)) pName = $"Player {netObj.OwnerClientId}";
+            
+            int pLevel = economy != null ? economy.currentLevel.Value : 1;
+            
+            // Death count is server-only data, use 0 on clients
+            int pDeaths = 0;
+            if (ConnectionHandler.Instance != null && NetworkManager.Singleton.IsServer)
             {
-                // Get Components
-                var networkState = client.PlayerObject.GetComponent<PlayerNetworkState>();
-                var economy = client.PlayerObject.GetComponent<PlayerEconomy>();
-
-                string pName = networkState != null ? networkState.playerName.Value.ToString() : $"Player {client.ClientId}";
-                int pLevel = economy != null ? economy.currentLevel.Value : 1;
-                
-                // Death count is server-only data, use 0 on clients
-                // TODO: Could sync this via NetworkVariable if needed
-                int pDeaths = 0;
-                if (ConnectionHandler.Instance != null && NetworkManager.Singleton.IsServer)
-                {
-                    pDeaths = ConnectionHandler.Instance.GetDeathCount(client.ClientId);
-                }
-                
-                bool isMe = (client.ClientId == NetworkManager.Singleton.LocalClientId);
-
-                entries.Add(new LeaderboardEntry
-                {
-                    Rank = 0, // Assigned after sort
-                    Name = pName,
-                    Level = pLevel,
-                    Deaths = pDeaths,
-                    IsLocalPlayer = isMe
-                });
+                pDeaths = ConnectionHandler.Instance.GetDeathCount(netObj.OwnerClientId);
             }
+            
+            bool isMe = (netObj.OwnerClientId == NetworkManager.Singleton.LocalClientId);
+
+            entries.Add(new LeaderboardEntry
+            {
+                Rank = 0, // Assigned after sort
+                Name = pName,
+                Level = pLevel,
+                Deaths = pDeaths,
+                IsLocalPlayer = isMe
+            });
         }
 
         // 2. Sort by Level descending, then by Deaths ascending (fewer deaths break ties)
