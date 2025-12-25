@@ -1,0 +1,730 @@
+fileFormatVersion: 2
+guid: b1ab9131db1ca4b67a67751920b07374
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 1218
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f325439c41ca4b14b4f34d13a86bfbd
+      internalID: 1228459795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_1
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 1216
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a4ed15fd3ad742629d2bb13653c4a04
+      internalID: -194696093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_2
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 1218
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 014c1306da7bc474896e472ed49fb2a9
+      internalID: -28202112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_3
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 1217
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4435b05351c1441488b8955904999ff2
+      internalID: 1956733281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_4
+      rect:
+        serializedVersion: 2
+        x: 1665
+        y: 1217
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67779eaf9a68c482b9cea61d6f86bc79
+      internalID: -510329274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_5
+      rect:
+        serializedVersion: 2
+        x: 2075
+        y: 1215
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6de976e085dc4eabbb9d57c6cca8c80
+      internalID: 684288077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_6
+      rect:
+        serializedVersion: 2
+        x: 2480
+        y: 1218
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e10c99d64f724b4d95b68b33bd34a41
+      internalID: -783843356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_7
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 824
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dba6296d401741fd9c535f600142f91
+      internalID: 1047030953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_8
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 854
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb8c1cbd03ade448ca0831258a3e2647
+      internalID: -1061405529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_9
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 852
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55747af9ef2de43cdb2dfc906bec1a08
+      internalID: 352698736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_10
+      rect:
+        serializedVersion: 2
+        x: 1259
+        y: 826
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c882c36725594c02a9e69006f66d864
+      internalID: -1079884916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_11
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 824
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd0863713f4134493a2a50f063ad856d
+      internalID: 1273052038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_12
+      rect:
+        serializedVersion: 2
+        x: 2075
+        y: 824
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6c63e15d80eb4b0e9666573eaed70c2
+      internalID: 2134275817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_13
+      rect:
+        serializedVersion: 2
+        x: 2482
+        y: 824
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb01951ec44446c19ec4c76d7c5ae7e
+      internalID: 1452696489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 403
+        width: 366
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c3e2d7620fcf48d5a67f5274a898e36
+      internalID: -1571000002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_15
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 403
+        width: 368
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1bc3c51912984a95b5705952e79e13e
+      internalID: -2083577588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_16
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 403
+        width: 375
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ddccd5cbf89b4f3996da73795a1bc96
+      internalID: -1489305128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_17
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 403
+        width: 372
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd73f8a28018a425999170b5113de9a2
+      internalID: 286556511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_18
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 403
+        width: 373
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 536f7a5b2560d4b178aa1c432fd9fe6a
+      internalID: -1156766478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_19
+      rect:
+        serializedVersion: 2
+        x: 2042
+        y: 385
+        width: 377
+        height: 371
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5801d64e6c7544fc39c6231ec2781efc
+      internalID: 609328900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_20
+      rect:
+        serializedVersion: 2
+        x: 2450
+        y: 385
+        width: 366
+        height: 367
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3deb8f8a9efa84b1c9a7a637984da4ed
+      internalID: -1507479909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_21
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 0
+        width: 225
+        height: 358
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a68488f710a3e416c9a485786604a610
+      internalID: -1399479623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_22
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 362
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 722eea4a3a51f480fbf60ed03e112a0a
+      internalID: -145444360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_23
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 0
+        width: 364
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca8f3042ca076498f9e7f04718bed0b6
+      internalID: 216395010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_24
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 28
+        width: 337
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e54bb1ff6a2c494299757c5bb8abafc
+      internalID: 388062299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_25
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 28
+        width: 341
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b1cc8dcaffa042118135318f7a29e59
+      internalID: -2134921207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_26
+      rect:
+        serializedVersion: 2
+        x: 2152
+        y: 0
+        width: 168
+        height: 363
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 541b5bf1449274177944803802364edb
+      internalID: 840357822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVP Decor 1 - Copy_27
+      rect:
+        serializedVersion: 2
+        x: 2551
+        y: 0
+        width: 167
+        height: 360
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9d2872d34f1045e79e25e33faf9fc2e
+      internalID: 59493646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PVP Decor 1 - Copy_0: 1228459795
+      PVP Decor 1 - Copy_1: -194696093
+      PVP Decor 1 - Copy_10: -1079884916
+      PVP Decor 1 - Copy_11: 1273052038
+      PVP Decor 1 - Copy_12: 2134275817
+      PVP Decor 1 - Copy_13: 1452696489
+      PVP Decor 1 - Copy_14: -1571000002
+      PVP Decor 1 - Copy_15: -2083577588
+      PVP Decor 1 - Copy_16: -1489305128
+      PVP Decor 1 - Copy_17: 286556511
+      PVP Decor 1 - Copy_18: -1156766478
+      PVP Decor 1 - Copy_19: 609328900
+      PVP Decor 1 - Copy_2: -28202112
+      PVP Decor 1 - Copy_20: -1507479909
+      PVP Decor 1 - Copy_21: -1399479623
+      PVP Decor 1 - Copy_22: -145444360
+      PVP Decor 1 - Copy_23: 216395010
+      PVP Decor 1 - Copy_24: 388062299
+      PVP Decor 1 - Copy_25: -2134921207
+      PVP Decor 1 - Copy_26: 840357822
+      PVP Decor 1 - Copy_27: 59493646
+      PVP Decor 1 - Copy_3: 1956733281
+      PVP Decor 1 - Copy_4: -510329274
+      PVP Decor 1 - Copy_5: 684288077
+      PVP Decor 1 - Copy_6: -783843356
+      PVP Decor 1 - Copy_7: 1047030953
+      PVP Decor 1 - Copy_8: -1061405529
+      PVP Decor 1 - Copy_9: 352698736
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
