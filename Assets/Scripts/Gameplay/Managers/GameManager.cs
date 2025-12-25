@@ -12,6 +12,11 @@ public class GameManager : NetworkBehaviour
     public NetworkVariable<bool> IsGameOver = new NetworkVariable<bool>(false);
     public NetworkVariable<ulong> WinnerId = new NetworkVariable<ulong>(0);
 
+    /// <summary>
+    /// Static helper property to easily check if game is over from any script.
+    /// </summary>
+    public static bool IsGameOverState => Instance != null && Instance.IsGameOver.Value;
+
     // Event for UI to subscribe to
     public static event Action<ulong> OnGameWon;
 

@@ -180,6 +180,9 @@ public class SwarmController : NetworkBehaviour
     private void FixedUpdate()
     {
         if (!IsServer) return;
+        
+        // Stop all movement when game is over
+        if (GameManager.IsGameOverState) return;
 
         // Check if too far from all players
         despawnCheckTimer -= Time.fixedDeltaTime;

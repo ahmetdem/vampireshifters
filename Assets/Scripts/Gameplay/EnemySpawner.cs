@@ -81,6 +81,9 @@ public class EnemySpawner : NetworkBehaviour
     private void Update()
     {
         if (isSpawningStopped) return;
+        
+        // Don't spawn new enemies when game is over
+        if (GameManager.IsGameOverState) return;
 
         timeElapsed += Time.deltaTime;
         timer -= Time.deltaTime;

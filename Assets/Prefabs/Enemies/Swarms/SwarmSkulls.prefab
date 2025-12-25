@@ -192,7 +192,7 @@ MonoBehaviour:
   rareDropTable:
   - {fileID: 5318105536326779877, guid: 472da1df08e313ae694a307bba6c6e97, type: 3}
   - {fileID: 5318105536326779877, guid: ca0653b3ec7dc84bcbec53c15c7604a1, type: 3}
-  rareDropChance: 1
+  rareDropChance: 0.05
 --- !u!114 &7308972442982815606
 MonoBehaviour:
   m_ObjectHideFlags: 0

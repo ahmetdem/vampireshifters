@@ -105,6 +105,9 @@ public class BossController : NetworkBehaviour
         if (!IsServer) return;
         if (bossData == null) return;
         
+        // Stop boss when game is over
+        if (GameManager.IsGameOverState) return;
+        
         // Update target
         currentTarget = GetClosestPlayer();
         
