@@ -14,11 +14,10 @@ public class LeaderboardUI : MonoBehaviour
     [SerializeField] private GameObject rowPrefab;
 
     [Header("Settings")]
-    [SerializeField] private float updateInterval = 0.5f;
     [SerializeField] private bool showAlways = false;
 
-    private float nextUpdate;
     private bool isVisible = false;
+    private bool isDirty = false; // Flag for pending updates
 
     // Cache rows to reuse them instead of destroying/instantiating every frame
     private List<GameObject> spawnedRows = new List<GameObject>();
@@ -34,16 +33,53 @@ public class LeaderboardUI : MonoBehaviour
         {
             leaderboardPanel.SetActive(false);
         }
+
+        // Quest 17: Subscribe to NetworkList changes for event-driven updates
+        StartCoroutine(SubscribeToLeaderboardEvents());
+    }
+
+    private System.Collections.IEnumerator SubscribeToLeaderboardEvents()
+    {
+        // Wait until LeaderboardManager is available
+        while (LeaderboardManager.Instance == null || LeaderboardManager.Instance.Entries == null)
+        {
+            yield return null;
+        }
+
+        // Subscribe to list changes
+        LeaderboardManager.Instance.Entries.OnListChanged += OnLeaderboardChanged;
+        
+        // Initial update
+        isDirty = true;
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        if (LeaderboardManager.Instance != null && LeaderboardManager.Instance.Entries != null)
+        {
+            LeaderboardManager.Instance.Entries.OnListChanged -= OnLeaderboardChanged;
+        }
+    }
+
+    /// <summary>
+    /// Quest 17: Event-driven callback when NetworkList changes.
+    /// </summary>
+    private void OnLeaderboardChanged(NetworkListEvent<LeaderboardEntry> changeEvent)
+    {
+        // Mark as dirty - will update on next frame if visible
+        isDirty = true;
     }
 
     private void Update()
     {
         HandleInput();
 
-        if (isVisible && Time.time >= nextUpdate)
+        // Quest 17: Only update when data has changed (event-driven)
+        if (isVisible && isDirty)
         {
             UpdateLeaderboard();
-            nextUpdate = Time.time + updateInterval;
+            isDirty = false;
         }
     }
 
@@ -56,7 +92,7 @@ public class LeaderboardUI : MonoBehaviour
         {
             isVisible = true;
             leaderboardPanel.SetActive(true);
-            UpdateLeaderboard(); // Immediate update on open
+            isDirty = true; // Force update on open
         }
         else if (Input.GetKeyUp(KeyCode.Tab))
         {
