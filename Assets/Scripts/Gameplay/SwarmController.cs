@@ -15,6 +15,9 @@ public class SwarmController : NetworkBehaviour
     private int damageAmount; // Actual damage after scaling
 
     public NetworkVariable<float> difficultyMultiplier = new NetworkVariable<float>(1.0f);
+    
+    // NEW: Synced swarm count so host and client spawn same number of visual minions
+    public NetworkVariable<int> syncedSwarmCount = new NetworkVariable<int>(1);
 
     [Header("Despawn Settings")]
     [Tooltip("Despawn if further than this from ALL players")]
@@ -50,9 +53,20 @@ public class SwarmController : NetworkBehaviour
     {
         if (currentSpeed == 0) currentSpeed = baseSpeed;
 
-        if (TryGetComponent(out SwarmVisuals visuals))
+        // Server sets the synced swarm count; clients will receive it via NetworkVariable
+        if (IsServer)
         {
-            visuals.SetSwarmDensity(difficultyMultiplier.Value);
+            // Calculate swarm count based on difficulty (will be set properly in InitializeDifficulty)
+            // Default to 1, InitializeDifficulty will update this
+        }
+        
+        // Subscribe to swarm count changes - when server sets it, clients spawn minions
+        syncedSwarmCount.OnValueChanged += OnSwarmCountChanged;
+        
+        // If we're joining late and value is already set, spawn now
+        if (syncedSwarmCount.Value > 0 && _cachedVisuals != null)
+        {
+            _cachedVisuals.SpawnMinionsWithCount(syncedSwarmCount.Value);
         }
 
         // Subscribe to health changes for visual feedback (client-only effect)
@@ -61,10 +75,21 @@ public class SwarmController : NetworkBehaviour
             health.currentHealth.OnValueChanged += OnHealthChanged;
         }
     }
+    
+    private void OnSwarmCountChanged(int previousValue, int newValue)
+    {
+        // When server sets the swarm count, spawn the visual minions
+        if (_cachedVisuals != null && newValue > 0 && previousValue != newValue)
+        {
+            _cachedVisuals.SpawnMinionsWithCount(newValue);
+        }
+    }
 
     public override void OnNetworkDespawn()
     {
         // Unsubscribe to prevent memory leaks
+        syncedSwarmCount.OnValueChanged -= OnSwarmCountChanged;
+        
         if (TryGetComponent(out Health health))
         {
             health.currentHealth.OnValueChanged -= OnHealthChanged;
@@ -126,10 +151,16 @@ public class SwarmController : NetworkBehaviour
             loot.SetLootMultiplier(difficulty);
         }
 
-        // 4. Update Visuals
+        // 4. Update Visuals - Calculate and sync swarm count via NetworkVariable
+        // This replaces the old SetSwarmDensity call which wasn't synced
         if (TryGetComponent(out SwarmVisuals visuals))
         {
-            visuals.SetSwarmDensity(difficulty);
+            int baseSwarmCount = visuals.GetBaseSwarmCount();
+            int newCount = Mathf.RoundToInt(baseSwarmCount * difficulty);
+            newCount = Mathf.Clamp(newCount, 1, 10); // Cap at 10 for performance
+            
+            // Set the NetworkVariable - this will trigger OnSwarmCountChanged on all clients
+            syncedSwarmCount.Value = newCount;
         }
 
         // 5. Hit Harder: Damage scales with difficulty (20% per level) + wave multiplier
