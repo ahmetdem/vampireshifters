@@ -79,11 +79,20 @@ public class Health : NetworkBehaviour
 
     protected virtual void Die()
     {
+        // Safety check: only despawn if actually spawned on network
+        NetworkObject netObj = GetComponent<NetworkObject>();
+        if (netObj == null || !netObj.IsSpawned)
+        {
+            Debug.LogWarning($"[Health] Tried to die but NetworkObject not spawned. Destroying locally.");
+            Destroy(gameObject);
+            return;
+        }
+
         if (TryGetComponent(out PlayerNetworkState playerState))
         {
             // Player Death Logic (Respawn)...
             ConnectionHandler.Instance.HandlePlayerDeath(OwnerClientId);
-            GetComponent<NetworkObject>().Despawn(true);
+            netObj.Despawn(true);
         }
         else
         {
@@ -94,7 +103,7 @@ public class Health : NetworkBehaviour
             }
 
             Debug.Log($"[Health] Enemy {NetworkObjectId} Died.");
-            GetComponent<NetworkObject>().Despawn(true);
+            netObj.Despawn(true);
         }
     }
 
