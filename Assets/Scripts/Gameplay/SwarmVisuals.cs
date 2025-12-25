@@ -22,6 +22,7 @@ public class SwarmVisuals : MonoBehaviour
 
     public float GetSwarmSpread() => swarmSpread; // Getter for the controller
     public GameObject[] GetMinions() => _minions; // For visual feedback access
+    public int GetBaseSwarmCount() => swarmCount; // For SwarmController to calculate synced count
 
     /// <summary>
     /// Must be called before Start() to set up damage references.
@@ -33,20 +34,41 @@ public class SwarmVisuals : MonoBehaviour
 
     private void Start()
     {
-        SpawnMinions();
+        // Use synced count from SwarmController if available (ensures host/client match)
+        if (_swarmController != null)
+        {
+            // Wait one frame to ensure NetworkVariable is synced
+            StartCoroutine(SpawnMinionsDelayed());
+        }
+        else
+        {
+            SpawnMinions(swarmCount);
+        }
+    }
+
+    private System.Collections.IEnumerator SpawnMinionsDelayed()
+    {
+        // Wait for network sync
+        yield return null;
+        
+        // Use the server-synced minion count
+        int count = _swarmController.syncedMinionCount.Value;
+        if (count <= 0) count = swarmCount; // Fallback to default
+        
+        SpawnMinions(count);
     }
     
-    private void SpawnMinions()
+    private void SpawnMinions(int count)
     {
-        _minions = new GameObject[swarmCount];
-        _minionRenderers = new SpriteRenderer[swarmCount];
-        _minionFlashFeedbacks = new MinionFlashFeedback[swarmCount];
+        _minions = new GameObject[count];
+        _minionRenderers = new SpriteRenderer[count];
+        _minionFlashFeedbacks = new MinionFlashFeedback[count];
         
         // Use position-based seed so both host and client generate same "random" positions
         int seed = Mathf.RoundToInt(transform.position.x * 1000 + transform.position.y * 7919);
         System.Random seededRandom = new System.Random(seed);
         
-        for (int i = 0; i < swarmCount; i++)
+        for (int i = 0; i < count; i++)
         {
             // Generate consistent "random" offset using seeded random
             float angle = (float)(seededRandom.NextDouble() * Mathf.PI * 2);
@@ -77,21 +99,7 @@ public class SwarmVisuals : MonoBehaviour
         }
     }
 
-    // NOTE: Removed Update() and render culling methods - custom culling was causing
-    // host/client desync since each client has a different camera position.
-    // Unity's built-in frustum culling handles this automatically.
-
-    public void SetSwarmDensity(float multiplier)
-    {
-        // 1. Calculate new count
-        int newCount = Mathf.RoundToInt(swarmCount * multiplier);
-
-        // 2. FIX: Clamp to 1 instead of 5 so you can test small groups
-        swarmCount = Mathf.Clamp(newCount, 1, 10);
-
-        // Note: If this runs after Start(), you might need to manually trigger a respawn 
-        // of the visual minions here, otherwise this number only changes for the NEXT wave.
-    }
+    // NOTE: Removed SetSwarmDensity - minion count is now synced via SwarmController.syncedMinionCount
 
     #region Visual Feedback System (Client-Only)
 
