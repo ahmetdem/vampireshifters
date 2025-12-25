@@ -21,10 +21,17 @@ public class OrbitWeapon : BaseWeapon
         orbitRadius = data.range;
         orbitalCount = Mathf.Max(1, Mathf.RoundToInt(data.duration)); // Use duration as orbital count
         
+        Debug.Log($"[OrbitWeapon] Initialize called! IsServer={NetworkManager.Singleton?.IsServer}, range={orbitRadius}, orbitalCount={orbitalCount}, prefab={(data.projectilePrefab != null ? data.projectilePrefab.name : "NULL")}");
+        
         // Delay spawning to avoid scene sync race condition
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsServer)
         {
+            Debug.Log("[OrbitWeapon] Starting DelayedSpawnOrbitals coroutine...");
             StartCoroutine(DelayedSpawnOrbitals());
+        }
+        else
+        {
+            Debug.Log("[OrbitWeapon] Not server or NetworkManager null - skipping orbital spawn");
         }
         
         initialized = true;
@@ -32,15 +39,41 @@ public class OrbitWeapon : BaseWeapon
 
     private IEnumerator DelayedSpawnOrbitals()
     {
+        Debug.Log("[OrbitWeapon] DelayedSpawnOrbitals started, waiting 0.5s...");
         // Wait for scene synchronization to complete
         yield return new WaitForSeconds(0.5f);
+        
+        Debug.Log("[OrbitWeapon] Delay complete, calling SpawnOrbitals...");
         SpawnOrbitals();
     }
 
     private void SpawnOrbitals()
     {
-        if (!NetworkManager.Singleton.IsServer) return;
-        if (data.projectilePrefab == null) return;
+        if (NetworkManager.Singleton == null)
+        {
+            Debug.LogError("[OrbitWeapon] SpawnOrbitals: NetworkManager is NULL!");
+            return;
+        }
+        
+        if (!NetworkManager.Singleton.IsServer)
+        {
+            Debug.LogWarning("[OrbitWeapon] SpawnOrbitals: Not server, aborting");
+            return;
+        }
+        
+        if (data == null)
+        {
+            Debug.LogError("[OrbitWeapon] SpawnOrbitals: data is NULL!");
+            return;
+        }
+        
+        if (data.projectilePrefab == null)
+        {
+            Debug.LogError($"[OrbitWeapon] SpawnOrbitals: projectilePrefab is NULL! Check WeaponData '{data.weaponName}'");
+            return;
+        }
+
+        Debug.Log($"[OrbitWeapon] SpawnOrbitals: Spawning {orbitalCount} orbitals...");
 
         for (int i = 0; i < orbitalCount; i++)
         {
@@ -54,6 +87,11 @@ public class OrbitWeapon : BaseWeapon
             if (netObj != null)
             {
                 netObj.Spawn();
+                Debug.Log($"[OrbitWeapon] Spawned orbital {i} at {spawnPos}");
+            }
+            else
+            {
+                Debug.LogError($"[OrbitWeapon] Orbital prefab missing NetworkObject component!");
             }
 
             // Setup orbital damage component with prediction data
@@ -64,7 +102,8 @@ public class OrbitWeapon : BaseWeapon
 
             orbitals.Add(orbital);
         }
-        // Note: We don't parent orbitals - we manually update their positions in WeaponUpdate()
+        
+        Debug.Log($"[OrbitWeapon] Successfully spawned {orbitals.Count} orbitals");
     }
 
     private Vector3 GetOrbitPosition(float angleOffset)
@@ -90,11 +129,20 @@ public class OrbitWeapon : BaseWeapon
         return false;
     }
 
+    private void OnDisable()
+    {
+        Debug.LogWarning($"[OrbitWeapon] OnDisable called! This might destroy orbitals. Stack trace follows.");
+        Debug.LogWarning(System.Environment.StackTrace);
+    }
+
     private void OnDestroy()
     {
+        Debug.LogWarning($"[OrbitWeapon] OnDestroy called! Orbitals will be despawned.");
+        
         // Safety check for shutdown/scene change where NetworkManager might already be gone
         if (NetworkManager.Singleton == null)
         {
+            Debug.Log("[OrbitWeapon] OnDestroy: NetworkManager null, clearing orbital references");
             orbitals.Clear();
             return;
         }
@@ -102,6 +150,7 @@ public class OrbitWeapon : BaseWeapon
         // Only server can despawn network objects
         if (!NetworkManager.Singleton.IsServer) 
         {
+            Debug.Log("[OrbitWeapon] OnDestroy: Not server, clearing orbital references only");
             orbitals.Clear();
             return;
         }
@@ -111,6 +160,8 @@ public class OrbitWeapon : BaseWeapon
         var orbitalsToDestroy = new List<GameObject>(orbitals);
         orbitals.Clear();
 
+        Debug.Log($"[OrbitWeapon] OnDestroy: Server despawning {orbitalsToDestroy.Count} orbitals");
+        
         foreach (var orbital in orbitalsToDestroy)
         {
             if (orbital != null)

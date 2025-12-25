@@ -65,6 +65,9 @@ public class BossHealth : Health
                 }
             }
             
+            // Hide boss health bar on all clients
+            HideBossHealthBarClientRpc();
+            
             if (BossEventDirector.Instance != null)
             {
                 BossEventDirector.Instance.OnBossDefeated();
@@ -73,5 +76,18 @@ public class BossHealth : Health
 
         base.Die(); // Despawns the boss
     }
-}
+    
+    /// <summary>
+    /// Tell all clients to hide the boss health bar.
+    /// </summary>
+    [ClientRpc]
+    private void HideBossHealthBarClientRpc()
+    {
+        BossHealthBar healthBar = FindObjectOfType<BossHealthBar>();
+        if (healthBar != null)
+        {
+            healthBar.HideBossHealth();
+        }
+    }
 
+}

@@ -49,6 +49,8 @@ public class OrbitalDamage : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         
+        Debug.Log($"[OrbitalDamage] OnNetworkSpawn! OwnerNetworkObjectId={OwnerNetworkObjectId.Value}, IsServer={IsServer}");
+        
         // Subscribe to owner ID changes so clients can find owner when value arrives
         OwnerNetworkObjectId.OnValueChanged += OnOwnerIdChanged;
         
@@ -56,6 +58,10 @@ public class OrbitalDamage : NetworkBehaviour
         if (OwnerNetworkObjectId.Value != 0)
         {
             FindOwnerTransform();
+        }
+        else
+        {
+            Debug.LogWarning("[OrbitalDamage] OnNetworkSpawn: OwnerNetworkObjectId is 0, waiting for value change...");
         }
 
         // Disable NetworkTransform on all clients/server to allow local visual prediction
@@ -74,19 +80,33 @@ public class OrbitalDamage : NetworkBehaviour
 
     private void OnOwnerIdChanged(ulong oldValue, ulong newValue)
     {
+        Debug.Log($"[OrbitalDamage] OnOwnerIdChanged: {oldValue} -> {newValue}");
         FindOwnerTransform();
     }
 
     private void FindOwnerTransform()
     {
-        if (OwnerNetworkObjectId.Value == 0) return;
-        if (NetworkManager.Singleton == null) return;
+        if (OwnerNetworkObjectId.Value == 0)
+        {
+            Debug.LogWarning("[OrbitalDamage] FindOwnerTransform: OwnerNetworkObjectId is 0!");
+            return;
+        }
+        if (NetworkManager.Singleton == null)
+        {
+            Debug.LogWarning("[OrbitalDamage] FindOwnerTransform: NetworkManager is null!");
+            return;
+        }
 
         // Find the NetworkObject with this ID
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(OwnerNetworkObjectId.Value, out NetworkObject ownerNetObj))
         {
             ownerTransform = ownerNetObj.transform;
             isInitialized = true;
+            Debug.Log($"[OrbitalDamage] FindOwnerTransform SUCCESS: Found owner at {ownerTransform.position}");
+        }
+        else
+        {
+            Debug.LogWarning($"[OrbitalDamage] FindOwnerTransform FAILED: NetworkObjectId {OwnerNetworkObjectId.Value} not found in SpawnedObjects! SpawnedObjects count: {NetworkManager.Singleton.SpawnManager.SpawnedObjects.Count}");
         }
     }
 

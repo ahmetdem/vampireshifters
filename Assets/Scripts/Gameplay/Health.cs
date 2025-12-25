@@ -5,6 +5,9 @@ public class Health : NetworkBehaviour
 {
     [SerializeField] private int maxHealth = 100;
     public NetworkVariable<int> currentHealth = new NetworkVariable<int>(100);
+    
+    // Getter for UI to access max health
+    public int MaxHealth => maxHealth;
 
     // Flash state tracking
     private Coroutine _flashCoroutine;

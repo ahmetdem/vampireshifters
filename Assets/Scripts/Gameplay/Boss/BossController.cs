@@ -33,6 +33,10 @@ public class BossController : NetworkBehaviour
         if (IsServer)
         {
             InitializeBoss();
+            
+            // Notify all clients to show boss health bar
+            string bossName = bossData != null ? bossData.bossName : "Boss";
+            ShowBossHealthBarClientRpc(bossName);
         }
         
         // Spawn effect on all clients
@@ -40,6 +44,34 @@ public class BossController : NetworkBehaviour
         {
             Instantiate(bossData.spawnEffectPrefab, transform.position, Quaternion.identity);
         }
+    }
+    
+    /// <summary>
+    /// Tell all clients to show the boss health bar.
+    /// </summary>
+    [ClientRpc]
+    private void ShowBossHealthBarClientRpc(string bossName)
+    {
+        Debug.Log($"[BossController] ShowBossHealthBarClientRpc received for: {bossName}");
+        
+        // Find the BossHealthBar in the scene
+        BossHealthBar healthBar = FindObjectOfType<BossHealthBar>();
+        if (healthBar == null)
+        {
+            Debug.LogWarning("[BossController] BossHealthBar not found in scene! Make sure you have a BossHealthBar component on a UI object.");
+            return;
+        }
+        
+        // Get the BossHealth component directly (bossHealth might be null on client side)
+        BossHealth bh = GetComponent<BossHealth>();
+        if (bh == null)
+        {
+            Debug.LogWarning("[BossController] BossHealth component not found on boss!");
+            return;
+        }
+        
+        healthBar.ShowBossHealth(bh, bossName);
+        Debug.Log($"[BossController] Successfully showed boss health bar for: {bossName}");
     }
     
     private void InitializeBoss()

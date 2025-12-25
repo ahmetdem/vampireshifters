@@ -79,6 +79,8 @@ MonoBehaviour:
   damageInterval: 1
   difficultyMultiplier:
     m_InternalValue: 1
+  syncedSwarmCount:
+    m_InternalValue: 1
   despawnDistance: 50
   despawnCheckInterval: 2
 --- !u!114 &8630027605579998487
@@ -94,12 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualPrefab: {fileID: 4464664025128372768, guid: ab5d2ec1f8083738f8850a3b8de829b2, type: 3}
-  swarmCount: 1
+  baseSwarmCount: 1
   swarmSpread: 5
   damageFlashColor: {r: 1, g: 1, b: 1, a: 1}
   flashCountOnDamage: 1
-  renderDistance: 100
-  renderCheckInterval: 0.5
 --- !u!114 &-3242095549862174872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,4 +191,4 @@ MonoBehaviour:
   rareDropTable:
   - {fileID: 5318105536326779877, guid: 472da1df08e313ae694a307bba6c6e97, type: 3}
   - {fileID: 5318105536326779877, guid: ca0653b3ec7dc84bcbec53c15c7604a1, type: 3}
-  rareDropChance: 0.01
+  rareDropChance: 1

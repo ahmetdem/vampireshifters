@@ -167,7 +167,7 @@ public class LeaderboardUI : MonoBehaviour
             texts[0].text = $"#{data.Rank}";
             texts[1].text = data.Name;
             texts[2].text = $"Lv.{data.Level}";
-            texts[3].text = $"💀 {data.Deaths}";
+            texts[3].text = $"Deaths: {data.Deaths}";
 
             // Highlight local player
             Color textColor = data.IsLocalPlayer ? Color.yellow : Color.white;
