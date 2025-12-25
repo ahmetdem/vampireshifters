@@ -96,56 +96,71 @@ public class EnemySpawner : NetworkBehaviour
     {
         float minutes = timeElapsed / 60f;
 
-        // Calculate scaled max per player
+        // Calculate global max enemies (scales with time, capped at absoluteMax)
         int scaledMax = Mathf.RoundToInt(baseMaxEnemies + (extraCapPerMinute * minutes * difficultyMultiplier));
         int totalMaxEnemies = Mathf.Min(scaledMax, absoluteMaxEnemies);
         
-        // Calculate per-player cap
         int playerCount = NetworkManager.Singleton.ConnectedClientsList.Count;
-        int maxEnemiesPerPlayer = Mathf.Max(1, totalMaxEnemies / Mathf.Max(1, playerCount));
+        if (playerCount == 0) return;
         
         int currentBurst = Mathf.RoundToInt(baseBurstCount + (minutes * difficultyMultiplier));
         float currentDifficulty = 1.0f + (minutes * difficultyMultiplier);
 
-        // Get active waves for current time
+        // Get GLOBAL enemy count (not per-player - that was broken)
+        int currentEnemyCount = 0;
+        if (useObjectPooling && EnemyPool.Instance != null)
+        {
+            currentEnemyCount = EnemyPool.Instance.GetActiveEnemyCount();
+        }
+        else
+        {
+            currentEnemyCount = FindObjectsOfType<SwarmController>().Length;
+        }
+
+        // Skip if at global cap
+        if (currentEnemyCount >= totalMaxEnemies) return;
+
+        // Calculate how many we can spawn this wave
+        int remainingCap = totalMaxEnemies - currentEnemyCount;
+        int totalToSpawn = Mathf.Min(currentBurst * playerCount, remainingCap);
+        
+        // Spawn enemies distributed equally around ALL players (round-robin)
         List<WaveData> activeWaves = GetActiveWaves(minutes);
+        List<NetworkClient> validClients = new List<NetworkClient>();
         
         foreach (var client in NetworkManager.Singleton.ConnectedClientsList)
         {
-            if (client.PlayerObject == null) continue;
-
-            // Get enemy count for THIS player
-            int playerEnemyCount = 0;
-            if (useObjectPooling && EnemyPool.Instance != null)
+            if (client.PlayerObject != null)
             {
-                playerEnemyCount = EnemyPool.Instance.GetEnemyCountForPlayer(client.ClientId);
+                validClients.Add(client);
             }
-            else
-            {
-                // Fallback: use global count / player count
-                playerEnemyCount = FindObjectsOfType<SwarmController>().Length / Mathf.Max(1, playerCount);
-            }
+        }
+        
+        if (validClients.Count == 0) return;
+        
+        int spawnedCount = 0;
+        int clientIndex = 0;
+        
+        while (spawnedCount < totalToSpawn)
+        {
+            // Round-robin: pick next player
+            NetworkClient client = validClients[clientIndex % validClients.Count];
+            clientIndex++;
+            
+            // Pick wave and enemy
+            WaveData selectedWave = PickWeightedWave(activeWaves);
+            GameObject prefab = selectedWave != null ? selectedWave.GetRandomEnemy() : fallbackPrefab;
+            
+            if (prefab == null) continue;
 
-            // Skip if this player's cap is reached
-            if (playerEnemyCount >= maxEnemiesPerPlayer) continue;
+            float healthMult = selectedWave?.healthMultiplier ?? 1f;
+            float damageMult = selectedWave?.damageMultiplier ?? 1f;
 
-            for (int i = 0; i < currentBurst; i++)
-            {
-                if (playerEnemyCount + i >= maxEnemiesPerPlayer) break;
-
-                // Pick wave and enemy
-                WaveData selectedWave = PickWeightedWave(activeWaves);
-                GameObject prefab = selectedWave != null ? selectedWave.GetRandomEnemy() : fallbackPrefab;
-                
-                if (prefab == null) continue;
-
-                float healthMult = selectedWave?.healthMultiplier ?? 1f;
-                float damageMult = selectedWave?.damageMultiplier ?? 1f;
-
-                // Spawn just outside player view
-                Vector3 spawnPos = GetCameraEdgeSpawnPosition(client.PlayerObject.transform.position);
-                SpawnEnemyAt(spawnPos, prefab, currentDifficulty, healthMult, damageMult, client.ClientId);
-            }
+            // Spawn just outside this player's view
+            Vector3 spawnPos = GetCameraEdgeSpawnPosition(client.PlayerObject.transform.position);
+            SpawnEnemyAt(spawnPos, prefab, currentDifficulty, healthMult, damageMult);
+            
+            spawnedCount++;
         }
     }
 
@@ -241,14 +256,14 @@ public class EnemySpawner : NetworkBehaviour
         return spawnPos;
     }
 
-    private void SpawnEnemyAt(Vector3 spawnPos, GameObject prefab, float difficulty, float healthMult, float damageMult, ulong targetClientId)
+    private void SpawnEnemyAt(Vector3 spawnPos, GameObject prefab, float difficulty, float healthMult, float damageMult)
     {
         GameObject enemyObj;
 
         if (useObjectPooling && EnemyPool.Instance != null)
         {
-            // Use object pooling with per-player tracking
-            enemyObj = EnemyPool.Instance.GetEnemy(prefab, spawnPos, difficulty, healthMult, damageMult, targetClientId);
+            // Use object pooling with global tracking (no per-player tracking - it was broken)
+            enemyObj = EnemyPool.Instance.GetEnemy(prefab, spawnPos, difficulty, healthMult, damageMult);
         }
         else
         {

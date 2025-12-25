@@ -142,8 +142,17 @@ public class ConnectionHandler : MonoBehaviour
 
     private void OnClientDisconnect(ulong clientId)
     {
-        clientNames.Remove(clientId);
         deathCounts.Remove(clientId);
         Debug.Log($"[ConnectionHandler] Cleaned up data for Client {clientId}");
+    }
+
+    public int GetDeathCount(ulong clientId)
+    {
+        return deathCounts.TryGetValue(clientId, out int count) ? count : 0;
+    }
+
+    public List<ulong> GetAllConnectedClientIds()
+    {
+        return new List<ulong>(clientNames.Keys);
     }
 }
