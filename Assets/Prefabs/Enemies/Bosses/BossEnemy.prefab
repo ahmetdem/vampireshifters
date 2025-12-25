@@ -10,15 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4830764037001180748}
   - component: {fileID: 8879275261172665792}
-  - component: {fileID: 3176691530574659141}
-  - component: {fileID: 8630027605579998487}
   - component: {fileID: 3782026180421123215}
   - component: {fileID: -3242095549862174872}
-  - component: {fileID: 8216826031370973542}
   - component: {fileID: -7855572886094739564}
-  - component: {fileID: 227886966536145675}
-  - component: {fileID: -1997917228949462298}
   - component: {fileID: 3175959295347169575}
+  - component: {fileID: 3287101846690998896}
+  - component: {fileID: 4175437446329609811}
   m_Layer: 0
   m_Name: BossEnemy
   m_TagString: Enemy
@@ -64,39 +61,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &3176691530574659141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081695803496586333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3c021d5402a7ba39a25764707345c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseSpeed: 2
-  trackingRefreshRate: 0.5
-  swarmCollider: {fileID: 3782026180421123215}
-  padding: 1.2
-  difficultyMultiplier:
-    m_InternalValue: 1
---- !u!114 &8630027605579998487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081695803496586333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa2cb7db380fb5a3bb911e4749a056e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualPrefab: {fileID: 4464664025128372768, guid: 1c985f55d1c76ddab8c5baf26bd6004b, type: 3}
-  swarmCount: 5
-  swarmSpread: 4
 --- !u!58 &3782026180421123215
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -163,20 +127,6 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &8216826031370973542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081695803496586333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f031ced43d582089b6654f5f89c006d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 10
-  damageInterval: 1
 --- !u!50 &-7855572886094739564
 Rigidbody2D:
   serializedVersion: 4
@@ -204,38 +154,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &227886966536145675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081695803496586333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ec0852225f4f9d78b39e90db279c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 2166651954924859026, guid: b74e0c259daa362d88dd1dac093e21d6, type: 3}
-  coinValue: 10
-  dropChance: 1
-  rareDropTable: []
-  rareDropChance: 0.2
---- !u!114 &-1997917228949462298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081695803496586333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36a28ec11bca17156bc7cb46d04929f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1000
-  currentHealth:
-    m_InternalValue: 1000
 --- !u!212 &3175959295347169575
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -288,3 +206,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3287101846690998896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081695803496586333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a28ec11bca17156bc7cb46d04929f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
+  currentHealth:
+    m_InternalValue: 1000
+--- !u!114 &4175437446329609811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081695803496586333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80bddf21ff954590852a74d0d6820f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossData: {fileID: 11400000, guid: 0bc6d5b46a0627a4990248170ad66c83, type: 2}

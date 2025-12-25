@@ -72,16 +72,18 @@ public class LobbyManager : MonoBehaviour
             // 1. Create Relay
             Allocation allocation = await Relay.Instance.CreateAllocationAsync(4);
             string joinCode = await Relay.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            Debug.Log($"[LobbyManager] Host created Relay with join code: '{joinCode}'");
 
             // 2. Create Lobby with Join Code
             CreateLobbyOptions options = new CreateLobbyOptions();
             options.Data = new Dictionary<string, DataObject>
         {
-            { "joinCode", new DataObject(DataObject.VisibilityOptions.Member, joinCode) }
+            { "joinCode", new DataObject(DataObject.VisibilityOptions.Public, joinCode) }
         };
 
             string playerName = PlayerPrefs.GetString("PlayerName", "Host");
             currentLobby = await LobbyService.Instance.CreateLobbyAsync($"{playerName}'s Lobby", 4, options);
+            Debug.Log($"[LobbyManager] Lobby created with ID: {currentLobby.Id}");
 
             // NEW: Attach heartbeat to the NetworkManager so it survives scene loads
             if (NetworkManager.Singleton.TryGetComponent(out LobbyBeat oldBeat))
@@ -94,13 +96,19 @@ public class LobbyManager : MonoBehaviour
             // 3. Setup Transport
             var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
             transport.SetRelayServerData(new Unity.Networking.Transport.Relay.RelayServerData(allocation, "dtls"));
+            Debug.Log($"[LobbyManager] Relay server data set on transport");
 
             // 4. Set Payload and Start Host
             SetConnectionPayload();
 
             if (NetworkManager.Singleton.StartHost())
             {
+                Debug.Log($"[LobbyManager] Host started successfully! IsHost: {NetworkManager.Singleton.IsHost}, IsServer: {NetworkManager.Singleton.IsServer}");
                 NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
+            }
+            else
+            {
+                Debug.LogError("[LobbyManager] StartHost() returned false!");
             }
         }
         catch (Exception e)
@@ -110,14 +118,45 @@ public class LobbyManager : MonoBehaviour
     }
     private async void JoinLobby(string lobbyId)
     {
+        Lobby lobby = null;
         try
         {
-            // 1. Join Lobby
-            Lobby lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId);
+            // 1. Join Lobby (or get it if already a member)
+            try
+            {
+                lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId);
+            }
+            catch (LobbyServiceException e) when (e.Message.Contains("already a member"))
+            {
+                // Player is already in this lobby, try to get the lobby data and proceed
+                Debug.LogWarning("Already a member of this lobby, attempting to reconnect...");
+                lobby = await LobbyService.Instance.GetLobbyAsync(lobbyId);
+            }
+
+            // Check if join code exists
+            if (lobby.Data == null || !lobby.Data.ContainsKey("joinCode") || string.IsNullOrEmpty(lobby.Data["joinCode"].Value))
+            {
+                Debug.LogError("Join Lobby Failed: No valid join code in lobby data. The host may have disconnected.");
+                await LeaveLobbyAsync(lobbyId);
+                return;
+            }
+
             string joinCode = lobby.Data["joinCode"].Value;
+            Debug.Log($"[LobbyManager] Attempting to join Relay with code: '{joinCode}' (length: {joinCode.Length})");
 
             // 2. Join Relay
-            JoinAllocation joinAllocation = await Relay.Instance.JoinAllocationAsync(joinCode);
+            JoinAllocation joinAllocation;
+            try
+            {
+                joinAllocation = await Relay.Instance.JoinAllocationAsync(joinCode);
+            }
+            catch (Exception relayEx)
+            {
+                // Relay join failed (stale code, host disconnected, etc.)
+                Debug.LogError($"Relay join failed: {relayEx.Message}. Leaving lobby...");
+                await LeaveLobbyAsync(lobbyId);
+                return;
+            }
 
             // 3. Setup Transport
             var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
@@ -134,6 +173,25 @@ public class LobbyManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError($"Join Lobby Failed: {e.Message}");
+            // Try to leave the lobby to clean up state
+            if (lobby != null)
+            {
+                await LeaveLobbyAsync(lobby.Id);
+            }
+        }
+    }
+
+    private async System.Threading.Tasks.Task LeaveLobbyAsync(string lobbyId)
+    {
+        try
+        {
+            string playerId = AuthenticationService.Instance.PlayerId;
+            await LobbyService.Instance.RemovePlayerAsync(lobbyId, playerId);
+            Debug.Log("Left lobby successfully.");
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning($"Failed to leave lobby: {e.Message}");
         }
     }
 

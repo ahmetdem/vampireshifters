@@ -6,6 +6,11 @@ public class Health : NetworkBehaviour
     [SerializeField] private int maxHealth = 100;
     public NetworkVariable<int> currentHealth = new NetworkVariable<int>(100);
 
+    // Flash state tracking
+    private Coroutine _flashCoroutine;
+    private Color _originalColor = Color.white;
+    private SpriteRenderer _cachedSpriteRenderer;
+
     public override void OnNetworkSpawn()
     {
         if (IsServer)
@@ -19,16 +24,57 @@ public class Health : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        Debug.Log($"[Health] Took {damage} damage! Current HP: {currentHealth.Value - damage}"); // <--- ADD THIS
-
         currentHealth.Value -= damage;
+        
+        // Trigger visual feedback on ALL clients (including host)
+        TriggerDamageVisualClientRpc();
 
         if (currentHealth.Value <= 0)
         {
-            // Trace the stack to see what called Die()
-            Debug.LogError($"[Health] DIED! Death triggered by: {System.Environment.StackTrace}"); // <--- ADD THIS
             Die();
         }
+    }
+
+    /// <summary>
+    /// Called on all clients to trigger visual damage feedback.
+    /// </summary>
+    [ClientRpc]
+    private void TriggerDamageVisualClientRpc()
+    {
+        // Try SwarmVisuals first (for swarm enemies)
+        if (TryGetComponent(out SwarmVisuals swarmVisuals))
+        {
+            swarmVisuals.OnDamageTaken();
+        }
+        // Try SpriteRenderer for simple flash (for non-swarm enemies like boss summons and players)
+        else if (TryGetComponent(out SpriteRenderer spriteRenderer))
+        {
+            // Cache sprite renderer and original color on first use
+            if (_cachedSpriteRenderer == null)
+            {
+                _cachedSpriteRenderer = spriteRenderer;
+                _originalColor = spriteRenderer.color;
+            }
+            
+            // Stop existing flash before starting new one
+            if (_flashCoroutine != null)
+            {
+                StopCoroutine(_flashCoroutine);
+                _cachedSpriteRenderer.color = _originalColor;
+            }
+            
+            _flashCoroutine = StartCoroutine(SimpleFlash());
+        }
+    }
+
+    private System.Collections.IEnumerator SimpleFlash()
+    {
+        if (_cachedSpriteRenderer == null) yield break;
+        
+        _cachedSpriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        _cachedSpriteRenderer.color = _originalColor;
+        _flashCoroutine = null;
     }
 
     protected virtual void Die()

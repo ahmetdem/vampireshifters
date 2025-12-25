@@ -12,7 +12,8 @@ public class ConnectionHandler : MonoBehaviour
     private Dictionary<ulong, int> deathCounts = new Dictionary<ulong, int>();
 
     [Header("Spawn Settings")]
-    [SerializeField] private float spawnRadius = 10f;
+    [Tooltip("Radius around center (0,0) where players can spawn")]
+    [SerializeField] private float spawnRadius = 30f;
 
     private void Awake()
     {
@@ -74,11 +75,34 @@ public class ConnectionHandler : MonoBehaviour
 
     public Vector3 GetRandomSpawnPosition()
     {
-        // Simply pick a random point within the radius
-        Vector2 randomPoint = Random.insideUnitCircle * spawnRadius;
+        // Use the inspector value directly - keep it simple
+        // For a 300x300 map, max safe radius is 140 (half of 300 minus padding)
+        float radius = Mathf.Min(spawnRadius, 100f); // Cap at 100 to be safe
+        
+        Debug.Log($"[ConnectionHandler] Using spawn radius: {radius}");
 
-        // Return that position
-        return new Vector3(randomPoint.x, randomPoint.y, 0f);
+        // Try to find a clear spawn position (no collisions)
+        const int maxAttempts = 20;
+        const float playerRadius = 0.5f;
+        
+        for (int i = 0; i < maxAttempts; i++)
+        {
+            Vector2 randomPoint = Random.insideUnitCircle * radius;
+            Vector3 spawnPos = new Vector3(randomPoint.x, randomPoint.y, 0f);
+            
+            // Check if position is clear of obstacles
+            Collider2D hit = Physics2D.OverlapCircle(randomPoint, playerRadius);
+            
+            if (hit == null || hit.isTrigger)
+            {
+                Debug.Log($"[ConnectionHandler] Found clear spawn at {spawnPos} (attempt {i + 1})");
+                return spawnPos;
+            }
+        }
+        
+        // Fallback to center if no clear spot found
+        Debug.LogWarning("[ConnectionHandler] Could not find clear spawn position, using center");
+        return Vector3.zero;
     }
 
     private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)

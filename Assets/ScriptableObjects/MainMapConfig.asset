@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5c30d118fc1cfc7886b126ca462065, type: 3}
   m_Name: MainMapConfig
   m_EditorClassIdentifier: 
-  mapWidth: 2000
-  mapHeight: 2000
+  mapWidth: 300
+  mapHeight: 300
   noiseScale: 0.1
   grassThreshold: 0.3
   grassFillTile: {fileID: 11400000, guid: a22edfcd39ddb6f4da867a19a012edde, type: 2}

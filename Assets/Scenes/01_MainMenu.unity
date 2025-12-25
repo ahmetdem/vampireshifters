@@ -716,7 +716,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00032411492}
+  m_AnchoredPosition: {x: 0, y: -0.00007759671}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1046404438
@@ -1158,8 +1158,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2077234081}
   m_HandleRect: {fileID: 2077234080}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.9998674
+  m_Value: 1
+  m_Size: 0.99998766
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1320,8 +1320,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 444394518}
   m_HandleRect: {fileID: 444394517}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.99999994
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1844,7 +1844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8dfd8481122cb3f8b10512610453df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 200
+  spawnRadius: 100
 --- !u!114 &2114902689
 MonoBehaviour:
   m_ObjectHideFlags: 0

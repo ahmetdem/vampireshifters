@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Unity.Netcode;
+using System.Collections;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 /// <summary>
 /// Procedurally generates a tilemap at runtime using Perlin noise.
-/// Supports multiplayer - host generates and syncs seed to clients.
+/// Can also bake a map in the editor for static use (recommended for multiplayer).
 /// </summary>
 public class ProceduralMapGenerator : NetworkBehaviour
 {
@@ -16,7 +20,11 @@ public class ProceduralMapGenerator : NetworkBehaviour
     [Header("Configuration")]
     [SerializeField] private MapGeneratorConfig config;
     
-    [Header("Generation Settings")]
+    [Header("Baked Map Mode")]
+    [Tooltip("If true, map is already baked into the scene - skip runtime generation")]
+    [SerializeField] private bool useBakedMap = false;
+    
+    [Header("Generation Settings (only used if useBakedMap is false)")]
     [Tooltip("If true, generates map on Start. If false, call GenerateMap() manually.")]
     [SerializeField] private bool generateOnStart = true;
     
@@ -57,6 +65,23 @@ public class ProceduralMapGenerator : NetworkBehaviour
 
     private void Start()
     {
+        // If using baked map, only generate runtime objects (boundaries, camera bounds)
+        if (useBakedMap)
+        {
+            Debug.Log("[ProceduralMapGenerator] Using baked map - skipping tile generation");
+            
+            // Still need to generate boundaries at runtime (they're not saved in scene)
+            if (generateBoundaryWalls)
+            {
+                GenerateBoundaryWalls();
+            }
+            if (generateCameraBounds)
+            {
+                GenerateCameraBounds();
+            }
+            return;
+        }
+
         if (generateOnStart)
         {
             // In multiplayer, wait for network seed
@@ -107,22 +132,30 @@ public class ProceduralMapGenerator : NetworkBehaviour
         }
     }
 
+    // How many tiles to process per frame before yielding (prevents Relay timeout)
+    private const int TILES_PER_FRAME = 5000;
+
     /// <summary>
     /// Generates the map with the given seed.
     /// </summary>
     public void GenerateMap(int seed)
     {
+        StartCoroutine(GenerateMapCoroutine(seed));
+    }
+
+    private IEnumerator GenerateMapCoroutine(int seed)
+    {
         if (config == null)
         {
             Debug.LogError("ProceduralMapGenerator: No MapGeneratorConfig assigned!");
-            return;
+            yield break;
         }
 
         hasGenerated = true;
         currentSeed = seed;
         Random.InitState(seed);
         
-        Debug.Log($"[ProceduralMapGenerator] Generating map with seed: {seed}");
+        Debug.Log($"[ProceduralMapGenerator] Starting async map generation with seed: {seed}");
 
         // Clear existing tiles and boundaries
         ClearAllTilemaps();
@@ -132,19 +165,19 @@ public class ProceduralMapGenerator : NetworkBehaviour
         float noiseOffsetX = Random.Range(0f, 10000f);
         float noiseOffsetY = Random.Range(0f, 10000f);
 
-        // Generate ground layer
-        GenerateGroundLayer(noiseOffsetX, noiseOffsetY);
+        // Generate ground layer (yields periodically)
+        yield return StartCoroutine(GenerateGroundLayerCoroutine(noiseOffsetX, noiseOffsetY));
 
-        // Generate decorations
-        GenerateDecorations(noiseOffsetX, noiseOffsetY);
+        // Generate decorations (yields periodically)
+        yield return StartCoroutine(GenerateDecorationsCoroutine(noiseOffsetX, noiseOffsetY));
 
-        // Generate boundary walls
+        // Generate boundary walls (fast, no yield needed)
         if (generateBoundaryWalls)
         {
             GenerateBoundaryWalls();
         }
 
-        // Generate camera bounds
+        // Generate camera bounds (fast, no yield needed)
         if (generateCameraBounds)
         {
             GenerateCameraBounds();
@@ -234,12 +267,13 @@ public class ProceduralMapGenerator : NetworkBehaviour
     }
 
 
-    private void GenerateGroundLayer(float noiseOffsetX, float noiseOffsetY)
+    private IEnumerator GenerateGroundLayerCoroutine(float noiseOffsetX, float noiseOffsetY)
     {
-        if (groundTilemap == null) return;
+        if (groundTilemap == null) yield break;
 
         int halfWidth = config.mapWidth / 2;
         int halfHeight = config.mapHeight / 2;
+        int tilesProcessed = 0;
 
         for (int x = -halfWidth; x < halfWidth; x++)
         {
@@ -279,19 +313,28 @@ public class ProceduralMapGenerator : NetworkBehaviour
                 {
                     groundTilemap.SetTile(tilePos, tileToPlace);
                 }
+
+                // Yield periodically to allow network updates
+                tilesProcessed++;
+                if (tilesProcessed >= TILES_PER_FRAME)
+                {
+                    tilesProcessed = 0;
+                    yield return null;
+                }
             }
         }
 
         // Apply edge tiles for smooth transitions
-        ApplyEdgeTiles(noiseOffsetX, noiseOffsetY);
+        yield return StartCoroutine(ApplyEdgeTilesCoroutine(noiseOffsetX, noiseOffsetY));
     }
 
-    private void ApplyEdgeTiles(float noiseOffsetX, float noiseOffsetY)
+    private IEnumerator ApplyEdgeTilesCoroutine(float noiseOffsetX, float noiseOffsetY)
     {
-        if (config.grassEdgeTiles == null || config.grassEdgeTiles.Length < 9) return;
+        if (config.grassEdgeTiles == null || config.grassEdgeTiles.Length < 9) yield break;
 
         int halfWidth = config.mapWidth / 2;
         int halfHeight = config.mapHeight / 2;
+        int tilesProcessed = 0;
 
         // Edge tile mapping based on neighbor analysis
         // Tiles should be arranged in the array as:
@@ -322,6 +365,14 @@ public class ProceduralMapGenerator : NetworkBehaviour
                 {
                     Vector3Int tilePos = new Vector3Int(x, y, 0);
                     groundTilemap.SetTile(tilePos, config.grassEdgeTiles[tileIndex]);
+                }
+
+                // Yield periodically to allow network updates
+                tilesProcessed++;
+                if (tilesProcessed >= TILES_PER_FRAME)
+                {
+                    tilesProcessed = 0;
+                    yield return null;
                 }
             }
         }
@@ -355,14 +406,15 @@ public class ProceduralMapGenerator : NetworkBehaviour
         return 4; // Default to center
     }
 
-    private void GenerateDecorations(float noiseOffsetX, float noiseOffsetY)
+    private IEnumerator GenerateDecorationsCoroutine(float noiseOffsetX, float noiseOffsetY)
     {
-        if (decorationTilemap == null) return;
+        if (decorationTilemap == null) yield break;
 
         int halfWidth = config.mapWidth / 2;
         int halfHeight = config.mapHeight / 2;
         int centerX = 0;
         int centerY = 0;
+        int tilesProcessed = 0;
 
         for (int x = -halfWidth; x < halfWidth; x++)
         {
@@ -393,7 +445,7 @@ public class ProceduralMapGenerator : NetworkBehaviour
                             {
                                 collisionTilemap.SetTile(tilePos, largeDeco);
                             }
-                            continue; // Don't place other decorations here
+                            goto NextTile; // Don't place other decorations here
                         }
                     }
                 }
@@ -407,7 +459,7 @@ public class ProceduralMapGenerator : NetworkBehaviour
                         if (medDeco != null)
                         {
                             decorationTilemap.SetTile(tilePos, medDeco);
-                            continue;
+                            goto NextTile;
                         }
                     }
                 }
@@ -423,6 +475,15 @@ public class ProceduralMapGenerator : NetworkBehaviour
                             decorationTilemap.SetTile(tilePos, smallDeco);
                         }
                     }
+                }
+
+                NextTile:
+                // Yield periodically to allow network updates
+                tilesProcessed++;
+                if (tilesProcessed >= TILES_PER_FRAME)
+                {
+                    tilesProcessed = 0;
+                    yield return null;
                 }
             }
         }
@@ -451,4 +512,217 @@ public class ProceduralMapGenerator : NetworkBehaviour
         networkSeed.OnValueChanged -= OnSeedChanged;
         base.OnDestroy();
     }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// Bakes the map in the editor. Tiles are saved permanently to the scene.
+    /// After baking, enable "Use Baked Map" to skip runtime generation.
+    /// </summary>
+    [ContextMenu("Bake Map In Editor")]
+    public void BakeMapInEditor()
+    {
+        if (config == null)
+        {
+            Debug.LogError("ProceduralMapGenerator: No MapGeneratorConfig assigned!");
+            return;
+        }
+
+        if (Application.isPlaying)
+        {
+            Debug.LogError("Cannot bake map while in Play mode. Exit Play mode first.");
+            return;
+        }
+
+        int seed = useRandomSeed ? Random.Range(int.MinValue, int.MaxValue) : fixedSeed;
+        Debug.Log($"[ProceduralMapGenerator] Baking map with seed: {seed}");
+
+        // Clear existing tiles
+        if (groundTilemap != null) groundTilemap.ClearAllTiles();
+        if (decorationTilemap != null) decorationTilemap.ClearAllTiles();
+        if (collisionTilemap != null) collisionTilemap.ClearAllTiles();
+
+        Random.InitState(seed);
+
+        // Generate noise offset
+        float noiseOffsetX = Random.Range(0f, 10000f);
+        float noiseOffsetY = Random.Range(0f, 10000f);
+
+        // Generate tiles (synchronous in editor)
+        BakeGroundLayer(noiseOffsetX, noiseOffsetY);
+        BakeEdgeTiles(noiseOffsetX, noiseOffsetY);
+        BakeDecorations(noiseOffsetX, noiseOffsetY);
+
+        // Mark tilemaps as dirty so they save
+        EditorUtility.SetDirty(groundTilemap);
+        if (decorationTilemap != null) EditorUtility.SetDirty(decorationTilemap);
+        if (collisionTilemap != null) EditorUtility.SetDirty(collisionTilemap);
+
+        // Auto-enable baked map mode
+        useBakedMap = true;
+        EditorUtility.SetDirty(this);
+
+        Debug.Log($"[ProceduralMapGenerator] Map baked successfully! Size: {config.mapWidth}x{config.mapHeight}");
+        Debug.Log("[ProceduralMapGenerator] Remember to save the scene (Ctrl+S) to keep the baked tiles!");
+    }
+
+    private void BakeGroundLayer(float noiseOffsetX, float noiseOffsetY)
+    {
+        if (groundTilemap == null) return;
+
+        int halfWidth = config.mapWidth / 2;
+        int halfHeight = config.mapHeight / 2;
+
+        for (int x = -halfWidth; x < halfWidth; x++)
+        {
+            for (int y = -halfHeight; y < halfHeight; y++)
+            {
+                Vector3Int tilePos = new Vector3Int(x, y, 0);
+                
+                float noiseValue = Mathf.PerlinNoise(
+                    (x + noiseOffsetX) * config.noiseScale,
+                    (y + noiseOffsetY) * config.noiseScale
+                );
+
+                TileBase tileToPlace;
+                
+                if (noiseValue > config.grassThreshold)
+                {
+                    if (config.groundVariationTiles != null && config.groundVariationTiles.Length > 0 
+                        && Random.value < 0.1f)
+                    {
+                        tileToPlace = config.groundVariationTiles[Random.Range(0, config.groundVariationTiles.Length)];
+                    }
+                    else
+                    {
+                        tileToPlace = config.grassFillTile;
+                    }
+                }
+                else
+                {
+                    tileToPlace = config.dirtFillTile;
+                }
+
+                if (tileToPlace != null)
+                {
+                    groundTilemap.SetTile(tilePos, tileToPlace);
+                }
+            }
+        }
+    }
+
+    private void BakeEdgeTiles(float noiseOffsetX, float noiseOffsetY)
+    {
+        if (config.grassEdgeTiles == null || config.grassEdgeTiles.Length < 9) return;
+
+        int halfWidth = config.mapWidth / 2;
+        int halfHeight = config.mapHeight / 2;
+
+        for (int x = -halfWidth; x < halfWidth; x++)
+        {
+            for (int y = -halfHeight; y < halfHeight; y++)
+            {
+                float centerNoise = GetNoiseAt(x, y, noiseOffsetX, noiseOffsetY);
+                if (centerNoise <= config.grassThreshold) continue;
+
+                bool topGrass = GetNoiseAt(x, y + 1, noiseOffsetX, noiseOffsetY) > config.grassThreshold;
+                bool bottomGrass = GetNoiseAt(x, y - 1, noiseOffsetX, noiseOffsetY) > config.grassThreshold;
+                bool leftGrass = GetNoiseAt(x - 1, y, noiseOffsetX, noiseOffsetY) > config.grassThreshold;
+                bool rightGrass = GetNoiseAt(x + 1, y, noiseOffsetX, noiseOffsetY) > config.grassThreshold;
+
+                int tileIndex = GetEdgeTileIndex(topGrass, bottomGrass, leftGrass, rightGrass);
+                
+                if (tileIndex >= 0 && tileIndex < config.grassEdgeTiles.Length && 
+                    config.grassEdgeTiles[tileIndex] != null)
+                {
+                    Vector3Int tilePos = new Vector3Int(x, y, 0);
+                    groundTilemap.SetTile(tilePos, config.grassEdgeTiles[tileIndex]);
+                }
+            }
+        }
+    }
+
+    private void BakeDecorations(float noiseOffsetX, float noiseOffsetY)
+    {
+        if (decorationTilemap == null) return;
+
+        int halfWidth = config.mapWidth / 2;
+        int halfHeight = config.mapHeight / 2;
+
+        for (int x = -halfWidth; x < halfWidth; x++)
+        {
+            for (int y = -halfHeight; y < halfHeight; y++)
+            {
+                Vector3Int tilePos = new Vector3Int(x, y, 0);
+                
+                float distFromCenter = Mathf.Sqrt(x * x + y * y);
+                bool inSafeZone = distFromCenter < config.spawnSafeRadius;
+
+                float noiseValue = GetNoiseAt(x, y, noiseOffsetX, noiseOffsetY);
+                if (noiseValue <= config.grassThreshold) continue;
+
+                if (!inSafeZone && config.largeDecorations != null && config.largeDecorations.Length > 0)
+                {
+                    if (Random.value < config.largeDecorationChance)
+                    {
+                        TileBase largeDeco = config.largeDecorations[Random.Range(0, config.largeDecorations.Length)];
+                        if (largeDeco != null)
+                        {
+                            decorationTilemap.SetTile(tilePos, largeDeco);
+                            if (collisionTilemap != null) collisionTilemap.SetTile(tilePos, largeDeco);
+                            continue;
+                        }
+                    }
+                }
+
+                if (config.mediumDecorations != null && config.mediumDecorations.Length > 0)
+                {
+                    if (Random.value < config.mediumDecorationChance)
+                    {
+                        TileBase medDeco = config.mediumDecorations[Random.Range(0, config.mediumDecorations.Length)];
+                        if (medDeco != null)
+                        {
+                            decorationTilemap.SetTile(tilePos, medDeco);
+                            continue;
+                        }
+                    }
+                }
+
+                if (config.smallDecorations != null && config.smallDecorations.Length > 0)
+                {
+                    if (Random.value < config.smallDecorationChance)
+                    {
+                        TileBase smallDeco = config.smallDecorations[Random.Range(0, config.smallDecorations.Length)];
+                        if (smallDeco != null)
+                        {
+                            decorationTilemap.SetTile(tilePos, smallDeco);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    [ContextMenu("Clear Baked Map")]
+    public void ClearBakedMap()
+    {
+        if (Application.isPlaying)
+        {
+            Debug.LogError("Cannot clear map while in Play mode. Exit Play mode first.");
+            return;
+        }
+
+        if (groundTilemap != null) groundTilemap.ClearAllTiles();
+        if (decorationTilemap != null) decorationTilemap.ClearAllTiles();
+        if (collisionTilemap != null) collisionTilemap.ClearAllTiles();
+
+        EditorUtility.SetDirty(groundTilemap);
+        if (decorationTilemap != null) EditorUtility.SetDirty(decorationTilemap);
+        if (collisionTilemap != null) EditorUtility.SetDirty(collisionTilemap);
+
+        useBakedMap = false;
+        EditorUtility.SetDirty(this);
+
+        Debug.Log("[ProceduralMapGenerator] Baked map cleared. Remember to save the scene!");
+    }
+#endif
 }

@@ -46,11 +46,18 @@ public class SwarmVisuals : MonoBehaviour
         _minionRenderers = new SpriteRenderer[swarmCount];
         _minionFlashFeedbacks = new MinionFlashFeedback[swarmCount];
         
+        // Use position-based seed so both host and client generate same "random" positions
+        int seed = Mathf.RoundToInt(transform.position.x * 1000 + transform.position.y * 7919);
+        System.Random seededRandom = new System.Random(seed);
+        
         for (int i = 0; i < swarmCount; i++)
         {
-            // Spawns visual-only zombie prefabs locally
-            Vector2 randomOffset = Random.insideUnitCircle * swarmSpread;
-            _minions[i] = Instantiate(visualPrefab, transform.position + (Vector3)randomOffset, Quaternion.identity);
+            // Generate consistent "random" offset using seeded random
+            float angle = (float)(seededRandom.NextDouble() * Mathf.PI * 2);
+            float radius = (float)(seededRandom.NextDouble() * swarmSpread);
+            Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+            
+            _minions[i] = Instantiate(visualPrefab, transform.position + (Vector3)offset, Quaternion.identity);
             _minions[i].transform.SetParent(transform);
             
             // Ensure minions have Enemy tag for weapon detection

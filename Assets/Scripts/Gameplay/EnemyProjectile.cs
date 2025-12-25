@@ -57,9 +57,12 @@ public class EnemyProjectile : NetworkBehaviour
                 Debug.Log($"[EnemyProjectile] Hit player for {damage} damage!");
             }
             DespawnProjectile();
+            return;
         }
-        // Hit wall/obstacle (optional - add "Wall" tag if needed)
-        else if (other.CompareTag("Wall"))
+        
+        // Hit any solid object (walls, obstacles, decorations)
+        // Check if it's NOT a trigger (solid collider) and NOT a player/enemy
+        if (!other.isTrigger && !other.CompareTag("Player") && !other.CompareTag("Enemy"))
         {
             DespawnProjectile();
         }

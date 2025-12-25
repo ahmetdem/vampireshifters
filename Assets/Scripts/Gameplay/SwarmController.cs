@@ -77,7 +77,20 @@ public class SwarmController : NetworkBehaviour
     private void OnHealthChanged(int previousValue, int newValue)
     {
         // Only react to damage (not healing)
-        if (newValue < previousValue && _cachedVisuals != null)
+        if (newValue < previousValue)
+        {
+            // Trigger visual feedback locally (this runs on all clients including host)
+            TriggerDamageVisual();
+        }
+    }
+
+    /// <summary>
+    /// Trigger the damage visual effect locally on the machine running this code.
+    /// Called by OnHealthChanged which runs on all clients when NetworkVariable changes.
+    /// </summary>
+    private void TriggerDamageVisual()
+    {
+        if (_cachedVisuals != null)
         {
             _cachedVisuals.OnDamageTaken();
         }
