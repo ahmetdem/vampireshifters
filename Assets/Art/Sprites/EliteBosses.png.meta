@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -95,7 +95,385 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: EliteBosses_0
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 1027
+        width: 640
+        height: 473
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f53e5623a8e2c4a548dd41159cdcb87a
+      internalID: -123937980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_1
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 1027
+        width: 613
+        height: 498
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 366333f0c33c048c49b1e4f8e2513470
+      internalID: -511353151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_2
+      rect:
+        serializedVersion: 2
+        x: 1598
+        y: 1029
+        width: 475
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c639ea7afb6a34206a4e2d421f541377
+      internalID: -1225531204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_3
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 520
+        width: 549
+        height: 444
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a073413dec9284cd2a43711a12c63bee
+      internalID: 1544173383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_4
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 822
+        width: 29
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c982ba5bca2b456aa59af946f0ac8f3
+      internalID: 492429363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_5
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 826
+        width: 33
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7682dc678968d4894b01a8b288964bdb
+      internalID: -630020513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_6
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 520
+        width: 572
+        height: 488
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41eff05a5237f4811a8772a1fac91c93
+      internalID: 967938739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_7
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 525
+        width: 563
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fd46ec3b8db848908cbfbe944b632f3
+      internalID: -1032580786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_8
+      rect:
+        serializedVersion: 2
+        x: 2285
+        y: 525
+        width: 476
+        height: 454
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6b872b5866274bb0a00d0da23f05c86
+      internalID: 959023885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_9
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 769
+        width: 58
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e219bb226be34bd89a506abf94dfd77
+      internalID: -1964891131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_10
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 777
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1834e61477e1541d6b9de1ef5e15b9c8
+      internalID: -1167621551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_11
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 744
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06bbdc64ac7194ac19c7d3f430a99296
+      internalID: 983371924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_12
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 10
+        width: 510
+        height: 492
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f856ba76e31eb45d480411e8459f93a8
+      internalID: -1714320147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_13
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 52
+        width: 367
+        height: 422
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 382df3812c37d4e4a85954efe21d1077
+      internalID: 1881541633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_14
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 11
+        width: 450
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5323b1e21459c4c9ba3a8f7b99b1d038
+      internalID: -948638394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_15
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 11
+        width: 484
+        height: 454
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43cf43b14de0d4095bbc7302c0a1070f
+      internalID: 1092069837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_16
+      rect:
+        serializedVersion: 2
+        x: 2251
+        y: 11
+        width: 542
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd8a7472b8fa24657a7ad219591c97b2
+      internalID: 1451478876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EliteBosses_17
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 11
+        width: 188
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e32c5c480c4394a74afa9a4df8c6890c
+      internalID: -1798329331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +484,25 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      EliteBosses_0: -123937980
+      EliteBosses_1: -511353151
+      EliteBosses_10: -1167621551
+      EliteBosses_11: 983371924
+      EliteBosses_12: -1714320147
+      EliteBosses_13: 1881541633
+      EliteBosses_14: -948638394
+      EliteBosses_15: 1092069837
+      EliteBosses_16: 1451478876
+      EliteBosses_17: -1798329331
+      EliteBosses_2: -1225531204
+      EliteBosses_3: 1544173383
+      EliteBosses_4: 492429363
+      EliteBosses_5: -630020513
+      EliteBosses_6: 967938739
+      EliteBosses_7: -1032580786
+      EliteBosses_8: 959023885
+      EliteBosses_9: -1964891131
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
